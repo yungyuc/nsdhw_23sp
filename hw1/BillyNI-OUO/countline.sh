@@ -7,7 +7,7 @@ elif [ $# -gt 1 ] ; then
 else 
     fname=$1
     if [ -f $fname ]; then
-        lines="$(wc -l < $fname)"
+        lines="$(grep -c ^ $1)"
         echo "$lines lines in $fname"
     else
         echo "$fname not found"
