@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-exec $PYTHON_BIN - $@ << EOF
+exec $PYTHON_BIN - $* << EOF
 import sys
 import os.path
 if len(sys.argv) < 2:
