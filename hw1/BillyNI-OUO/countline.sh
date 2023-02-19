@@ -1,15 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-if [ "$#" -lt 1 ]; then
+if [ $# -lt 1 ] ; then
     echo "missing file name"
-elif [ "$#" -gt 1 ]; then
+elif [ $# -gt 1 ] ; then
     echo "only one argument is allowed"
-else
-    FNAME=$1
-    if [ -f "$FNAME" ]; then
-        LINES=`wc -l < "$FNAME"`
-        echo "$LINES lines in $FNAME"
+else 
+    fname=$1
+    if [ -f $fname ]; then
+        lines="$(grep -c ^ $1)"
+        echo "$lines lines in $fname"
     else
-        echo "$FNAME not found"
+        echo "$fname not found"
     fi
 fi
