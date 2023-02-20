@@ -1,5 +1,6 @@
 #!/bin/bash
-''''exec $PYTHON_BIN countline.py $@;
+''''[ -z $PYTHON_BIN ] && exec echo 'No environment variable, $PYTHON_BIN.';
+exec $PYTHON_BIN $0 $@;
 ''';
 
 import sys
