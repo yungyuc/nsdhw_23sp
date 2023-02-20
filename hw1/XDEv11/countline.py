@@ -1,12 +1,9 @@
 #!/bin/bash
-
-''''true
-exec $PYTHON_BIN countline.py $@;
-'''
+''''exec $PYTHON_BIN countline.py $@;
+''';
 
 import sys
 import os.path
-
 
 if len(sys.argv) < 2:
 	sys.stdout.write('missing file name\n');
