@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ''''true
-exec $PYTHON_BIN countline.py $@
+exec $PYTHON_BIN countline.py $@;
 '''
 
 import sys
@@ -9,14 +9,14 @@ import os.path
 
 
 if len(sys.argv) < 2:
-    sys.stdout.write('missing file name\n')
+	sys.stdout.write('missing file name\n');
 elif len(sys.argv) > 2:
-    sys.stdout.write('only one argument is allowed\n')
+	sys.stdout.write('only one argument is allowed\n');
 else:
-    fname = sys.argv[1]
-    if os.path.exists(fname):
-        with open(fname) as fobj:
-            lines = fobj.readlines()
-        sys.stdout.write('{} lines in {}\n'.format(len(lines), fname))
-    else:
-        sys.stdout.write('{} not found\n'.format(fname))
+	fname = sys.argv[1]
+	if os.path.exists(fname):
+		with open(fname) as fobj:
+			lines = fobj.readlines();
+		sys.stdout.write('{} lines in {}\n'.format(len(lines), fname));
+	else:
+		sys.stdout.write('{} not found\n'.format(fname));
