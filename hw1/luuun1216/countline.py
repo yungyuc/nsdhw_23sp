@@ -1,6 +1,8 @@
 #!/bin/bash
 
-""":"exec ${PYTHON_BIN:-python} $0 $@":"""
+""":"
+exec ${PYTHON_BIN:-python} $0 $@
+":"""
 
 import sys
 import os.path
