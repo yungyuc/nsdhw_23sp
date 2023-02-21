@@ -9,7 +9,7 @@ PyBin = os.environ['PYTHON_BIN']
 try:
     subprocess.check_output([PyBin, '--version'], stderr=subprocess.STDOUT)
 except (subprocess.CalledProcessError, OSError):
-    sys.stderr.write('Error: {} can not be executed !\n'.format(PyBin))
+    sys.stderr.write('exec: {}: not found'.format(PyBin))
     sys.exit(1)
 
 if len(sys.argv) < 2:
