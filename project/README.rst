@@ -69,10 +69,15 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 
-Time Table Session 1
+Time Table Session A
 ++++++++++++++++++++
 
-.. list-table:: 7:00-9:36
+.. note::
+
+  The meeting room for this session (A) is EC114, the same room we use for
+  lectures.
+
+.. list-table:: 7:00-9:36 (EC114)
   :header-rows: 1
 
   * - ID
@@ -132,10 +137,15 @@ Time Table Session 1
     -
     -
 
-Time Table Session 2
+Time Table Session B
 ++++++++++++++++++++
 
-.. list-table:: 10:00-12:36
+.. note::
+
+  The meeting room for this session (B) is EC329.  Please note it is **not**
+  the room we use for lectures.
+
+.. list-table:: 10:00-12:36 (EC329)
   :header-rows: 1
 
   * - ID
