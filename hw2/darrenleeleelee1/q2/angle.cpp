@@ -6,6 +6,9 @@ double angle_between_vectors(const std::vector<double>& v1, const std::vector<do
     double dot_product = v1.at(0) * v2.at(0) + v1.at(1) * v2.at(1);
     double mag_v1 = std::sqrt(v1.at(0) * v1.at(0) + v1.at(1) * v1.at(1));
     double mag_v2 = std::sqrt(v2.at(0) * v2.at(0) + v2.at(1) * v2.at(1));
+    if(mag_v1 == 0 || mag_v2 == 0){
+        throw std::runtime_error("One or both input vectors have zero length");
+    }
     double cos_theta = dot_product / (mag_v1 * mag_v2);
     return std::acos(cos_theta);
 }
