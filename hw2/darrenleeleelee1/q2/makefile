@@ -18,7 +18,7 @@ $(LIB_TARGET): angle.cpp
 
 .PHONY: test
 test:
-	pytest ./$(PROG_TARGET)
+	env PYTHONPATH=".:$PYTHONPATH" python3 -m pytest -v
 
 .PHONY: clean
 clean:
