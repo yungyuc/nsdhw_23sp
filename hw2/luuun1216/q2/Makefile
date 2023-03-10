@@ -3,7 +3,7 @@ CC = g++
 pybind11_include = python3 -m pybind11 --includes
 cflages = -shared -O3 -Wall -std=gnu++14 -g -fPIC
 suffix = python3-config --extension-suffix
-object_file=_vector
+object_file=cal_vector_angle
 
 all: $(object_file).*.so
 
@@ -17,4 +17,3 @@ test: all
 .PHONY: clean
 clean:
 	rm -rf *.so __pycache__  .pytest_cache
-	
