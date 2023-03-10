@@ -8,7 +8,7 @@ object_file=_vector
 all: $(object_file).*.so
 
 $(object_file).*.so: $(object_file).cpp
-	$(CC) -o $(object_file)`$(suffix)` $(cflages) `$(pybind11_include)` $< -I /usr/include/python3.8
+	$(CC) -o $(object_file)`$(suffix)` $(cflages) `$(pybind11_include)` $< -I /usr/include/python3.10
 
 .PHONY: test.py
 test: all
