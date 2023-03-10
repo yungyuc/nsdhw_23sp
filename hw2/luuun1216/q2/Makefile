@@ -3,7 +3,7 @@ CC = g++
 pybind11_include = python3 -m pybind11 --includes
 cflages = -shared -O3 -Wall -std=gnu++14 -g -fPIC
 suffix = python3-config --extension-suffix
-object_file=cal_vector_angle
+object_file=_vector
 
 all: $(object_file).*.so
 
