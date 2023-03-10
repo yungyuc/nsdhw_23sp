@@ -18,3 +18,4 @@ run:
 .PHONY: check
 check:
 	./q1_result > result.txt
+	

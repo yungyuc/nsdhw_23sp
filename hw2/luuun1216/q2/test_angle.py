@@ -20,3 +20,4 @@ def test_right_angle():
 def test_other_angle():
     angle_result = calculate_vector_angle(1,0,-1,0)
     assert math.isclose(int(angle_result),180)
+

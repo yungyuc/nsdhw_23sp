@@ -19,4 +19,5 @@ public:
 private:
     std::vector<float> vector_x;
     std::vector<float> vector_y;
+    
 }; /* end class Line */

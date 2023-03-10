@@ -2,7 +2,6 @@
 # include <iostream>
 
 Line::Line(){}
-
 Line::Line(size_t size){
     this->vector_x.assign(size,0);
     this->vector_y.assign(size,0);

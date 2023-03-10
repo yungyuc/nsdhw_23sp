@@ -17,3 +17,4 @@ test: all
 .PHONY: clean
 clean:
 	rm -rf *.so __pycache__  .pytest_cache
+	
