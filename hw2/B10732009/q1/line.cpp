@@ -36,7 +36,7 @@ Line &Line::operator=(Line &&line)
 }
 
 // custom constructor
-Line::Line(size_t _dataSize) : dataSize(_dataSize), dataX(std::vector<double>(_dataSize)), dataY(std::vector<double>(_dataSize)) {}
+Line::Line(std::size_t _dataSize) : dataSize(_dataSize), dataX(std::vector<double>(_dataSize)), dataY(std::vector<double>(_dataSize)) {}
 
 // destructor
 Line::~Line() {}
