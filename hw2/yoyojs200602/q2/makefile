@@ -1,6 +1,6 @@
 FLAG = -shared -O3 -std=c++11 -fPIC
 PYBINDFLAG = `python3 -m pybind11 --includes`
-PYCONFFLAG = `python3-config --extension-suffix` `python3-config --ldflags`
+PYCONFFLAG = `python3-config --extension-suffix` `python3-config --includes --ldflags`
 GXX = g++
 OBJ = _vector
 
