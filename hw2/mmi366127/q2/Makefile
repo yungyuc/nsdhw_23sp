@@ -1,5 +1,5 @@
 PY_INC=`python3 -m pybind11 --includes`
-PY_CFG=`python3-config --extension-suffix` `python3-config --ldflags`
+PY_CFG=`python3-config --extension-suffix` `python3-config --includes --ldflags`
 SO_NAME=angle
 
 .PHONY: clean all
