@@ -17,7 +17,7 @@ clean:
 
 .PHONY: test
 test:
-		python3 -m pytest vec_angle.py -v
+		python3 -m pytest test_vec_angle.py -v
 
 _vector.so: vec_angle.cpp
 		$(CC) $(CCFlags) `$(include_pybind)` $(SRC) $(shell python3-config --includes --ldflags) -o $(OBJ)
