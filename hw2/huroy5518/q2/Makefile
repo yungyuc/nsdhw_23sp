@@ -2,7 +2,6 @@
 
 .PHONY: all clean test
 
-PYBIND_INCLUDE = $(shell python3 -m pybind11 --includes)
 all: _vector.so
 
 clean:
@@ -13,4 +12,4 @@ test:
 
 
 _vector.so: main.cpp
-	g++ -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` main.cpp -o _vector.so
+	g++ -O3 -Wall -shared -std=c++11 -fPIC $(shell python3 -m pybind11 --includes) main.cpp $(shell python3-config --includes --ldflags) -o _vector.so
