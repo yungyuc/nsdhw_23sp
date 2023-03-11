@@ -14,4 +14,4 @@ _vector: _vector.cpp
 	g++ -O3 -Wall -shared -std=c++11 -fPIC ${PY_INC} _vector.cpp -o _vector${PY_CFG}
 
 test: all
-	pytest -v
+	python3 -m pytest -v
