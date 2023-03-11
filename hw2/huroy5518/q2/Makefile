@@ -13,4 +13,4 @@ test:
 
 
 _vector.so: main.cpp
-	g++ -O3 -Wall -shared -std=c++11 -fPIC $(PYBIND_INCLUDE) main.cpp -o _vector.so
+	g++ -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` main.cpp -o _vector.so
