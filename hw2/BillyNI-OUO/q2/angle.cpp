@@ -21,6 +21,6 @@ double cal_angle(double v1_x, double v1_y, double v2_x, double v2_y){
     return acos(cosin);
 }
 
-PYBIND11_MODULE(_angle, m) {
+PYBIND11_MODULE(_vector, m) {
     m.def("cal_angle_in_python", &cal_angle, "Calculate angle in 2 vector");
 }
