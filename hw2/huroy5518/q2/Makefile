@@ -9,7 +9,7 @@ clean:
 	rm -f *.so
 
 test:
-	python3 -m pytest test.py -v
+	python3 -m pytest angle_test.py -v
 
 
 _vector.so: main.cpp
