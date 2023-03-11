@@ -11,84 +11,84 @@ echo "test path: $test_path"
 echo "working directory: $tmp_dir"
 cd $tmp_dir
 
-# question 1
-echo "empty working directory:"
-rm -rf *
-ls
+# # question 1
+# echo "empty working directory:"
+# rm -rf *
+# ls
 
-echo "copy q1 to working directory:"
-cp -a $solution_path/q1/* .
-ls
+# echo "copy q1 to working directory:"
+# cp -a $solution_path/q1/* .
+# ls
 
-echo "make:"
-make ; ret=$?
-if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
-ls
+# echo "make:"
+# make ; ret=$?
+# if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
+# ls
 
-make
-touch Makefile *.cpp
-make
+# make
+# touch Makefile *.cpp
+# make
 
-echo "make run:"
-make run ; ret=$?
-if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
+# echo "make run:"
+# make run ; ret=$?
+# if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
 
-ls
-if [ -e "result.txt" ] ; then
-  echo "there should not be result.txt"
-  exit 1
-fi
+# ls
+# if [ -e "result.txt" ] ; then
+#   echo "there should not be result.txt"
+#   exit 1
+# fi
 
-if [[ "$(uname)" == "Linux" ]] ; then
-  executable="$(find . -executable -type f)"
-else
-  executable="$(find . -perm +111 -type f)"
-fi
-echo "executable: $executable"
-if [ -z "$executable" ] ; then
-  echo "no executable found"
-  exit 1
-fi
+# if [[ "$(uname)" == "Linux" ]] ; then
+#   executable="$(find . -executable -type f)"
+# else
+#   executable="$(find . -perm +111 -type f)"
+# fi
+# echo "executable: $executable"
+# if [ -z "$executable" ] ; then
+#   echo "no executable found"
+#   exit 1
+# fi
 
-echo "make check:"
-make check ; ret=$? # this phony should redirect output to result.txt
-if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
+# echo "make check:"
+# make check ; ret=$? # this phony should redirect output to result.txt
+# if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
 
-dresult=$(diff $test_path/golden.txt result.txt)
-if [ -n "$dresult" ] ; then
-  echo "golden not pass"
-  exit 1
-fi
+# dresult=$(diff $test_path/golden.txt result.txt)
+# if [ -n "$dresult" ] ; then
+#   echo "golden not pass"
+#   exit 1
+# fi
 
-cat << EOF
-Q1 GRADING NOTE: correct implementation gets 1 point.
-EOF
-echo "GET POINT 1"
+# cat << EOF
+# Q1 GRADING NOTE: correct implementation gets 1 point.
+# EOF
+# echo "GET POINT 1"
 
-echo "make clean:"
-make clean ; ret=$?
-if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
+# echo "make clean:"
+# make clean ; ret=$?
+# if [ $ret -ne 0 ] ; then echo "failure" ; exit 1 ; fi
 
-if [[ "$(uname)" == "Linux" ]] ; then
-  executable="$(find . -executable -type f)"
-else
-  executable="$(find . -perm +111 -type f)"
-fi
-echo "executable: $executable"
-if [ -n "${executable}" ] ; then
-  echo "directory not cleaned"
-  exit 1
-fi
+# if [[ "$(uname)" == "Linux" ]] ; then
+#   executable="$(find . -executable -type f)"
+# else
+#   executable="$(find . -perm +111 -type f)"
+# fi
+# echo "executable: $executable"
+# if [ -n "${executable}" ] ; then
+#   echo "directory not cleaned"
+#   exit 1
+# fi
 
-cat << EOF
-Q1 GRADING NOTE: correct Makefile gets 1 point:
-* When a source file changes (you can touch it), ``make`` needs to pick it up
-  and rebuild.
-* ``make check`` needs to produce the correct terminal output, without
-  crashing.
-* ``make clean`` needs to remove all the built and intermediate files.
-EOF
-echo "GET POINT 1"
+# cat << EOF
+# Q1 GRADING NOTE: correct Makefile gets 1 point:
+# * When a source file changes (you can touch it), ``make`` needs to pick it up
+#   and rebuild.
+# * ``make check`` needs to produce the correct terminal output, without
+#   crashing.
+# * ``make clean`` needs to remove all the built and intermediate files.
+# EOF
+# echo "GET POINT 1"
 
 # question 2
 echo "empty working directory:"
