@@ -8,10 +8,10 @@ SUFFIX = python3-config --extension-suffix
 all: _vector.*.so
 
 _vector.*.so: _vector.cpp
-	$(CC) $(CFLAGS) `$(PY)` $< -o _vector`$(SUFFIX)` -I/usr/include/python3.8
+	$(CC) $(CFLAGS) `$(PY)` $< -o _vector`$(SUFFIX)`
 
 clean:
 	rm -rf *.so ./__pycache__ ./.pytest_cache
 
 test: all
-	python3 -m pytest
+	python3 -m pytest -v
