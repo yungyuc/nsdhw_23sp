@@ -1,5 +1,5 @@
 CC     = g++
-CFLAGS = -Wall -std=c++11 -shared -fPIC
+CFLAGS = -o3 -Wall -std=c++11 -shared -fPIC
 PY     = python3 -m pybind11 --includes
 SUFFIX = python3-config --extension-suffix
 
