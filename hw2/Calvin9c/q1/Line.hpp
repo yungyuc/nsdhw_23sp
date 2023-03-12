@@ -9,7 +9,7 @@ public:
     Line(Line       &&);
     Line & operator=(Line const & );
     Line & operator=(Line       &&);
-
+ 
     Line(size_t size);
     ~Line();
     

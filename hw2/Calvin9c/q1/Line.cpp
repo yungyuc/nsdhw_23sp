@@ -7,7 +7,7 @@ Line::Line(Line const & my_line){
     x_coordinates = my_line.x_coordinates;
     y_coordinates = my_line.y_coordinates;
 }
-
+ 
 Line::Line(Line && my_line){
     x_coordinates = my_line.x_coordinates;
     y_coordinates = my_line.y_coordinates;

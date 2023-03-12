@@ -1,18 +1,18 @@
 CC = g++
 
 .PHONY: all
-all: main
+all: ./q1_output
 
 .PHONY: run
 run:
-		main
+		./q1_output
 
 .PHONY: clean
 clean:
-		rm -f main result.txt
+		rm -f ./q1_output result.txt
 
 .PHONY: check
-		main > result.txt
+		./q1_output > result.txt
 
-main: Line.cpp Line.hpp main.cpp
+./q1_output: Line.cpp Line.hpp main.cpp
 		$(CC) Line.cpp Line.hpp main.cpp -o q1_output
