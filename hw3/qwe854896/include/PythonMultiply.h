@@ -4,7 +4,7 @@
 #include "PythonMatrix.h"
 
 PythonMatrix multiply_naive(const PythonMatrix &mat1, const PythonMatrix &mat2);
-PythonMatrix multiply_tile(const PythonMatrix &mat1, const PythonMatrix &mat2);
+PythonMatrix multiply_tile(const PythonMatrix &mat1, const PythonMatrix &mat2, size_t tsize);
 PythonMatrix multiply_mkl(const PythonMatrix &mat1, const PythonMatrix &mat2);
 
 #endif

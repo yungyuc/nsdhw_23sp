@@ -5,8 +5,8 @@ PYTHON_INCLUDES := `python3-config --includes`
 
 LIB := _matrix.so
 
-SRCS := $(wildcard *.cpp)
-OBJS := $(patsubst %.cpp,bin/%.o,$(SRCS))
+SRCS := $(wildcard src/*.cpp)
+OBJS := $(patsubst src/%.cpp,bin/%.o,$(SRCS))
 
 DIR_GUARD=@mkdir -p $(@D)
 
@@ -15,11 +15,11 @@ all: $(LIB)
 $(LIB): $(OBJS)
 	$(CXX) $(CXXFLAGS) -shared -o $@ $(OBJS)
 
-bin/%.o: %.cpp
+bin/%.o: src/%.cpp
 	$(DIR_GUARD)
 	$(CXX) $(CXXFLAGS) $(PYTHON_INCLUDES) -o $@ -c $<
 
-test:
+test: $(LIB)
 	python3 -m pytest -v
 
 clean:

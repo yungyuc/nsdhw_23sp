@@ -15,7 +15,7 @@ Matrix Multiply::multiply_naive(const Matrix &mat1, const Matrix &mat2)
     return rst;
 }
 
-Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2)
+Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
 {
     if (mat1.ncol() != mat2.nrow())
         throw std::invalid_argument("Matrix: the number of columns in the first matrix must be equal to the number of rows in the second matrix");
