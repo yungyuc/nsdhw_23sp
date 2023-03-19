@@ -36,6 +36,7 @@ double &Matrix::operator()(const size_t &row, const size_t &col)
 
 size_t Matrix::nrow() const { return m_nrow; }
 size_t Matrix::ncol() const { return m_ncol; }
+double *Matrix::buffer() const { return m_buffer; }
 
 bool Matrix::operator==(const Matrix &other) const
 {

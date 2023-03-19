@@ -23,6 +23,6 @@ test: $(LIB)
 	python3 -m pytest -v
 
 clean:
-	rm -rf bin $(OBJS) $(LIB)
+	rm -f $(OBJS) $(LIB)
 
 .PHONY: all test clean

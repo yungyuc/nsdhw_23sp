@@ -1,4 +1,3 @@
-#include <fstream>
 #include <mkl/mkl.h>
 #include <mkl/mkl_lapack.h>
 #include <mkl/mkl_lapacke.h>
@@ -6,12 +5,18 @@
 #include "stdexcept"
 #include "Multiply.h"
 
-Matrix Multiply::multiply_naive(const Matrix &mat1, const Matrix &mat2)
+void check_matrix(const Matrix &mat1, const Matrix &mat2)
 {
     if (mat1.ncol() != mat2.nrow())
         throw std::invalid_argument("Matrix: the number of columns in the first matrix must be equal to the number of rows in the second matrix");
+}
+
+Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2)
+{
+    check_matrix(mat1, mat2);
 
     Matrix rst(mat1.nrow(), mat2.ncol());
+
     for (size_t i = 0; i < mat1.nrow(); ++i)
     {
         for (size_t j = 0; j < mat2.ncol(); ++j)
@@ -26,10 +31,9 @@ Matrix Multiply::multiply_naive(const Matrix &mat1, const Matrix &mat2)
     return rst;
 }
 
-Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
+Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
 {
-    // if (mat1.ncol() != mat2.nrow())
-    //     throw std::invalid_argument("Matrix: the number of columns in the first matrix must be equal to the number of rows in the second matrix");
+    check_matrix(mat1, mat2);
 
     size_t nrow_1 = mat1.nrow();
     size_t nrow_2 = mat2.nrow();
@@ -48,6 +52,8 @@ Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts
     size_t ncol_1_fix = fix(ncol_1);
     size_t ncol_2_fix = fix(ncol_2);
 
+    // Set dest with src
+    // they are align by (0, 0) with size (nrow, ncol)
     auto set = [&](Matrix &dest, const Matrix &src, size_t nrow, size_t ncol)
     {
         for (size_t i = 0; i < nrow; ++i)
@@ -63,21 +69,28 @@ Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts
     set(mat2_fix, mat2, nrow_2, ncol_2);
 
     const size_t buffer_size = tsize * tsize;
-    double block_1[buffer_size], block_2[buffer_size], block_rst[buffer_size], block_sum[buffer_size];
+    double *block_1 = new double[buffer_size];
+    double *block_2 = new double[buffer_size];
+    double *block_rst = new double[buffer_size];
+    double *block_sum = new double[buffer_size];
 
+    // Set a block to all zeros
     auto clear = [&](double *arr)
     {
         for (size_t i = 0; i < buffer_size; ++i)
             arr[i] = 0.0;
     };
 
+    // Add src block to dest block
     auto add = [&](double *dest, double *src)
     {
         for (size_t i = 0; i < buffer_size; ++i)
             dest[i] += src[i];
     };
 
-    auto load = [&](double *arr, const Matrix &mat, size_t r_offset, size_t c_offset, bool transpose = false)
+    // Load mat to arr with offset
+    // if transpose is set, let arr store mat^T
+    auto load = [&](double *arr, const Matrix &mat, size_t r_offset, size_t c_offset, bool transpose)
     {
         if (transpose)
         {
@@ -93,6 +106,7 @@ Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts
         }
     };
 
+    // Inverse operation of load
     auto save = [&](const double *arr, Matrix &mat, size_t r_offset, size_t c_offset)
     {
         for (size_t i = 0, io = r_offset; i < buffer_size; i += tsize, ++io)
@@ -100,6 +114,8 @@ Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts
                 mat(io, jo) = arr[i + j];
     };
 
+    // naive multiply
+    // for block
     auto multiply = [&](double *rst, const double *b1, const double *b2)
     {
         for (size_t iBase = 0, i = 0; iBase < buffer_size; iBase += tsize, ++i)
@@ -121,7 +137,7 @@ Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts
             clear(block_sum);
             for (size_t k = 0; k < ncol_1_fix; k += tsize)
             {
-                load(block_1, mat1_fix, i, k);
+                load(block_1, mat1_fix, i, k, false);
                 load(block_2, mat2_fix, k, j, true);
                 multiply(block_rst, block_1, block_2);
                 add(block_sum, block_rst);
@@ -130,45 +146,38 @@ Matrix Multiply::multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t ts
         }
     }
 
+    delete[] block_1;
+    delete[] block_2;
+    delete[] block_sum;
+    delete[] block_rst;
+
     Matrix rst(nrow_1, ncol_2);
     set(rst, rst_fix, nrow_1, ncol_2);
 
     return rst;
 }
 
-Matrix Multiply::multiply_mkl(const Matrix &mat1, const Matrix &mat2)
+Matrix multiply_mkl(const Matrix &mat1, const Matrix &mat2)
 {
-    Matrix ret(mat1.nrow(), mat2.ncol());
+    check_matrix(mat1, mat2);
+
+    Matrix rst(mat1.nrow(), mat2.ncol());
 
     cblas_dgemm(
-        CblasRowMajor /* const CBLAS_LAYOUT Layout */
-        ,
-        CblasNoTrans /* const CBLAS_TRANSPOSE transa */
-        ,
-        CblasNoTrans /* const CBLAS_TRANSPOSE transb */
-        ,
-        mat1.nrow() /* const MKL_INT m */
-        ,
-        mat2.ncol() /* const MKL_INT n */
-        ,
-        mat1.ncol() /* const MKL_INT k */
-        ,
-        1.0 /* const double alpha */
-        ,
-        mat1.m_buffer /* const double *a */
-        ,
-        mat1.ncol() /* const MKL_INT lda */
-        ,
-        mat2.m_buffer /* const double *b */
-        ,
-        mat2.ncol() /* const MKL_INT ldb */
-        ,
-        0.0 /* const double beta */
-        ,
-        ret.m_buffer /* double * c */
-        ,
-        ret.ncol() /* const MKL_INT ldc */
-    );
+        CblasRowMajor,
+        CblasNoTrans,
+        CblasNoTrans,
+        mat1.nrow(),
+        mat2.ncol(),
+        mat1.ncol(),
+        1.0,
+        mat1.buffer(),
+        mat1.ncol(),
+        mat2.buffer(),
+        mat2.ncol(),
+        0.0,
+        rst.buffer(),
+        rst.ncol());
 
-    return ret;
+    return rst;
 }
