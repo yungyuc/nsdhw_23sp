@@ -2,7 +2,6 @@ CXX := g++
 CXXFLAGS := -O3 -std=c++11 -fPIC -Wall -Wextra -pedantic -I include
 
 PYTHON_INCLUDES := `python3-config --includes`
-PYBIND11_INCLUDES := `python3 -m pybind11 --includes` `python3-config --includes`
 
 LIB := _matrix.so
 
@@ -18,7 +17,7 @@ $(LIB): $(OBJS)
 
 bin/%.o: %.cpp
 	$(DIR_GUARD)
-	$(CXX) $(CXXFLAGS) $(PYBIND11_INCLUDES) $(PYTHON_INCLUDES) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) $(PYTHON_INCLUDES) -o $@ -c $<
 
 test:
 	python3 -m pytest -v
