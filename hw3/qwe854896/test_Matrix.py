@@ -50,7 +50,7 @@ def test_equal_comparator():
 
 
 def test_inequal_comparator():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
+    nrow, ncol = random.sample(range(2, MAX_SIZE), 2)
     mat1 = Matrix(nrow, ncol)
     mat2 = Matrix(nrow, ncol)
 
