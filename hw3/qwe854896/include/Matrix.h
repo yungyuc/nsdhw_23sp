@@ -19,10 +19,11 @@ public:
     bool operator==(const Matrix &other) const;
     bool operator!=(const Matrix &other) const;
 
+    double *m_buffer;
+
 private:
     size_t m_nrow;
     size_t m_ncol;
-    double *m_buffer;
 };
 
 #endif

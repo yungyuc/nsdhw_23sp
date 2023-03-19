@@ -35,8 +35,39 @@ def test_multiply_tile():
     mat = multiply_tile(mat1, mat2, tsize)
 
 
+def test_multiply_tile_special():
+    size = 100
+    mat1 = Matrix(size, size)
+    mat2 = Matrix(size, size)
+
+    for i in range(size):
+        for j in range(size):
+            mat1[i, j] = i * size + j + 1
+            mat2[i, j] = i * size + j + 1
+
+    tsize = 16
+    mat_naive = multiply_naive(mat1, mat2)
+    mat_tile = multiply_tile(mat1, mat2, tsize)
+    assert mat_tile == mat_naive
+
+
 def test_multiply_mkl():
     m, n, p = random.sample(range(1, MAX_SIZE), 3)
     mat1 = Matrix(m, n)
     mat2 = Matrix(n, p)
     mat = multiply_mkl(mat1, mat2)
+
+
+def test_multiply_mkl_special():
+    size = 30
+    mat1 = Matrix(size, size)
+    mat2 = Matrix(size, size)
+
+    for i in range(size):
+        for j in range(size):
+            mat1[i, j] = i * size + j + 1
+            mat2[i, j] = i * size + j + 1
+
+    mat_naive = multiply_naive(mat1, mat2)
+    mat_mkl = multiply_mkl(mat1, mat2)
+    assert mat_mkl == mat_naive
