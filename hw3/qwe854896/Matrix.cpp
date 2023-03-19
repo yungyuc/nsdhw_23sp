@@ -6,6 +6,8 @@ Matrix::Matrix(const size_t &nrow, const size_t &ncol)
 {
     size_t nelement = nrow * ncol;
     m_buffer = new double[nelement];
+    for (size_t i = 0; i < nelement; ++i)
+        m_buffer[i] = 0.0;
 }
 
 Matrix::Matrix(const Matrix &mat)
