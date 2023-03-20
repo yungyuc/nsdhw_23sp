@@ -1,29 +1,33 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
-#include <pybind11/stl.h>
-#include "PythonMatrix.h"
-#include "PythonMultiply.h"
 namespace py = pybind11;
+
+#include "Matrix.h"
+#include "Multiply.h"
 
 PYBIND11_MODULE(_matrix, m)
 {
-      m.doc() = "_matrix package";
-      py::class_<PythonMatrix>(m, "Matrix")
-          .def(py::init<const size_t &, const size_t &>())
-          .def(py::self == py::self)
-          .def(py::self != py::self)
-          .def("__getitem__", &PythonMatrix::getitem)
-          .def("__setitem__", &PythonMatrix::setitem)
-          .def_readonly("nrow", &PythonMatrix::nrow)
-          .def_readonly("ncol", &PythonMatrix::ncol);
+    m.doc() = "_matrix package";
+    py::class_<Matrix>(m, "Matrix")
+        .def(py::init<const size_t &, const size_t &>())
+        .def(py::self == py::self)
+        .def(py::self != py::self)
+        .def("__getitem__", [](const Matrix &mat, py::tuple index)
+             { 
+                size_t it = index[0].cast<size_t>(); 
+                size_t jt = index[1].cast<size_t>(); 
+                return mat(it, jt); })
+        .def("__setitem__", [](Matrix &mat, py::tuple index, double value)
+             {
+                size_t it = index[0].cast<size_t>();
+                size_t jt = index[1].cast<size_t>();
+                mat(it, jt) = value; })
+        .def_property_readonly("nrow", [](const Matrix &mat)
+                               { return mat.nrow(); })
+        .def_property_readonly("ncol", [](const Matrix &mat)
+                               { return mat.ncol(); });
 
-      m.def("multiply_naive",
-            &multiply_naive,
-            pybind11::return_value_policy::reference);
-      m.def("multiply_tile",
-            &multiply_tile,
-            pybind11::return_value_policy::reference);
-      m.def("multiply_mkl",
-            &multiply_mkl,
-            pybind11::return_value_policy::reference);
+    m.def("multiply_naive", &multiply_naive);
+    m.def("multiply_tile", &multiply_tile);
+    m.def("multiply_mkl", &multiply_mkl);
 }
