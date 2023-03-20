@@ -3,15 +3,46 @@ import random
 from _matrix import Matrix
 from _matrix import multiply_naive, multiply_tile, multiply_mkl
 
-
+MIN_SIZE = 1
 MAX_SIZE = 10
 
 
+def random_matrix(nrow=0, ncol=0, sz_min=MIN_SIZE, sz_max=MAX_SIZE):
+    nrow = nrow if nrow != 0 else random.randint(sz_min, sz_max)
+    ncol = ncol if ncol != 0 else random.randint(sz_min, sz_max)
+    return Matrix(nrow, ncol), nrow, ncol
+
+
 def test_multiply_naive():
-    m, n, p = random.sample(range(1, MAX_SIZE), 3)
-    mat1 = Matrix(m, n)
-    mat2 = Matrix(n, p)
+    mat1, _, ncol = random_matrix()
+    mat2, _, _ = random_matrix(nrow=ncol)
+    try:
+        _ = multiply_naive(mat1, mat2)
+        assert True
+    except:
+        assert False
+
+
+def test_multiply_naive_empty():
+    mat1 = Matrix(0, 0)
+    mat2 = Matrix(0, 0)
+
+    try:
+        _ = multiply_naive(mat1, mat2)
+        assert True
+    except:
+        assert False
+
+
+def test_multiply_naive_scalar():
+    mat1 = Matrix(1, 1)
+    mat2 = Matrix(1, 1)
+
+    a, b = random.choices(range(MAX_SIZE), k=2)
+    mat1[0, 0], mat2[0, 0] = a, b
+
     mat = multiply_naive(mat1, mat2)
+    assert mat[0, 0] == a * b
 
 
 def test_multiply_naive_special():
@@ -24,15 +55,19 @@ def test_multiply_naive_special():
     mat = multiply_naive(mat1, mat2)
     assert mat.nrow == 2
     assert mat.ncol == 2
-    assert mat[0, 0] == 6 and mat[0, 1] == 7 and mat[1, 0] == 26 and mat[1, 1] == 31
+    assert mat[0, 0] == 6 and mat[0,
+                                  1] == 7 and mat[1, 0] == 26 and mat[1, 1] == 31
 
 
 def test_multiply_tile():
-    m, n, p = random.sample(range(1, MAX_SIZE), 3)
-    mat1 = Matrix(m, n)
-    mat2 = Matrix(n, p)
+    mat1, _, ncol = random_matrix()
+    mat2, _, _ = random_matrix(nrow=ncol)
     tsize = 16
-    mat = multiply_tile(mat1, mat2, tsize)
+    try:
+        _ = multiply_tile(mat1, mat2, tsize)
+        assert True
+    except:
+        assert False
 
 
 def test_multiply_tile_special():
@@ -52,10 +87,13 @@ def test_multiply_tile_special():
 
 
 def test_multiply_mkl():
-    m, n, p = random.sample(range(1, MAX_SIZE), 3)
-    mat1 = Matrix(m, n)
-    mat2 = Matrix(n, p)
-    mat = multiply_mkl(mat1, mat2)
+    mat1, _, ncol = random_matrix()
+    mat2, _, _ = random_matrix(nrow=ncol)
+    try:
+        _ = multiply_mkl(mat1, mat2)
+        assert True
+    except:
+        assert False
 
 
 def test_multiply_mkl_special():

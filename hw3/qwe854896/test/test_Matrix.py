@@ -2,26 +2,49 @@ import random
 
 from _matrix import Matrix
 
-
+MIN_SIZE = 1
 MAX_SIZE = 10
 
 
-def test_custom_constructor():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
-    mat = Matrix(nrow, ncol)
+def random_matrix(nrow=0, ncol=0, sz_min=MIN_SIZE, sz_max=MAX_SIZE):
+    nrow = nrow if nrow != 0 else random.randint(sz_min, sz_max)
+    ncol = ncol if ncol != 0 else random.randint(sz_min, sz_max)
+    return Matrix(nrow, ncol), nrow, ncol
+
+
+def test_matrix_creation():
+    try:
+        _, _, _ = random_matrix()
+        assert True
+    except:
+        assert False
+
+
+def test_empty_matrix():
+    try:
+        _, _, _ = random_matrix(sz_min=0, sz_max=0)
+        assert True
+    except:
+        assert False
+
+
+def test_scalar_matrix():
+    try:
+        _, _, _ = random_matrix(sz_min=1, sz_max=1)
+        assert True
+    except:
+        assert False
 
 
 def test_getitem():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
-    mat = Matrix(nrow, ncol)
+    mat, nrow, ncol = random_matrix()
     for i in range(nrow):
         for j in range(ncol):
             _ = mat[i, j]
 
 
 def test_setitem():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
-    mat = Matrix(nrow, ncol)
+    mat, nrow, ncol = random_matrix()
     for i in range(nrow):
         for j in range(ncol):
             mat[i, j] = i * j
@@ -29,17 +52,14 @@ def test_setitem():
 
 
 def test_getter():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
-    mat = Matrix(nrow, ncol)
-
+    mat, nrow, ncol = random_matrix()
     assert nrow == mat.nrow
     assert ncol == mat.ncol
 
 
 def test_equal_comparator():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
-    mat1 = Matrix(nrow, ncol)
-    mat2 = Matrix(nrow, ncol)
+    mat1, nrow, ncol = random_matrix()
+    mat2, nrow, ncol = random_matrix(nrow=nrow, ncol=ncol)
 
     for i in range(nrow):
         for j in range(ncol):
@@ -50,9 +70,8 @@ def test_equal_comparator():
 
 
 def test_inequal_comparator():
-    nrow, ncol = random.sample(range(2, MAX_SIZE), 2)
-    mat1 = Matrix(nrow, ncol)
-    mat2 = Matrix(nrow, ncol)
+    mat1, nrow, ncol = random_matrix(sz_min=2)
+    mat2, nrow, ncol = random_matrix(nrow=nrow, ncol=ncol)
 
     for i in range(nrow):
         for j in range(ncol):
@@ -63,7 +82,6 @@ def test_inequal_comparator():
 
 
 def test_copy_constructor():
-    nrow, ncol = random.sample(range(1, MAX_SIZE), 2)
-    mat1 = Matrix(nrow, ncol)
-    mat2 = mat1
+    mat1, _, _ = random_matrix()
+    mat2 = Matrix(mat1)
     assert mat1 == mat2

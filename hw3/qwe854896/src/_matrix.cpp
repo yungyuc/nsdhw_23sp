@@ -10,6 +10,7 @@ PYBIND11_MODULE(_matrix, m)
     m.doc() = "_matrix package";
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<const size_t &, const size_t &>())
+        .def(py::init<const Matrix &>())
         .def(py::self == py::self)
         .def(py::self != py::self)
         .def("__getitem__", [](const Matrix &mat, py::tuple index)
