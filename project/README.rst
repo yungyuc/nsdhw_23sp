@@ -68,6 +68,9 @@ Project List by Account Name
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
+2. `qwe854896 <https://github.com/qwe854896>`__ for
+   `MatrixCurer <qwe854896/README.rst>`__:
+   https://github.com/qwe854896/MatrixCurer
 
 Time Table Session A
 ++++++++++++++++++++
