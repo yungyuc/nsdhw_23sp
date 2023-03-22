@@ -11,10 +11,18 @@ public:
     Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol)
     {
         size_t nelement = nrow * ncol;
-        m_buffer = (double *) calloc(nelement, sizeof(double));
+        m_buffer = new double[nelement];
+        memset(m_buffer, 0, nelement * sizeof(double));
     }
 
-    ~Matrix() { free(m_buffer); }
+    Matrix(const Matrix &m) : m_nrow(m.nrow()), m_ncol(m.ncol())
+    {
+        size_t nelement = m_nrow * m_ncol;
+        m_buffer = new double[nelement];
+        memcpy(m_buffer, m.buffer(), nelement * sizeof(double));
+    }
+
+    ~Matrix() { delete[] m_buffer; }
 
     // No bound check.
     double operator()(size_t row, size_t col) const
@@ -44,6 +52,7 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
+    double *buffer() const { return m_buffer; }
 
 private:
     size_t m_nrow;
