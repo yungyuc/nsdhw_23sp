@@ -1,5 +1,6 @@
 import _matrix
 import pytest
+import timeit
 import math
 
 class Test_Matrix():
@@ -42,3 +43,81 @@ class Test_Matrix():
 
         assert mat1 == mat2
         assert mat1 is not mat2
+
+    def test_match_naive_mkl(self):
+
+        size = 100
+        mat1, mat2, *_ = self.make_matrices(size)
+
+        ret_naive = _matrix.multiply_naive(mat1, mat2)
+        ret_mkl = _matrix.multiply_mkl(mat1, mat2)
+
+        assert size == ret_naive.nrow
+        assert size == ret_naive.ncol
+        assert size == ret_mkl.nrow
+        assert size == ret_mkl.ncol
+
+        for i in range(ret_naive.nrow):
+            for j in range(ret_naive.ncol):
+                assert mat1[i,j] is not ret_mkl[i,j]
+                assert ret_naive[i,j] == ret_mkl[i,j]
+
+    def test_zero(self):
+        size = 100
+        mat1, mat2, mat3, *_ = self.make_matrices(size)
+
+        ret_naive = _matrix.multiply_naive(mat1, mat3)
+        ret_mkl = _matrix.multiply_mkl(mat1, mat3)
+
+        assert size == ret_naive.nrow
+        assert size == ret_naive.ncol
+        assert size == ret_mkl.nrow
+        assert size == ret_mkl.ncol
+
+        for i in range(ret_naive.nrow):
+            for j in range(ret_naive.ncol):
+                assert 0 == ret_naive[i, j]
+                assert 0 == ret_mkl[i, j]
+
+    def check_tile(self, mat1, mat2, tsize):
+
+        if 0 == tsize:
+            ret_tile = _matrix.multiply_naive(mat1, mat2)
+            tile_str = "_matrix.multiply_naive(mat1, mat2)"
+        else:
+            ret_tile = _matrix.multiply_tile(mat1, mat2, tsize)
+            tile_str = "_matrix.multiply_tile(mat1, mat2, tsize)"
+        ret_mkl = _matrix.multiply_mkl(mat1, mat2)
+
+        for i in range(ret_tile.nrow):
+            for j in range(ret_tile.ncol):
+                assert mat1[i,j] != ret_mkl[i,j]
+                assert ret_tile[i,j] == ret_mkl[i,j]
+
+        ns = dict(_matrix=_matrix, mat1=mat1, mat2=mat2, tsize=tsize)
+        t_tile = timeit.Timer(tile_str, globals=ns)
+        t_mkl = timeit.Timer('_matrix.multiply_mkl(mat1, mat2)', globals=ns)
+
+        time_tile = min(t_tile.repeat(10, 1))
+        time_mkl = min(t_mkl.repeat(10, 1))
+        ratio = time_tile/time_mkl
+
+        return ratio, time_tile
+
+    def test_tile(self):
+        mat1, mat2, *_ = self.make_matrices(1000)
+        ratio0, time0 = self.check_tile(mat1, mat2, 0)
+        print("naive ratio:", ratio0)
+        ratio16, time16 = self.check_tile(mat1, mat2, 16)
+        print("tile 16 ratio:", ratio16)
+        print("time16/time0:", time16/time0)
+        assert ratio16/ratio0 <= 0.8
+        ratio17, time17 = self.check_tile(mat1, mat2, 17)
+        print("tile 17 ratio:", ratio17)
+        print("time17/time0:", time17/time0)
+        assert ratio17/ratio0 <= 0.8
+
+        ratio19, time19 = self.check_tile(mat1, mat2, 19)
+        print("tile 19 ratio:", ratio19)
+        print("time19/time0:", time19/time0)
+        assert ratio19/ratio0 <= 0.8
