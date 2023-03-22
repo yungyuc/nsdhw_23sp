@@ -21,6 +21,31 @@ Matrix multiply_naive(Matrix &a, Matrix &b)
     return c;
 }
 
+Matrix multiply_tile(Matrix const &a, Matrix const &b, size_t const tile_size)
+{
+    if (a.ncol() != b.nrow()) {
+        exit(1);
+    }
+
+    Matrix c(a.nrow(), b.ncol());
+    for (size_t i = 0; i < a.nrow(); i++) {
+        for (size_t k = 0; k < a.ncol(); k++) {
+            for (size_t j = 0; j < b.ncol(); j++) {
+                for (size_t ti = i; ti < std::min(i + tile_size, a.nrow());
+                     ti++) {
+                    for (size_t tk = k; tk < std::min(k + tile_size, a.ncol());
+                         tk++) {
+                        for (size_t tj = j;
+                             tj < std::min(j + tile_size, b.ncol()); tj++) {
+                            c(ti, tj) += a(ti, tk) * b(tk, tj);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return c;
+}
 
 PYBIND11_MODULE(_matrix, m)
 {

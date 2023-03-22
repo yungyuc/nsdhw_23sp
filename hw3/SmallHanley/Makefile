@@ -9,4 +9,4 @@ test: all
 benchmark:
 
 clean:
-	rm *.so performance.txt -rf __pycache__
+	rm *.so -rf __pycache__
