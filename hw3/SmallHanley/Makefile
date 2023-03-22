@@ -12,7 +12,7 @@ LDFLAGS=${MKLROOT}/libmkl_def.so \
 		-lpthread -lm -ldl \
 	     -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
 all: Matrix.h _matrix.cpp
-	${CXX} $(CXXFLAGS) -I/usr/include/mkl $(PYBIND) _matrix.cpp -o _matrix$(PYCONFIG) -I/usr/include/python3.8 ${LDFLAGS}
+	${CXX} $(CXXFLAGS) -I/usr/include/mkl $(PYBIND) $(shell python3-config --includes --ldflags) _matrix.cpp -o _matrix$(PYCONFIG) -I/usr/include/python3.8 ${LDFLAGS}
 
 test: all
 	python3 -m pytest -v -s
