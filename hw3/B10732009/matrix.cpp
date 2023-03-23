@@ -7,7 +7,7 @@ Matrix::Matrix() : mRow(0), mCol(0), mBuffer(nullptr)
 {
 }
 
-Matrix::Matrix(std::size_t row, std::size_t col) : mRow(row), mCol(col), mBuffer(new double[row * col])
+Matrix::Matrix(std::size_t row, std::size_t col) : mRow(row), mCol(col), mBuffer(new double[row * col]())
 {
 }
 
