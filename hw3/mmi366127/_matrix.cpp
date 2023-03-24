@@ -55,7 +55,6 @@ struct Matrix {
         free(data);
     }
     int get_padding(int x) {
-        return x;
         return ((x - 1) / 16 + 1) * 16;
     }
     void resize(int r, int c) {
