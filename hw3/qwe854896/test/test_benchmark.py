@@ -23,7 +23,7 @@ for it in range(size):
 
     repeat = 5
 
-    with open('_performance.txt', 'w') as fobj:
+    with open('performance.txt', 'w') as fobj:
 
         fobj.write(f'Start multiply_naive (repeat={repeat}), take min = ')
         naivesec = minsec = min(naive.repeat(repeat=repeat, number=1))
