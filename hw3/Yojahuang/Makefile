@@ -1,14 +1,7 @@
 CXX = g++
 CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC `python3-config --includes` 
 CIMPORTPATH = includes/
-MKLROOT=/usr/lib/x86_64-linux-gnu
-LDFLAGS=${MKLROOT}/libmkl_def.so \
-		${MKLROOT}/libmkl_avx2.so \
-		${MKLROOT}/libmkl_core.so \
-		${MKLROOT}/libmkl_intel_lp64.so \
-		${MKLROOT}/libmkl_sequential.so \
-		-lpthread -lm -ldl \
-	     -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
+LDFLAGS= -lblas
 
 all: _matrix.so
 

@@ -132,7 +132,7 @@ PYBIND11_MODULE(_matrix, m) {
   m.doc() = "Matrix multiplication function implementation";      // module doc string
   m.def("multiply_naive", &multiply_naive);
   m.def("multiply_tile", &multiply_tile);
-  m.def("multiply_mkl", &multiply_naive);
+  m.def("multiply_mkl", &multiply_mkl);
   py::class_<Matrix>(m, "Matrix")
     .def(py::init<size_t, size_t>())
     .def_property_readonly("nrow", [](Matrix& m){ return m.n_row(); })
