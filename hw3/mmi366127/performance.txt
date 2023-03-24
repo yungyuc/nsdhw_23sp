@@ -1,0 +1,8 @@
+multiply_naive takes 0.7656763039994985 seconds
+multiply_mkl takes 0.013970657018944621 seconds
+multiply_tile with block size = 4 takes 1.1082178298383951 seconds
+multiply_tile with block size = 8 takes 0.8189321288373321 seconds
+multiply_tile with block size = 16 takes 0.7266073878854513 seconds
+multiply_tile with block size = 32 takes 0.6500818659551442 seconds
+multiply_tile with block size = 64 takes 0.6594491929281503 seconds
+multiply_tile with block size = 128 takes 0.659750826889649 seconds

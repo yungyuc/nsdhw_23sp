@@ -55,6 +55,7 @@ struct Matrix {
         free(data);
     }
     int get_padding(int x) {
+        return x;
         return ((x - 1) / 16 + 1) * 16;
     }
     void resize(int r, int c) {
@@ -89,10 +90,14 @@ struct Matrix {
     }
     double getvalue(const std::vector<int> idx) const {
         assert(idx.size() == 2);
+        assert(idx[0] < nrow);
+        assert(idx[1] < ncol);
         return data[idx[0] * pad + idx[1]];
     }
     void setvalue(const std::vector<int> idx, double v) {
         assert(idx.size() == 2);
+        assert(idx[0] < nrow);
+        assert(idx[1] < ncol);
         data[idx[0] * pad + idx[1]] = v;
     }
 };
@@ -135,6 +140,13 @@ Matrix multiply_tile(const Matrix &A, const Matrix &B, int BLOCK_SIZE) {
     return C;
 }
 
+void myDgemm(double* a, double* b, double* c, int m, int k, int n) {
+    // fix column-major problem
+    char transa = 'N', transb = 'N';
+    double alpha = 1.0, beta = 0.;
+    dgemm_(&transb, &transa, &n, &m, &k, &alpha, b, &n, a, &k, &beta, c, &n);
+}
+
 Matrix multiply_mkl(const Matrix &A, const Matrix &B) {
     assert(A.ncol == B.nrow);
     Matrix C(A.nrow, B.ncol);
@@ -142,11 +154,10 @@ Matrix multiply_mkl(const Matrix &A, const Matrix &B) {
     temp_a = (double*)aligned_alloc(64, sizeof(double) * A.size());
     temp_b = (double*)aligned_alloc(64, sizeof(double) * B.size());
     temp_c = (double*)aligned_alloc(64, sizeof(double) * C.size());
+    memset(temp_c, 0, sizeof(double) * C.size());
     memcpy_matrix(temp_a, A.data, A.nrow, A.ncol, A.ncol, A.pad);
     memcpy_matrix(temp_b, B.data, B.nrow, B.ncol, B.ncol, B.pad);
-    char transpose = 'N';
-    double alpha = 1.0, beta = 0.0;
-    dgemm_(&transpose, &transpose, &A.nrow, &B.ncol, &A.ncol, &alpha, temp_a, &A.nrow, temp_b, &B.nrow, &beta, temp_c, &C.nrow);
+    myDgemm(temp_a, temp_b, temp_c, A.nrow, A.ncol, B.ncol);
     memcpy_matrix(C.data, temp_c, C.nrow, C.ncol, C.pad, C.ncol);
     free(temp_a); free(temp_b); free(temp_c); 
     return C;

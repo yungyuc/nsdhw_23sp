@@ -15,6 +15,5 @@ clean:
 	rm -f *.so
 	rm -rf __pycache__
 	rm -rf .pytest_cache
-	rm -f performance.txt
 
 
