@@ -19,6 +19,9 @@ clean:
 	rm -f *.so
 
 test: _matrix.so
-	python3 -m pytest test_matrix_mul.py -v && python3 performance.py && cat performance.txt
+	python3 -m pytest test_matrix_mul.py -v
+
+performance: _matrix.so
+	python3 performance.py
 	
 .PHONY: all clean test

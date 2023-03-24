@@ -1,10 +1,8 @@
 #include "matrix.h"
 #include "TileHelper.h"
 
-#include <vector>
 #include <stdexcept>
 #include <cstddef>
-#include <iostream>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>

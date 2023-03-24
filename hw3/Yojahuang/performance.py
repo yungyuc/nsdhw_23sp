@@ -20,15 +20,15 @@ for i in range(size):
     mkl = timeit.Timer('_matrix.multiply_mkl(mat1, mat2)', setup=setup)
 
     with open('performance.txt', 'w') as f:
-        f.write('Start multiply_naive (repeat=5), take min =')
+        f.write('Start multiply_naive (repeat=5), take min = ')
         naiveTime = min(naive.repeat(repeat=repeat, number=1))
         f.write('{} seconds\n'.format(naiveTime))
 
-        f.write('Start multiply_tile (repeat=5), take min =')
+        f.write('Start multiply_tile (repeat=5), take min = ')
         tileTime = min(tile.repeat(repeat=repeat, number=1))
         f.write('{} seconds\n'.format(tileTime))
         
-        f.write('Start multiply_mkl (repeat=5), take min =')
+        f.write('Start multiply_mkl (repeat=5), take min = ')
         mklTime = min(mkl.repeat(repeat=repeat, number=1))
         f.write('{} seconds\n'.format(mklTime))
 
