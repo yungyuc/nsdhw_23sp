@@ -19,6 +19,6 @@ clean:
 	rm -f *.so
 
 test: _matrix.so
-
-
+	python3 -m pytest test_matrix_mul.py -v
+	
 .PHONY: all clean test

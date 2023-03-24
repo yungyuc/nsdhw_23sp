@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstddef>
 #include <cstring>
+#include <cmath>
 
 Matrix::Matrix() {
     this->m_row = 0;
@@ -61,7 +62,8 @@ bool Matrix::operator==(const Matrix rhs) const {
     for (int i = 0; i < col; ++i) {
         for (int j = 0; j < row; ++j) {
             size_t idx = this->m_col * i + j;
-            if (this->m_buffer[idx] != rhs(i, j)) return false;
+            double diff = abs(this->m_buffer[idx] - rhs(i,j));
+            if (diff > 0.0000001) return false;
         }
     }
 
