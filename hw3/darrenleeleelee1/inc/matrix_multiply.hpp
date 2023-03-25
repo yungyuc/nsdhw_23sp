@@ -69,7 +69,7 @@ Matrix MatrixMultiply::multiply_tile(const Matrix& A, const Matrix& B, size_t ti
     return result;
 }
 
-Matrix multiply_mkl(const Matrix &A, const Matrix &B)
+Matrix MatrixMultiply::multiply_mkl(const Matrix &A, const Matrix &B)
 {
     size_t nrow_A = A.nrow();
     size_t ncol_A = A.ncol();
