@@ -37,7 +37,7 @@ Matrix multiply_tile(Matrix const & matrix1, Matrix const & matrix2, size_t tile
 Matrix multiply_mkl(Matrix const & matrix1, Matrix const & matrix2){
     Matrix ret = Matrix(matrix1.nrow(), matrix2.ncol());
     cblas_dgemm(
-        CblasRowMajor,-
+        CblasRowMajor,
         CblasNoTrans,
         CblasNoTrans,
         matrix1.nrow(),
