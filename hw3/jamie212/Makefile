@@ -15,7 +15,7 @@ all: $(TARGET)
 test: $(TARGET)
 	python3 -m pytest -v
 	python3 performance.py
-	
+
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
 
