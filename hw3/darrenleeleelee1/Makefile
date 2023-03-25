@@ -11,9 +11,13 @@ else
 endif
 LFLAGS := -lblas
 LIB_TARGET = ./bin/_matrix.so
+
+DIR_GUARD=@mkdir -p $(@D)
+
 all: $(LIB_TARGET) $(PROG_TARGET)
 
 $(LIB_TARGET): ./src/_matrix.cpp ./inc/matrix.hpp ./inc/matrix_multiply.hpp
+	$(DIR_GUARD)
 	$(CXXPROC) -o $@ $(CPPFLAGS) $(LFLAGS) $<
 
 .PHONY: test
