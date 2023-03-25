@@ -5,7 +5,7 @@ ifeq ($(shell uname),Darwin)
 	CPPFLAGS = -O3 -Wall -shared -std=c++11 -I./inc -fPIC `python3 -m pybind11 --includes` -undefined dynamic_lookup `python3-config --includes --ldflags`
 else ifeq ($(shell uname),Linux)
 	# Linux
-	CPPFLAGS = -O3 -Wall -shared -std=c++11 -I./inc -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+	CPPFLAGS = -O3 -Wall -shared -std=c++11 -I./inc -fPIC `python3-config --includes`
 else
   	echo "Don't know the OS"
 endif
