@@ -15,21 +15,21 @@ for i in range(size):
 
     repeat = 5
 
-    naive = timeit.Timer('_matrix.multiply_naive(mat1, mat2)', setup=setup)
-    tile = timeit.Timer('_matrix.multiply_tile(mat1, mat2, 16)', setup=setup)
-    mkl = timeit.Timer('_matrix.multiply_mkl(mat1, mat2)', setup=setup)
+    mul_naive = timeit.Timer('_matrix.multiply_naive(mat1, mat2)', setup=setup)
+    mul_tile = timeit.Timer('_matrix.multiply_tile(mat1, mat2, 16)', setup=setup)
+    mul_mkl = timeit.Timer('_matrix.multiply_mkl(mat1, mat2)', setup=setup)
 
     with open('performance.txt', 'w') as f:
         f.write('Start multiply_naive (repeat=5), take min = ')
-        naiveTime = min(naive.repeat(repeat=repeat, number=1))
+        naiveTime = min(mul_naive.repeat(repeat=repeat, number=1))
         f.write('{} seconds\n'.format(naiveTime))
 
         f.write('Start multiply_tile (repeat=5), take min = ')
-        tileTime = min(tile.repeat(repeat=repeat, number=1))
+        tileTime = min(mul_tile.repeat(repeat=repeat, number=1))
         f.write('{} seconds\n'.format(tileTime))
         
         f.write('Start multiply_mkl (repeat=5), take min = ')
-        mklTime = min(mkl.repeat(repeat=repeat, number=1))
+        mklTime = min(mul_mkl.repeat(repeat=repeat, number=1))
         f.write('{} seconds\n'.format(mklTime))
 
         f.write('Tile speed-up over naive: {} x\n'.format(tileTime / naiveTime))

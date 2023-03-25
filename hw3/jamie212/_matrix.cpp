@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-// #include <mkl.h>
+#include <mkl.h>
 #include <pybind11/pybind11.h>
 
 using namespace std;
@@ -143,20 +143,20 @@ Matrix multiply_tile(Matrix& A, Matrix& B, size_t tile_size) {
     return C;
 }
 
-// Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
-//     assert(A.ncol() == B.nrow());
+Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
+    assert(A.ncol() == B.nrow());
 
-//     size_t n = A.nrow();
-//     size_t m = A.ncol();
-//     size_t p = B.ncol();
+    size_t n = A.nrow();
+    size_t m = A.ncol();
+    size_t p = B.ncol();
 
-//     Matrix E(n, p);
+    Matrix E(n, p);
 
-//     const double alpha = 1.0;
-//     const double beta = 0.0;
-//     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, n, p, m, alpha, A.get_data(), m, B.get_data(), p, beta, E.get_data(), p);
-//     return E;
-// }
+    const double alpha = 1.0;
+    const double beta = 0.0;
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, n, p, m, alpha, A.get_data(), m, B.get_data(), p, beta, E.get_data(), p);
+    return E;
+}
 
 
 PYBIND11_MODULE(_matrix, m)
@@ -182,7 +182,7 @@ PYBIND11_MODULE(_matrix, m)
              });
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
-    // m.def("multiply_mkl", &multiply_mkl);
+    m.def("multiply_mkl", &multiply_mkl);
     // m.def("matrices_equal", &matrices_equal);
     // m.def("setZero", &setZero);
     m.def("generateValue", &generateValue);

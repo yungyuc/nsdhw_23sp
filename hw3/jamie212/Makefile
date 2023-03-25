@@ -1,31 +1,24 @@
-CXX=g++
+CC = clang++
+CFLAGS = -O3 -Wall -m64 -shared -std=c++11 -fPIC
+MKL_LIB_DIR = /usr/lib/x86_64-linux-gnu
+MKL_LIB_SO = libmkl_def.so libmkl_avx2.so libmkl_core.so libmkl_intel_lp64.so libmkl_sequential.so
+MKL_LIBS = $(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
+			-lpthread -lm -ldl -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
 
-ifeq ($(shell uname),Darwin) # MacOS
-	CXXFLAGS = -O3 -Wall -shared -std=c++11 -fPIC -arch arm64 -undefined dynamic_lookup `python3-config --cflags --ldflags` 
-else ifeq ($(shell uname),Linux) # Linux
-	CXXFLAGS = -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags` 
-else
-	echo "Don't know which OS system"
-endif
+SRC = _matrix.cpp
+TARGET = $(patsubst %.cpp, %.so, $(SRC))
 
-SOURCES = _matrix.cpp
-LIBRARY = _matrix.so
+.PHONY: all clean
 
-.PHONY: test clean
+all: $(TARGET)
 
-all: $(LIBRARY)
-
-$(LIBRARY): $(SOURCES)
-	$(CXX) $(CXXFLAGS) -O3 -o $@ $^
-
-test: $(LIBRARY)
-	env PYTHONPATH=".:$PYTHONPATH" python3 -m pytest -v -p no:cacheprovider
-	# python performance.py
-	python -m pytest ../validate.py
-
+test: $(TARGET)
+	python3 -m pytest -v
+	python3 performance.py
+	
 clean:
-	rm -rf __pycache__
-	rm -f *.o *.so
-    
+	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
 
+%.so: %.cpp
+	$(CC) $(CFLAGS) -I/usr/include/mkl `python3 -m pybind11 --includes` $< -o $@ `python3-config --includes --ldflags` ${MKL_LIBS}
 
