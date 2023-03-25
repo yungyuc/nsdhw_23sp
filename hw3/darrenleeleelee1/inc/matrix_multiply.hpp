@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 #include <mkl/mkl.h>
-#include <mkl/mkl_lapack.h>
-#include <mkl/mkl_lapacke.h>
 #include "matrix.hpp"
 namespace MatrixMultiply{
     Matrix multiply_naive(const Matrix& A, const Matrix& B);

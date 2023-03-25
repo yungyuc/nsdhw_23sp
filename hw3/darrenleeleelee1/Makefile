@@ -8,16 +8,14 @@ else ifeq ($(shell uname),Linux)
 	CPPFLAGS = -O3 -Wall -shared -std=c++11 -I./inc -fPIC `python3-config --includes`
 else
   	echo "Don't know the OS"
-endif
-LFLAGS := -lblas -lgsl -lgslcblas -lm
+endif := -lblas -lgsl -lgslcblas -lm
 LIB_TARGET = _matrix.so
 
 
 all: $(LIB_TARGET) $(PROG_TARGET)
 
 $(LIB_TARGET): ./src/_matrix.cpp ./inc/matrix.hpp ./inc/matrix_multiply.hpp
-	$(CXXPROC) -o $@ $(CPPFLAGS) $(LFLAGS) $<
-
+	$(CXXPROC) -O3 -Wall -shared -std=c++11 -fPIC $(shell python3 -m pybind11 --includes) $< $(shell python3-config --includes --ldflags) -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -I/usr/include/mkl -o $@
 .PHONY: test
 test: $(LIB_TARGET)
 	python3 -m pytest -v -s
