@@ -9,7 +9,7 @@ else ifeq ($(shell uname),Linux)
 else
   	echo "Don't know the OS"
 endif
-LFLAGS := -lblas
+LFLAGS := -lblas -lgsl -lgslcblas -lm
 LIB_TARGET = _matrix.so
 
 
