@@ -12,7 +12,7 @@ LIB_TARGET = _matrix.so
 all: $(TARGET)
 
 $(LIB_TARGET): ./src/_matrix.cpp
-	$(CC) $(CFLAGS) -I/usr/include/mkl python3 -m pybind11 --includes $< -o $@ python3-config --includes --ldflags ${MKL_LIBS}
+	$(CC) $(CFLAGS) -I/usr/include/mkl `python3 -m pybind11 --includes` $< -o $@ `python3-config --includes --ldflags` ${MKL_LIBS}
 
 test: $(LIB_TARGET)
 	python3 -m pytest -v -s
