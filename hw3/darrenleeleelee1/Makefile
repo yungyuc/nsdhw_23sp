@@ -8,7 +8,7 @@ else ifeq ($(shell uname),Linux)
 	CPPFLAGS = -O3 -Wall -m64 -shared -std=c++11 -fPIC -I./inc -fPIC `python3-config --includes`
 else
   	echo "Don't know the OS"
-endif := -lblas -lgsl -lgslcblas -lm
+endif
 LIB_TARGET = _matrix.so
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIB_SO=libmkl_def.so libmkl_avx2.so libmkl_core.so libmkl_intel_lp64.so libmkl_sequential.so
