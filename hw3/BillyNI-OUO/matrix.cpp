@@ -5,10 +5,10 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
-#include <mkl.h>
-#include <mkl_lapack.h>
-#include <mkl_lapacke.h>
-using namespace std;
+#include <mkl/mkl.h>
+#include <mkl/mkl_cblas.h>
+#include <mkl/mkl_lapack.h>
+#include <mkl/mkl_lapacke.h>
 namespace py=pybind11;
 
 class Matrix {
@@ -19,6 +19,12 @@ public:
       : m_nrow(nrow), m_ncol(ncol)
     {
         m_buffer = new double[nrow*ncol];
+        memset(m_buffer, 0, nrow*ncol * sizeof(double));
+    }
+    Matrix(const Matrix &m) : m_nrow(m.nrow()), m_ncol(m.ncol())
+    {
+        m_buffer = new double[m_nrow * m_ncol];
+        memcpy(m_buffer, m.data(), m_nrow * m_ncol * sizeof(double));
     }
 
     ~Matrix()
@@ -52,11 +58,10 @@ public:
     	}
         return m_buffer[row*m_ncol + col];
     }
-    bool operator ==(Matrix r)
+    bool operator ==(const Matrix &r)
 	{
-		if(this==&r)
-			return true;
-		else if(this->nrow() != r.nrow() || this->ncol() != r.ncol()){
+		
+		if(this->nrow() != r.nrow() || this->ncol() != r.ncol()){
 			return false;
 		}else{
 			for(size_t i = 0; i < this->nrow(); i ++){
@@ -72,7 +77,7 @@ public:
 	}
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    double* data()const{return m_buffer;}
+    double* data() const {return m_buffer;}
 
 private:
 
@@ -83,43 +88,37 @@ private:
 };
 
 
-Matrix multiply_naive(Matrix a, Matrix b){
+Matrix multiply_naive(Matrix const &a, Matrix const &b){
 	 if (a.ncol() != b.nrow())
     {
         throw std::out_of_range("matrix column differs from row size");
     }
 
-    Matrix ret = Matrix(a.nrow(), b.ncol());
+    Matrix ret(a.nrow(), b.ncol());
 
-    for (size_t i=0; i<ret.nrow(); ++i)
-    {
-        for (size_t k=0; k<ret.ncol(); ++k)
-        {
-            double v = 0;
-            for (size_t j=0; j<a.ncol(); ++j)
-            {
-                v += a(i,j) * b(j,k);
+    for (size_t i = 0; i < a.nrow(); i++) {
+        for (size_t j = 0; j < b.ncol(); j++) {
+            for (size_t k = 0; k < a.ncol(); k++) {
+                ret(i, j) += a(i, k) * b(k, j);
             }
-            ret(i,k) = v;
         }
     }
     return ret;
 }
 
-Matrix multiple_tile(Matrix a, Matrix b){
+Matrix multiply_tile(Matrix const &a, Matrix const &b, int T){
 	if (a.ncol() != b.nrow())
     {
         throw std::out_of_range("matrix column differs from row size");
     }
 
     Matrix ret = Matrix(a.nrow(), b.ncol());
-    int T = 16;
-    int M = a.ncol();
-    int N = a.nrow();
-    int K = b.nrow();
-    for (int m = 0; m < M/T; m += T) {
-        for (int n = 0; n < N/T; n += T) {
-            for (int k = 0; k < K/T; k += T) {
+    int M = a.nrow();
+    int N = a.ncol();
+    int K = b.ncol();
+    for (int m = 0; m < M; m += T) {
+        for (int n = 0; n < N; n += T) {
+            for (int k = 0; k < K; k += T) {
 
                 const int minMt = std::min(m + T, M);
                 const int minNt = std::min(n + T, N);
@@ -128,25 +127,27 @@ Matrix multiple_tile(Matrix a, Matrix b){
                 for (int mt = m; mt < minMt; mt++) {
                     for (int nt = n; nt < minNt; nt++) {
                         for (int kt = k; kt < minKt; kt++) {
-                            ret(mt * M, nt) += a(mt * M, kt) * b(kt * K , nt);
+                            ret(mt , nt) += a(mt , kt) * b(kt , nt);
                         }
                     }
                 }
             }
         }
     }
+
+
     return ret;
 }
 
-Matrix multiply_mkl(Matrix const &a, Matrix const &b)
+Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
 {
-    if (a.ncol() != b.nrow())
-    {
-        throw std::out_of_range("matrix column differs from row size");
+    if (mat1.ncol() != mat2.nrow()) {
+        exit(1);
     }
 
+    mkl_set_num_threads(1);
 
-    Matrix ret = Matrix(a.nrow(), b.ncol());
+    Matrix ret(mat1.nrow(), mat2.ncol());
 
     cblas_dgemm(CblasRowMajor /* const CBLAS_LAYOUT Layout */
                 ,
@@ -154,21 +155,21 @@ Matrix multiply_mkl(Matrix const &a, Matrix const &b)
                 ,
                 CblasNoTrans /* const CBLAS_TRANSPOSE transb */
                 ,
-                a.nrow() /* const MKL_INT m */
+                mat1.nrow() /* const MKL_INT m */
                 ,
-                b.ncol() /* const MKL_INT n */
+                mat2.ncol() /* const MKL_INT n */
                 ,
-                a.ncol() /* const MKL_INT k */
+                mat1.ncol() /* const MKL_INT k */
                 ,
                 1.0 /* const double alpha */
                 ,
-                a.data() /* const double *a */
+                mat1.data() /* const double *a */
                 ,
-                a.ncol() /* const MKL_INT lda */
+                mat1.ncol() /* const MKL_INT lda */
                 ,
-                b.data() /* const double *b */
+                mat2.data() /* const double *b */
                 ,
-                b.ncol() /* const MKL_INT ldb */
+                mat2.ncol() /* const MKL_INT ldb */
                 ,
                 0.0 /* const double beta */
                 ,
@@ -176,6 +177,7 @@ Matrix multiply_mkl(Matrix const &a, Matrix const &b)
                 ,
                 ret.ncol() /* const MKL_INT ldc */
     );
+
     return ret;
 }
 
@@ -217,7 +219,7 @@ PYBIND11_MODULE(_matrix, m) {
     .def("__eq__", &Matrix::operator ==);
 
     m.def("multiply_naive", &multiply_naive, "basic Matrix-Matrix Multiplication");
-    m.def("multiple_tile", &multiple_tile, "tile Matrix-Matrix Multiplication");
+    m.def("multiply_tile", &multiply_tile, "tile Matrix-Matrix Multiplication");
     m.def("multiply_mkl", &multiply_mkl, "mkl Matrix-Matrix Multiplication");
 }
 
