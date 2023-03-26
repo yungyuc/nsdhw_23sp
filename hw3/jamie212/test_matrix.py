@@ -26,7 +26,7 @@ def test_naive():
             assert abs(naive_ans[i, j] - naive_ans_np[i, j]) < 1e-6
 
 def test_tile():
-    tile_size = 32
+    tile_size = 100
     n_size = 1000
     m_size = 1000
     C = Matrix(n_size, m_size)
