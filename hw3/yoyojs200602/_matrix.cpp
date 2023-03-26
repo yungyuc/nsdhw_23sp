@@ -82,28 +82,28 @@ Matrix multiply_tile(const Matrix& a, const Matrix& b, int tile_size) {
 }
 
 Matrix multiply_mkl(const Matrix& a, const Matrix& b) {
-    // Matrix c(a.nrow(), b.ncol());
-
-    // cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
-    //             a.nrow(), b.ncol(), a.ncol(), 1.0,
-    //             a.data(), a.ncol(), b.data(), b.ncol(),
-    //             0.0, c.data(), c.ncol());
-
-    // return c;
-
     Matrix c(a.nrow(), b.ncol());
 
-    for (int i = 0; i < a.nrow(); ++i) {
-        for (int j = 0; j < b.ncol(); ++j) {
-            double sum = 0.0;
-            for (int k = 0; k < a.ncol(); ++k) {
-                sum += a(i, k) * b(k, j);
-            }
-            c(i, j) = sum;
-        }
-    }
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
+                a.nrow(), b.ncol(), a.ncol(), 1.0,
+                a.data(), a.ncol(), b.data(), b.ncol(),
+                0.0, c.data(), c.ncol());
 
     return c;
+
+    // Matrix c(a.nrow(), b.ncol());
+
+    // for (int i = 0; i < a.nrow(); ++i) {
+    //     for (int j = 0; j < b.ncol(); ++j) {
+    //         double sum = 0.0;
+    //         for (int k = 0; k < a.ncol(); ++k) {
+    //             sum += a(i, k) * b(k, j);
+    //         }
+    //         c(i, j) = sum;
+    //     }
+    // }
+
+    // return c;
 }
 
 
