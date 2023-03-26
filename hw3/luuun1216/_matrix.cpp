@@ -55,3 +55,14 @@ Matrix multiply_mkl(Matrix const & matrix1, Matrix const & matrix2){
 
     return ret;
 }
+
+void generateValue(Matrix& A){
+    size_t n = A.nrow();
+    size_t m = A.ncol();
+    for (size_t i = 0 ; i < n ; ++i){
+        for (size_t j = 0 ; j < m ; ++j){
+            double value = rand() % RANDMAX;
+            A(i, j) = value;
+        }
+    }
+}
