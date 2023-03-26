@@ -7,14 +7,12 @@
 
 class Matrix {
 public:
-    Matrix(): nrow_(0), ncol_(0) {
-        data_ = (double*)calloc(0, sizeof(double));
-    }
+    Matrix(): nrow_(0), ncol_(0), data_(nullptr) {}
     Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol) {
         data_ = (double*)calloc(nrow * ncol, sizeof(double));
     }
 
-    ~Matrix() { delete[] data_; }
+    ~Matrix() { if (data_ != nullptr) delete[] data_; }
 
     int nrow() const { return nrow_; }
     int ncol() const { return ncol_; }
