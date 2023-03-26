@@ -87,7 +87,7 @@ Matrix multiply_mkl(const Matrix& a, const Matrix& b) {
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
                 a.nrow(), b.ncol(), a.ncol(), 1.0,
                 a.data(), a.ncol(), b.data(), b.ncol(),
-                0.0, c.data(), c.ncol());
+                0.0, const_cast<double*>(c.data()), c.ncol());
 
     return c;
 
