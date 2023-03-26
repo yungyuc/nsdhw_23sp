@@ -16,7 +16,7 @@ SRC = _matrix.cpp
 TAR = $(patsubst %.cpp, %.so, $(SRC))
 
 test: $(TAR)
-	python3 -m pytest -v
+	python3 -m pytest -vv -s
 
 clean:
 	rm -rf *.o *.so __pycache__ .pytest_cache
