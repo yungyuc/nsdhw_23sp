@@ -8,10 +8,10 @@
 class Matrix {
 public:
     Matrix(): nrow_(0), ncol_(0) {
-        data_ = calloc(0, sizeof(double));
+        data_ = (double*)calloc(0, sizeof(double));
     }
     Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol) {
-        data_ = calloc(nrow * ncol, sizeof(double));
+        data_ = (double*)calloc(nrow * ncol, sizeof(double));
     }
 
     ~Matrix() { delete[] data_; }
