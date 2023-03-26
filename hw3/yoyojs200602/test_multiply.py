@@ -89,6 +89,7 @@ def test_tile():
 def test_benchmark():
 
     mat1, mat2, _ = gen_test_matrices(mat_size)
+    mat_size = 1000
     ns = dict(multiply_naive=multiply_naive, multiply_tile=multiply_tile, multiply_mkl=multiply_mkl,
                 mat1=mat1, mat2=mat2, tile_size=tile_size)
 
