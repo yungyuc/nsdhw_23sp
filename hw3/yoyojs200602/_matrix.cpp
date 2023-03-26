@@ -7,16 +7,18 @@
 
 class Matrix {
 public:
-    Matrix(): nrow_(0), ncol_(0) {}
-    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol), data_(nrow * ncol) {}
+    Matrix(): nrow_(0), ncol_(0), data_(nullptr) {}
+    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol), data_(new double[nrow * ncol]) {}
+
+    ~Matrix() { delete[] data_; }
 
     int nrow() const { return nrow_; }
     int ncol() const { return ncol_; }
 
     double& operator()(int i, int j) { return data_[i * ncol_ + j]; }
     const double& operator()(int i, int j) const { return data_[i * ncol_ + j]; }
-    double* data() { return data_.data(); }
-    const double* data() const { return data_.data(); }
+    double* data() { return data_; }
+    const double* data() const { return data_; }
     bool operator ==(const Matrix &m) const
     {
         if (this->nrow() != m.nrow() || this->ncol() != m.ncol())
@@ -36,7 +38,7 @@ public:
 
 private:
     int nrow_, ncol_;
-    std::vector<double> data_;
+    double* data_;
 };
 
 Matrix multiply_naive(const Matrix& a, const Matrix& b) {
