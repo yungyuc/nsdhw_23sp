@@ -88,7 +88,6 @@ def test_tile():
 
 def test_benchmark():
 
-    mat_size = 1000
     mat1, mat2, _ = gen_test_matrices(mat_size)
     ns = dict(multiply_naive=multiply_naive, multiply_tile=multiply_tile, multiply_mkl=multiply_mkl,
                 mat1=mat1, mat2=mat2, tile_size=tile_size)
@@ -97,20 +96,16 @@ def test_benchmark():
     tile = timeit.Timer('multiply_tile(mat1, mat2, tile_size)', globals=ns)
     mkl = timeit.Timer('multiply_mkl(mat1, mat2)', globals=ns)
 
-    with open('performance.txt', 'w') as outfile:
-        naive_time = min(naive.repeat(repeat=repeat, number=1))
-        tile_time = min(tile.repeat(repeat=repeat, number=1))
-        mkl_time = min(mkl.repeat(repeat=repeat, number=1))
-        tile_over_naive = naive_time/tile_time
-        mkl_over_naive = naive_time/mkl_time
+    naive_time = min(naive.repeat(repeat=repeat, number=1))
+    tile_time = min(tile.repeat(repeat=repeat, number=1))
+    mkl_time = min(mkl.repeat(repeat=repeat, number=1))
+    tile_over_naive = naive_time/tile_time
+    mkl_over_naive = naive_time/mkl_time
 
-        outfile.write('Multiplication report of two 1000x1000 matrices (repeat {} times):\n'.format(repeat))
-        outfile.write('Naive method: {} sec\n'.format(naive_time))
-        outfile.write('Tile method(tile size=16): {} sec\n'.format(tile_time))
-        outfile.write('mkl method: {} sec\n\n'.format(mkl_time))
+    print('Multiplication report of two 1000x1000 matrices (repeat {} times):\n'.format(repeat))
+    print('Naive method: {} sec\n'.format(naive_time))
+    print('Tile method(tile size=16): {} sec\n'.format(tile_time))
+    print('mkl method: {} sec\n\n'.format(mkl_time))
 
-        outfile.write('Tile speed-up over naive:{} x\n'.format(tile_over_naive))
-        outfile.write('mkl speed-up over naive:{} x\n'.format(mkl_over_naive))
-
-if __name__ == '__main__':
-    test_benchmark()
+    print('Tile speed-up over naive:{} x\n'.format(tile_over_naive))
+    print('mkl speed-up over naive:{} x\n'.format(mkl_over_naive))
