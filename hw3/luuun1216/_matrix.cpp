@@ -61,7 +61,7 @@ void generateValue(Matrix& A){
     size_t m = A.ncol();
     for (size_t i = 0 ; i < n ; ++i){
         for (size_t j = 0 ; j < m ; ++j){
-            double value = rand() % RANDMAX;
+            double value = rand() % 10;
             A(i, j) = value;
         }
     }
