@@ -1,7 +1,6 @@
-Multiplication report of two 1000x1000 matrices (repeat 5 times):
-Naive method: 0.7452364999917336 sec
-Tile method(tile size=16): 0.47339229995850474 sec
-mkl method: 0.7423982000327669 sec
+Naive method: 1.3587883530000227 sec
+Tile method(tile size=16): 0.9664410979999616 sec
+mkl method: 0.057807172000025275 sec
 
-Tile speed-up over naive:1.5742471942552876 x
-mkl speed-up over naive:1.003823150377845 x
+Tile speed-up over naive: 1.4059712028099995 x
+mkl speed-up over naive: 23.505532375799817 x

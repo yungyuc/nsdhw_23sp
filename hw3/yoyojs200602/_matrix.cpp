@@ -7,16 +7,22 @@
 
 class Matrix {
 public:
-    Matrix(): nrow_(0), ncol_(0) {}
-    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol), data_(nrow * ncol) {}
+    Matrix(): nrow_(0), ncol_(0) {
+        data_ = calloc(0, sizeof(double));
+    }
+    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol) {
+        data_ = calloc(nrow * ncol, sizeof(double));
+    }
+
+    ~Matrix() { delete[] data_; }
 
     int nrow() const { return nrow_; }
     int ncol() const { return ncol_; }
 
     double& operator()(int i, int j) { return data_[i * ncol_ + j]; }
     const double& operator()(int i, int j) const { return data_[i * ncol_ + j]; }
-    double* data() { return data_.data(); }
-    const double* data() const { return data_.data(); }
+    double* data() { return data_; }
+    const double* data() const { return data_; }
     bool operator ==(const Matrix &m) const
     {
         if (this->nrow() != m.nrow() || this->ncol() != m.ncol())
@@ -36,7 +42,7 @@ public:
 
 private:
     int nrow_, ncol_;
-    std::vector<double> data_;
+    double* data_;
 };
 
 Matrix multiply_naive(const Matrix& a, const Matrix& b) {
@@ -54,7 +60,6 @@ Matrix multiply_naive(const Matrix& a, const Matrix& b) {
 
     return c;
 }
-
 
 Matrix multiply_tile(const Matrix& a, const Matrix& b, int tile_size) {
     Matrix c(a.nrow(), b.ncol());
@@ -90,20 +95,6 @@ Matrix multiply_mkl(const Matrix& a, const Matrix& b) {
                 0.0, const_cast<double*>(c.data()), c.ncol());
 
     return c;
-
-    // Matrix c(a.nrow(), b.ncol());
-
-    // for (int i = 0; i < a.nrow(); ++i) {
-    //     for (int j = 0; j < b.ncol(); ++j) {
-    //         double sum = 0.0;
-    //         for (int k = 0; k < a.ncol(); ++k) {
-    //             sum += a(i, k) * b(k, j);
-    //         }
-    //         c(i, j) = sum;
-    //     }
-    // }
-
-    // return c;
 }
 
 
