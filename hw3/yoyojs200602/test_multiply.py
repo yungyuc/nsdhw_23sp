@@ -5,7 +5,6 @@ import unittest
 from _matrix import Matrix, multiply_naive, multiply_tile, multiply_mkl
 
 
-mat_size = 1000
 tile_size = 16
 repeat = 5
 
@@ -23,60 +22,53 @@ def gen_test_matrices(size):
 
     return mat1, mat2, mat3
 
-def assert_matrix_equal(mat1, mat2):
-
-    assert mat1.nrow == mat2.nrow
-    assert mat1.ncol == mat2.ncol
-
-    for i in range(mat1.nrow):
-        for j in range(mat1.ncol):
-            assert mat1[i, j] == mat2[i, j]
-
-
 def test_matrix_build():
 
+    mat_size = 100
     mat1, mat2, mat3 = gen_test_matrices(mat_size)
     
     assert mat_size == mat1.nrow
     assert mat_size == mat1.ncol
     assert mat_size == mat2.nrow
     assert mat_size == mat2.ncol
-
-    assert_matrix_equal(mat1, mat2)
     
     for i in range(mat1.nrow):
         for j in range(mat1.ncol):
-            assert mat1[i, j] == i+j
-            assert mat2[i, j] == i+j
             assert mat3[i, j] == 0
+
+    assert mat1 == mat2
+    assert mat1 is not mat2
 
 def test_general():
 
+    mat_size = 100
     mat1, mat2, _ = gen_test_matrices(mat_size)
 
     naive = multiply_naive(mat1, mat2)
     tile = multiply_tile(mat1, mat2, tile_size)
     mkl = multiply_mkl(mat1, mat2)
 
-    assert_matrix_equal(naive, tile)
-    assert_matrix_equal(naive, mkl)
-    assert_matrix_equal(mkl, tile)
+    assert naive == tile
+    assert naive == mkl
+    assert mkl == tile
 
 def test_zero():
 
+    mat_size = 100
     mat1, _, mat2 = gen_test_matrices(mat_size)
 
     naive = multiply_naive(mat1, mat2)
     tile = multiply_tile(mat1, mat2, tile_size)
     mkl = multiply_mkl(mat1, mat2)
 
-    assert_matrix_equal(naive, mat2)
-    assert_matrix_equal(tile, mat2)
-    assert_matrix_equal(mkl, mat2)
+    assert naive == mat2
+    assert tile == mat2
+    assert mkl == mat2
 
 def test_tile():
 
-    mat1, mat2, _ = gen_test_matrices(1000)
+    mat_size = 1000
+    mat1, mat2, _ = gen_test_matrices(mat_size)
     ns = dict(multiply_naive=multiply_naive, multiply_tile=multiply_tile, mat1=mat1, mat2=mat2)
 
     t_tile_0 = timeit.Timer("multiply_naive(mat1, mat2)", globals=ns)
@@ -96,6 +88,7 @@ def test_tile():
 
 def test_benchmark():
 
+    mat_size = 1000
     mat1, mat2, _ = gen_test_matrices(mat_size)
     ns = dict(multiply_naive=multiply_naive, multiply_tile=multiply_tile, multiply_mkl=multiply_mkl,
                 mat1=mat1, mat2=mat2, tile_size=tile_size)

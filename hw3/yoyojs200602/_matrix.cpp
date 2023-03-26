@@ -17,6 +17,22 @@ public:
     const double& operator()(int i, int j) const { return data_[i * ncol_ + j]; }
     double* data() { return data_.data(); }
     const double* data() const { return data_.data(); }
+    bool operator ==(const Matrix &m) const
+    {
+        if (this->nrow() != m.nrow() || this->ncol() != m.ncol())
+            return false;
+
+        for (int i=0; i<this->nrow(); i++)
+        {
+            for (int j=0; j<this->ncol(); j++)
+            {
+                if (this->operator()(i, j) != m(i, j))
+                    return false;
+            }
+        }
+
+        return true;
+    }
 
 private:
     int nrow_, ncol_;
@@ -107,6 +123,7 @@ PYBIND11_MODULE(_matrix, m)
         // .def("__call__", pybind11::overload_cast<int, int>(&Matrix::operator(), pybind11::const_), pybind11::return_value_policy::reference_internal)
         .def("__setitem__", [](Matrix &self, std::pair<int, int> id, double val) { self(id.first, id.second) = val; })
         .def("__getitem__", [](const Matrix &self, std::pair<int, int> id) { return self(id.first, id.second); })
+        .def("__eq__", [](const Matrix &m1, const Matrix &m2) { return m1 == m2; })
         .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })
         .def_property_readonly("ncol", [](const Matrix &mat) { return mat.ncol(); });
 }
