@@ -12,6 +12,7 @@ public:
 
     int nrow() const { return nrow_; }
     int ncol() const { return ncol_; }
+    std::vector<double> data_;
 
     double& operator()(int i, int j) { return data_[i * ncol_ + j]; }
     const double& operator()(int i, int j) const { return data_[i * ncol_ + j]; }
@@ -36,7 +37,7 @@ public:
 
 private:
     int nrow_, ncol_;
-    std::vector<double> data_;
+    // std::vector<double> data_;
 };
 
 Matrix multiply_naive(const Matrix& a, const Matrix& b) {
@@ -84,10 +85,15 @@ Matrix multiply_tile(const Matrix& a, const Matrix& b, int tile_size) {
 Matrix multiply_mkl(const Matrix& a, const Matrix& b) {
     Matrix c(a.nrow(), b.ncol());
 
+    // cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
+    //             a.nrow(), b.ncol(), a.ncol(), 1.0,
+    //             a.data(), a.ncol(), b.data(), b.ncol(),
+    //             0.0, const_cast<double*>(c.data()), c.ncol());
+
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
                 a.nrow(), b.ncol(), a.ncol(), 1.0,
-                a.data(), a.ncol(), b.data(), b.ncol(),
-                0.0, const_cast<double*>(c.data()), c.ncol());
+                a.data_.data(), a.ncol(), b.data_.data(), b.ncol(),
+                0.0, c.data_.data(), c.ncol());
 
     return c;
 
