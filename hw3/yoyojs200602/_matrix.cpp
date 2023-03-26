@@ -120,8 +120,6 @@ PYBIND11_MODULE(_matrix, m)
         .def("__setitem__", [](Matrix &self, std::pair<int, int> id, double val) { self(id.first, id.second) = val; })
         .def("__getitem__", [](const Matrix &self, std::pair<int, int> id) { return self(id.first, id.second); })
         .def("__eq__", [](const Matrix &m1, const Matrix &m2) { return m1 == m2; })
-        // .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })
-        // .def_property_readonly("ncol", [](const Matrix &mat) { return mat.ncol(); });
-        .def_property_readonly("nrow", &Matrix::nrow_)
-        .def_property_readonly("ncol", &Matrix::ncol_);
+        .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })
+        .def_property_readonly("ncol", [](const Matrix &mat) { return mat.ncol(); });
 }
