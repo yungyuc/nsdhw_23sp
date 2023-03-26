@@ -10,7 +10,6 @@ def np_matrix(n, m, mat):
             mat_np[i, j] = mat[i, j]
     return mat_np
 
-
 def test_naive():
     n_size = 1000
     m_size = 1000
@@ -24,6 +23,7 @@ def test_naive():
     naive_ans_np = np.matmul(A_np, B_np)
     for i in range(n_size):
         for j in range(m_size):
+            print(naive_ans[i,j])
             assert abs(naive_ans[i, j] - naive_ans_np[i, j]) < 1e-6
 
 def test_tile():
@@ -40,4 +40,5 @@ def test_tile():
     tile_ans_np = np.matmul(C_np, D_np)
     for i in range(n_size):
         for j in range(m_size):
+            print(tile_ans)
             assert abs(tile_ans[i, j] - tile_ans_np[i, j]) < 1e-6

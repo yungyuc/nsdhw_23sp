@@ -18,3 +18,4 @@ clean:
 test: $(MTARGET)
 	python -m pytest ../validate.py
 	python performance.py
+	python test.py
