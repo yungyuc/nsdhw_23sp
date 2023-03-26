@@ -74,7 +74,7 @@ Matrix multiply_naive(const Matrix& a, const Matrix& b) {
 Matrix multiply_tile(const Matrix& a, const Matrix& b, int tile_size) {
 
     int aR = a.nrow(), aC = a.ncol(), bC = b.ncol();
-    Matrix c(a.aR, bC); 
+    Matrix c(aR, bC); 
 
     for (int i0 = 0; i0 < aR; i0 += tile_size) 
     {
