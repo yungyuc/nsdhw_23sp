@@ -48,9 +48,13 @@ def test_general():
     tile = multiply_tile(mat1, mat2, tile_size)
     mkl = multiply_mkl(mat1, mat2)
 
-    assert naive == tile
-    assert naive == mkl
-    assert mkl == tile
+    # assert naive == tile
+    # assert naive == mkl
+    # assert mkl == tile
+
+    assert naive == tile, f"naive:\n{naive}\ntile:\n{tile}"
+    assert naive == mkl, f"naive:\n{naive}\nmkl:\n{mkl}"
+    assert mkl == tile, f"mkl:\n{mkl}\ntile:\n{tile}"
 
 def test_zero():
 
