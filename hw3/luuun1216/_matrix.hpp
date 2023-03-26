@@ -50,4 +50,5 @@ class Matrix{
 Matrix multiply_naive(Matrix const & matrix1, Matrix const & matrix2);
 Matrix multiply_tile(Matrix const & matrix1, Matrix const & matrix2, size_t tilesize);
 Matrix multiply_mkl(Matrix const & matrix1, Matrix const & matrix2);
+Matrix generate_num(Matrix& A);
 void check_matrix_multiply(Matrix const & matrix1, Matrix const & matrix2);

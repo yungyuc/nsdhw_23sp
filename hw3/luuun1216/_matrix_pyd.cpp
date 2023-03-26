@@ -9,7 +9,7 @@ PYBIND11_MODULE(_matrix, m)
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
-
+    m.def("generate_num", &generate_num);
     pybind::class_<Matrix>(m, "Matrix")
         .def(pybind::init<int, int>())
         .def_property_readonly("nrow", &Matrix::nrow)
