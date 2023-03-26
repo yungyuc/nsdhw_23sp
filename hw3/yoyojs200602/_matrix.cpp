@@ -8,7 +8,16 @@
 class Matrix {
 public:
     Matrix(): nrow_(0), ncol_(0), data_(nullptr) {}
-    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol), data_(new double[nrow * ncol]) {}
+    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol)
+    {
+        data_ = new double[nrow_ * ncol_];
+        memset(data_, 0, nrow_ * ncol_ * sizeof(double));
+    }
+    Matrix(const Matrix &m): nrow_(m.nrow()), ncol_(m.ncol())
+    {
+        data_ = new double[nrow_ * ncol_];
+        memcpy(data_, m.data(), nrow_ * ncol_ * sizeof(double));
+    }
 
     ~Matrix() { if (data_) delete[] data_; }
 
