@@ -51,6 +51,11 @@ private:
 };
 
 Matrix multiply_naive(const Matrix& a, const Matrix& b) {
+    if (a.ncol() != b.nrow())
+    {
+        throw std::out_of_range("b's column differs from a's row size")
+    }
+
     Matrix c(a.nrow(), b.ncol());
 
     for (int i = 0; i < a.nrow(); ++i) {
@@ -67,18 +72,26 @@ Matrix multiply_naive(const Matrix& a, const Matrix& b) {
 }
 
 Matrix multiply_tile(const Matrix& a, const Matrix& b, int tile_size) {
-    Matrix c(a.nrow(), b.ncol());
 
-    for (int i0 = 0; i0 < a.nrow(); i0 += tile_size) {
-        int i1 = std::min(i0 + tile_size, a.nrow());
-        for (int j0 = 0; j0 < b.ncol(); j0 += tile_size) {
-            int j1 = std::min(j0 + tile_size, b.ncol());
-            for (int k0 = 0; k0 < a.ncol(); k0 += tile_size) {
-                int k1 = std::min(k0 + tile_size, a.ncol());
-                for (int i = i0; i < i1; ++i) {
-                    for (int j = j0; j < j1; ++j) {
+    int aR = a.nrow(), aC = a.ncol(), bC = b.ncol();
+    Matrix c(a.aR, bC); 
+
+    for (int i0 = 0; i0 < aR; i0 += tile_size) 
+    {
+        int i1 = std::min(i0 + tile_size, aR);
+        for (int j0 = 0; j0 < bC; j0 += tile_size) 
+        {
+            int j1 = std::min(j0 + tile_size, bC);
+            for (int k0 = 0; k0 < aC; k0 += tile_size) 
+            {
+                int k1 = std::min(k0 + tile_size, aC);
+                for (int i = i0; i < i1; ++i) 
+                {
+                    for (int j = j0; j < j1; ++j) 
+                    {
                         double sum = 0.0;
-                        for (int k = k0; k < k1; ++k) {
+                        for (int k = k0; k < k1; ++k) 
+                        {
                             sum += a(i, k) * b(k, j);
                         }
                         c(i, j) += sum;
