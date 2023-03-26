@@ -1,0 +1,6 @@
+Naive method: 1.3587883530000227 sec
+Tile method(tile size=16): 0.9664410979999616 sec
+mkl method: 0.057807172000025275 sec
+
+Tile speed-up over naive: 1.4059712028099995 x
+mkl speed-up over naive: 23.505532375799817 x
