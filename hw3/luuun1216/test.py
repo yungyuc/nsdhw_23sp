@@ -1,7 +1,7 @@
 import pytest
 import random
 import numpy as np
-from _matrix import Matrix, multiply_naive, multiply_tile ,generateValue
+from _matrix import Matrix, multiply_naive, multiply_tile
 
 def np_matrix(n, m, mat):
     mat_np = np.zeros((n, m))
@@ -16,8 +16,7 @@ def test_naive():
     m_size = 1000
     matrix_A = Matrix(n_size, m_size)
     matrix_B = Matrix(n_size, m_size)
-    generateValue(matrix_A)
-    generateValue(matrix_B)
+
     A_np = np_matrix(n_size, m_size, matrix_A)
     B_np = np_matrix(n_size, m_size, matrix_B)
     naive_ans = multiply_naive(matrix_A, matrix_B)
@@ -32,8 +31,7 @@ def test_tile():
     m_size = 1000
     matrix_C = Matrix(n_size, m_size)
     matrix_D = Matrix(n_size, m_size)
-    generateValue(matrix_C)
-    generateValue(matrix_D)
+
     C_np = np_matrix(n_size, m_size, matrix_C)
     D_np = np_matrix(n_size, m_size, matrix_D)
     tile_ans = multiply_tile(matrix_C, matrix_D, tile_size)

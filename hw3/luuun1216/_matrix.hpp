@@ -51,13 +51,3 @@ Matrix multiply_naive(Matrix const & matrix1, Matrix const & matrix2);
 Matrix multiply_tile(Matrix const & matrix1, Matrix const & matrix2, size_t tilesize);
 Matrix multiply_mkl(Matrix const & matrix1, Matrix const & matrix2);
 void check_matrix_multiply(Matrix const & matrix1, Matrix const & matrix2);
-void generateValue(Matrix& A){
-    size_t n = A.nrow();
-    size_t m = A.ncol();
-    for (size_t i = 0 ; i < n ; ++i){
-        for (size_t j = 0 ; j < m ; ++j){
-            double value = rand() % 10;
-            A(i, j) = value;
-        }
-    }
-}
