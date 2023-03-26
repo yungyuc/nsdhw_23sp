@@ -8,11 +8,9 @@
 class Matrix {
 public:
     Matrix(): nrow_(0), ncol_(0), data_(nullptr) {}
-    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol) {
-        data_ = (double*)calloc(nrow * ncol, sizeof(double));
-    }
+    Matrix(int nrow, int ncol): nrow_(nrow), ncol_(ncol), data_(new double[nrow * ncol]) {}
 
-    ~Matrix() { if (data_ != nullptr) delete[] data_; }
+    ~Matrix() { if (data_) delete[] data_; }
 
     int nrow() const { return nrow_; }
     int ncol() const { return ncol_; }
