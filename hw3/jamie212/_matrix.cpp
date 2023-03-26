@@ -80,8 +80,7 @@ void generateValue(Matrix& A){
     size_t m = A.ncol();
     for (size_t i = 0 ; i < n ; ++i){
         for (size_t j = 0 ; j < m ; ++j){
-            double value = rand() % 100;
-            // double value = 0.1;
+            double value = rand() % RANDMAX;
             A(i, j) = value;
         }
     }

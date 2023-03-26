@@ -11,8 +11,8 @@ def get_np_matrix(n, m, mat):
     return mat_np
 
 def test_naive():
-    n_size = 4
-    m_size = 4
+    n_size = 1000
+    m_size = 1000
     A = Matrix(n_size, m_size)
     B = Matrix(n_size, m_size)
     generateValue(A)
@@ -26,9 +26,9 @@ def test_naive():
             assert abs(naive_ans[i, j] - naive_ans_np[i, j]) < 1e-6
 
 def test_tile():
-    tile_size = 2
-    n_size = 4
-    m_size = 4
+    tile_size = 64
+    n_size = 1000
+    m_size = 1000
     C = Matrix(n_size, m_size)
     D = Matrix(n_size, m_size)
     generateValue(C)
