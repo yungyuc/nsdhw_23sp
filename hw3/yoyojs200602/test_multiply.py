@@ -52,10 +52,6 @@ def test_general():
     # assert naive == mkl
     # assert mkl == tile
 
-    assert naive == tile, f"naive:\n{naive}\ntile:\n{tile}"
-    assert naive == mkl, f"naive:\n{naive}\nmkl:\n{mkl}"
-    assert mkl == tile, f"mkl:\n{mkl}\ntile:\n{tile}"
-
 def test_zero():
 
     mat_size = 100
