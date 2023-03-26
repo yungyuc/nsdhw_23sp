@@ -35,7 +35,7 @@ def assert_matrix_equal(mat1, mat2):
 
 def test_matrix_build():
 
-    mat1, mat2, _ = gen_test_matrices(mat_size)
+    mat1, mat2, mat3 = gen_test_matrices(mat_size)
     
     assert mat_size == mat1.nrow
     assert mat_size == mat1.ncol
@@ -43,6 +43,12 @@ def test_matrix_build():
     assert mat_size == mat2.ncol
 
     assert_matrix_equal(mat1, mat2)
+    
+    for i in range(mat1.nrow):
+        for j in range(mat1.ncol):
+            assert mat1[i, j] == i+j
+            assert mat2[i, j] == i+j
+            assert mat3[i, j] == 0
 
 def test_general():
 
@@ -70,7 +76,7 @@ def test_zero():
 
 def test_tile():
 
-    mat1, mat2, _ = gen_test_matrices(500)
+    mat1, mat2, _ = gen_test_matrices(1000)
     ns = dict(multiply_naive=multiply_naive, multiply_tile=multiply_tile, mat1=mat1, mat2=mat2)
 
     t_tile_0 = timeit.Timer("multiply_naive(mat1, mat2)", globals=ns)
