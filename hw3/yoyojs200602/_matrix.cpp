@@ -40,6 +40,11 @@ private:
 };
 
 Matrix multiply_naive(const Matrix& a, const Matrix& b) {
+    if (a.ncol() != b.nrow())
+    {
+        throw std::out_of_range("matrix column differs from row size");
+    }
+
     Matrix c(a.nrow(), b.ncol());
 
     for (int i = 0; i < a.nrow(); ++i) {
