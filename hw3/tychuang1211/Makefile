@@ -1,6 +1,6 @@
 CXX = g++
 FLAGS = -O3 -Wall -shared -std=c++11 -fPIC
-INCLUDES = $(shell pkg-config --cflags mkl-dynamic-lp64-iomp) $(shell python3 -m pybind11 --includes)
+INCLUDES = $(shell pkg-config --cflags mkl-dynamic-lp64-iomp) $(shell python3-config --includes)
 LINK = $(shell pkg-config --libs mkl-dynamic-lp64-iomp)
 SUFFIX = $(shell python3-config --extension-suffix)
 TARGET = _matrix$(SUFFIX)
