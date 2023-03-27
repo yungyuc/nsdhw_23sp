@@ -13,7 +13,7 @@ def generate_matrix(request):
 
 	for it in range(size):
 		for jt in range(size):
-			mat2[it, jt] = it + 0.1*jt + 1
+			mat2[it, jt] = it * size + jt + 1
 
 	return mat1, mat2, size
 
