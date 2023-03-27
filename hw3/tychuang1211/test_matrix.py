@@ -13,6 +13,7 @@ def generate_matrix(request):
 
 	for it in range(size):
 		for jt in range(size):
+			mat1[it, jt] = it * size + jt + 1
 			mat2[it, jt] = it * size + jt + 1
 
 	return mat1, mat2, size
@@ -21,14 +22,18 @@ def test_naive_multiplication(generate_matrix):
 	mat1, mat2, size = generate_matrix
 	naive = _matrix.multiply_naive(mat1, mat2)
 	mkl = _matrix.multiply_mkl(mat1, mat2)
-	assert naive == mkl
+	for i in range(size):
+		for j in range(size):
+			assert naive[i, j] == pytest.approx(mkl[i, j])
 
 @pytest.mark.parametrize("tsize", [8, 16, 32])
 def test_tile_multiplication(generate_matrix, tsize):
 	mat1, mat2, size = generate_matrix
 	tile = _matrix.multiply_tile(mat1, mat2, tsize)
 	mkl = _matrix.multiply_mkl(mat1, mat2)
-	assert tile == mkl
+	for i in range(size):
+		for j in range(size):
+			assert tile[i, j] == pytest.approx(mkl[i, j])
 
 def test_perfromance():
 	setup = '''
