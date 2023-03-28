@@ -224,7 +224,7 @@ Matrix multiply_mkl(const Matrix &x, const Matrix &y){
 // }
 
 
-PYBIND11_MODULE(_mat, m){
+PYBIND11_MODULE(_matrix, m){
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
         .def(py::init<const Matrix &>())

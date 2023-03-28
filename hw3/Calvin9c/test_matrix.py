@@ -1,4 +1,4 @@
-from _mat import Matrix, multiply_naive, multiply_tile, multiply_mkl
+from _matrix import Matrix, multiply_naive, multiply_tile, multiply_mkl
 import pytest
 import time
 
