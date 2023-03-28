@@ -91,7 +91,7 @@ class Matrix{
     
         void initialize(){
             for(size_t i=0 ; i<m_nrow ; ++i){
-                for(size_t j=0 ; j<m_nrow ; ++j){
+                for(size_t j=0 ; j<m_ncol ; ++j){
                     (*this)(i,j) = 0.0;
                 }
             }
