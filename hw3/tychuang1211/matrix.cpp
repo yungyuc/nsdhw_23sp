@@ -104,7 +104,7 @@ void Matrix::reset_buffer(size_t nrow, size_t ncol)
 {
     if (m_buffer) { delete[] m_buffer; }
     const size_t nelement = nrow * ncol;
-    if (nelement) { m_buffer = new double[nelement]; }
+    if (nelement) { m_buffer = new double[nelement](); }
     else          { m_buffer = nullptr; }
     m_nrow = nrow;
     m_ncol = ncol;
@@ -133,7 +133,7 @@ Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2)
             {
                 v += mat1(i,j) * mat2(j,k);
             }
-            ret(i,k) = v;
+            ret(i,k) += v;
         }
     }
 
@@ -152,34 +152,22 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
             "differs from that of second matrix row");
     }
 
-    const size_t nrow1 = mat1.nrow();
-    const size_t ncol1 = mat1.ncol();
-    const size_t ncol2 = mat2.ncol();
+    Matrix ret(mat1.nrow(), mat2.ncol());
 
-    Matrix ret(nrow1, ncol2, std::vector<double>(nrow1*ncol2,0));
-
-    for (size_t ti = 0; ti < nrow1; ti += tsize)
+    for (size_t tj = 0; tj < mat1.ncol(); tj += tsize)
     {
-        size_t imax = std::min(ti + tsize, nrow1);
-
-        for (size_t tk = 0; tk < ncol2; tk += tsize)
+        for (size_t ti = 0; ti < mat1.nrow(); ti += tsize)
         {
-            size_t kmax = std::min(tk + tsize, ncol2);
-
-            for (size_t tj = 0; tj < ncol1; tj += tsize)
+            for (size_t tk = 0; tk < mat2.ncol(); tk += tsize)
             {
-                size_t jmax = std::min(tj + tsize, ncol1);
-                
-                for (size_t i = ti; i < imax; ++i)
+                for (size_t j = tj; j < std::min(tj + tsize, mat1.ncol()); ++j)
                 {
-                    for (size_t k = tk; k < kmax; ++k)
+                    for (size_t i = ti; i < std::min(ti + tsize, mat1.nrow()); ++i)
                     {
-                        double v = 0;
-                        for (size_t j = tj; j < jmax; ++j)
+                        for (size_t k = tk; k < std::min(tk + tsize, mat2.ncol()); ++k)
                         {
-                            v += mat1(i,j) * mat2(j,k);
+                            ret(i,k) += mat1(i,j) * mat2(j,k);
                         }
-                        ret(i,k) += v;
                     }
                 }
             }   
