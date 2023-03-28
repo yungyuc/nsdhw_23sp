@@ -163,19 +163,21 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
         );
     }
 
-    Matrix ret(x.nrow(), y.ncol());
+    size_t x_row = x.nrow();
+    size_t y_col = y.ncol();
+    size_t x_col = x.ncol();
+
+    Matrix ret(x_row, y_col);
 
     // ret.initialize();
 
-    for (size_t i =0 ; i<ret.nrow() ; ++i){
-        for( size_t j=0 ; j<ret.ncol();++j){
+    for (size_t i =0 ; i<x_row ; ++i){
+        for( size_t j=0 ; j<y_col;++j){
             ret(i, j)=0.0;
         }
     }
 
-    size_t x_row = x.nrow();
-    size_t y_col = y.ncol();
-    size_t x_col = x.ncol();
+
 
 
 
