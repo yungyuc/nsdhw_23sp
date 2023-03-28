@@ -18,14 +18,14 @@ def test_matrix():
         start = time.time()
         golden = _matrix.multiply_mkl(m1, m2)
         end = time.time()
-        f.write(str(start-end) + "\n")
+        f.write(str(end-start) + "\n")
         
         f.write("naive:\n")
         start = time.time()
         m3 = _matrix.multiply_naive(m1, m2)
         end = time.time()
-        f.write(str(start-end) + "\n")
-        naivetime = start-end
+        f.write(str(end-start) + "\n")
+        naivetime = end-start
         assert m3.nrow == golden.nrow
         assert m3.ncol == golden.ncol
         for i in range(m3.nrow):
@@ -36,8 +36,8 @@ def test_matrix():
         start = time.time()
         m3 = _matrix.multiply_tile(m1, m2, 32)
         end = time.time()
-        f.write(str(start-end) + "\n")
-        tiletime = start-end
+        f.write(str(end-start) + "\n")
+        tiletime = end-start
         f.write("speedup(naive time/tile time): " + str(naivetime/tiletime) + "\n")
 
         assert m3.nrow == golden.nrow
