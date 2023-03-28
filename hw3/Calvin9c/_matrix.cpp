@@ -166,8 +166,8 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
     Matrix ret(x.nrow(), y.ncol());
     ret.initialize();
 
-    for( size_t i=0 ; i<x.ncol() ; i+=tile_size ){
-        for( size_t j=0 ; j<y.nrow() ; j+=tile_size ){
+    for( size_t i=0 ; i<x.nrow() ; i+=tile_size ){
+        for( size_t j=0 ; j<y.ncol() ; j+=tile_size ){
             for( size_t k=0 ; k<x.ncol() ; k+=tile_size ){
 
                 size_t upper_bound_sub_i = min(i+tile_size, x.nrow());

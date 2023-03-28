@@ -2,7 +2,7 @@ from _matrix import Matrix, multiply_naive, multiply_tile, multiply_mkl
 import pytest
 import time
 
-def test_mat():
+def test_matrix():
 
     file = open("performance.txt", "a")
 
