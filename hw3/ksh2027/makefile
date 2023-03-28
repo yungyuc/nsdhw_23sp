@@ -1,4 +1,4 @@
-CXX = g++
+CLANG = clang++
 CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC -m64 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 HEADERS = -I/usr/include/mkl
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
@@ -27,7 +27,7 @@ SO = _matrix.so
 all: $(SO)
 
 _matrix.so: matrix.cpp
-	$(CXX) -o $@ $< $(CFLAGS) $(HEADERS) ${MKL_LIBS}
+	$(CLANG) -o $@ $< $(CFLAGS) $(HEADERS) ${MKL_LIBS}
 
 test: $(SO)
 	python3 -m pytest -v -s
