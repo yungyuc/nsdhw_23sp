@@ -156,16 +156,18 @@ Matrix multiply_naive(const Matrix &x, const Matrix &y){
 
 Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
 
-    if(x.ncol()!=y.nrow()){
+    size_t x_row = x.nrow();
+    size_t y_col = y.ncol();
+    size_t x_col = x.ncol();
+
+    if(x_col!=y.nrow()){
         throw std::out_of_range(
             "the number of first matrix column "
             "differs from that of second matrix row"
         );
     }
 
-    size_t x_row = x.nrow();
-    size_t y_col = y.ncol();
-    size_t x_col = x.ncol();
+
 
     Matrix ret(x_row, y_col);
 
@@ -185,15 +187,15 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
         for( size_t j=0 ; j<y_col ; j+=tile_size ){
             for( size_t k=0 ; k<x_col ; k+=tile_size ){
 
-                size_t upper_bound_sub_i = min(i+tile_size, x_row);
-                for( size_t sub_i=i ; sub_i<upper_bound_sub_i ; ++sub_i ){
+                // size_t upper_bound_sub_i = min(i+tile_size, x_row);
+                for( size_t sub_i=i ; sub_i<min(i+tile_size, x_row) ; ++sub_i ){
                     
-                    size_t upper_bound_sub_j = min(j+tile_size, y_col);
-                    for( size_t sub_j=j ; sub_j<upper_bound_sub_j ; ++sub_j ){
+                    // size_t upper_bound_sub_j = min(j+tile_size, y_col);
+                    for( size_t sub_j=j ; sub_j<min(j+tile_size, y_col) ; ++sub_j ){
 
-                        size_t upper_bound_sub_k = min(k+tile_size, x_col);
-                        double v = 0;
-                        for( size_t sub_k=k ; sub_k<upper_bound_sub_k ; ++sub_k ){
+                        // size_t upper_bound_sub_k = min(k+tile_size, x_col);
+                        double v = 0.0;
+                        for( size_t sub_k=k ; sub_k<min(k+tile_size, x_col) ; ++sub_k ){
                             v += x(sub_i, sub_k) * y(sub_k,sub_j);
                         }
                         ret(sub_i, sub_j) += v ;
