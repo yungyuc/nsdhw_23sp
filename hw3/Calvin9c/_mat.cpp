@@ -38,6 +38,25 @@ class Matrix{
             return *this;
         }
 
+        bool operator==(Matrix const & other)const{
+
+            if( m_ncol != other.ncol() or m_nrow != other.nrow() ){
+                cout<<"the order of two matrix are not match";
+                return false;
+            }
+
+            for(size_t i=0;i<m_nrow;++i){
+                for(size_t j=0;j<m_ncol;++j){
+                    if(m_buffer[index(i, j)]!=other(i, j)){
+                        return false;
+                    }
+                }
+            }
+            return true;
+
+        }
+
+
         // TODO: move constructors and assignment operators.
 
         ~Matrix(){
@@ -162,7 +181,7 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
                         for( size_t sub_k=k ; sub_k<upper_bound_sub_k ; ++sub_k ){
                             v += x(sub_i, sub_k) * y(sub_k,sub_j);
                         }
-                        ret(sub_i, sub_j) += v 
+                        ret(sub_i, sub_j) += v ;
 
                     }
 
@@ -188,7 +207,7 @@ Matrix multiply_mkl(const Matrix &x, const Matrix &y){
     const int alpha = 1;
     const int beta = 0;
 
-    cblas_dgemm(ClasRowMajor, CblasNoTrans, CblasNoTrans, x.nrow(), y.ncol(), x.ncol(), alpha, x.get_buffer(), x.ncol(), y.get_buffer(), y.ncol(), beta, ret.get_buffer(), y.ncol());
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, x.nrow(), y.ncol(), x.ncol(), alpha, x.get_buffer(), x.ncol(), y.get_buffer(), y.ncol(), beta, ret.get_buffer(), y.ncol());
 
     return ret;
 }
@@ -211,7 +230,7 @@ PYBIND11_MODULE(_mat, m){
         .def(py::init<const Matrix &>())
         .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })
         .def_property_readonly("ncol", [](const Matrix &mat) { return mat.ncol(); })
-        .def("__eq__", [](const Matrix &a, const Matrix &b) { return a == b; })
+        .def("__eq__", [](const Matrix &x, const Matrix &y) { return x == y; })
         .def("__setitem__", [](Matrix &self, std::pair<int, int> idx, double val) {
             self(idx.first, idx.second) = val;
         })
