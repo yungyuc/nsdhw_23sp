@@ -168,7 +168,7 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
     // ret.initialize();
 
     for (size_t i =0 ; i<ret.nrow() ; ++i){
-        for( size_t j=0;j<ret.ncol;++j){
+        for( size_t j=0 ; j<ret.ncol();++j){
             ret(i, j)=0.0;
         }
     }
