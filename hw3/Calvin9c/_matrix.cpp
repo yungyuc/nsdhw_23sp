@@ -164,19 +164,32 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
     }
 
     Matrix ret(x.nrow(), y.ncol());
-    ret.initialize();
 
-    for( size_t i=0 ; i<x.nrow() ; i+=tile_size ){
-        for( size_t j=0 ; j<y.ncol() ; j+=tile_size ){
-            for( size_t k=0 ; k<x.ncol() ; k+=tile_size ){
+    // ret.initialize();
 
-                size_t upper_bound_sub_i = min(i+tile_size, x.nrow());
+    for (size_t i =0 ; i<ret.nrow() ; ++i){
+        for( size_t j=0;j<ret.ncol;++j){
+            ret(i, j)=0.0;
+        }
+    }
+
+    x_row = x.nrow();
+    y_col = y.ncol();
+    x_col = x.ncol();
+
+
+
+    for( size_t i=0 ; i<x_row ; i+=tile_size ){
+        for( size_t j=0 ; j<y_col ; j+=tile_size ){
+            for( size_t k=0 ; k<x_col ; k+=tile_size ){
+
+                size_t upper_bound_sub_i = min(i+tile_size, x_row);
                 for( size_t sub_i=i ; sub_i<upper_bound_sub_i ; ++sub_i ){
                     
-                    size_t upper_bound_sub_j = min(j+tile_size, y.ncol());
+                    size_t upper_bound_sub_j = min(j+tile_size, y_col);
                     for( size_t sub_j=j ; sub_j<upper_bound_sub_j ; ++sub_j ){
 
-                        size_t upper_bound_sub_k = min(k+tile_size, x.ncol());
+                        size_t upper_bound_sub_k = min(k+tile_size, x_col);
                         double v = 0;
                         for( size_t sub_k=k ; sub_k<upper_bound_sub_k ; ++sub_k ){
                             v += x(sub_i, sub_k) * y(sub_k,sub_j);
