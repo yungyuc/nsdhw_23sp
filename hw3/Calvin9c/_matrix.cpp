@@ -64,10 +64,12 @@ class Matrix{
         }
 
         double operator() (size_t row, size_t col) const {
-            return m_buffer[index(row, col)];
+            // return m_buffer[index(row, col)];
+            return m_buffer[row*m_ncol+col];
         }
         double & operator() (size_t row, size_t col){
-            return m_buffer[index(row, col)];
+            // return m_buffer[index(row, col)];
+            return m_buffer[row*m_ncol+col];
         }
 
         size_t nrow() const { return m_nrow; }
