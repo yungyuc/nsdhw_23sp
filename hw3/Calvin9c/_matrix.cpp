@@ -173,9 +173,9 @@ Matrix multiply_tile(const Matrix &x, const Matrix &y, size_t tile_size){
         }
     }
 
-    x_row = x.nrow();
-    y_col = y.ncol();
-    x_col = x.ncol();
+    size_t x_row = x.nrow();
+    size_t y_col = y.ncol();
+    size_t x_col = x.ncol();
 
 
 
