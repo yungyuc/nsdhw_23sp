@@ -1,5 +1,5 @@
 CC = g++
-CCFlags = -03 -Wall -shared -std=c++11 -fPIC
+CCFlags = -O3 -Wall -shared -std=c++11 -fPIC
 
 Headers = -I/usr/include/mkl
 
