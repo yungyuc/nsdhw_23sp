@@ -25,6 +25,7 @@ def test_matrix():
         m3 = _matrix.multiply_naive(m1, m2)
         end = time.time()
         f.write(str(start-end) + "\n")
+        naivetime = start-end
         assert m3.nrow == golden.nrow
         assert m3.ncol == golden.ncol
         for i in range(m3.nrow):
@@ -36,6 +37,9 @@ def test_matrix():
         m3 = _matrix.multiply_tile(m1, m2, 32)
         end = time.time()
         f.write(str(start-end) + "\n")
+        tiletime = start-end
+        f.write("speedup(naive time/tile time): " + str(naivetime/tiletime) + "\n")
+
         assert m3.nrow == golden.nrow
         assert m3.ncol == golden.ncol
         for i in range(m3.nrow):
