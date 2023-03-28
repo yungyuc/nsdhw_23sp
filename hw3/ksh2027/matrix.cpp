@@ -92,7 +92,7 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     }
 
     Matrix C(A.nrow(), B.ncol());
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, A.nrow(), B.ncol(), A.ncol(), 1.0, A.data(), A.ncol(), B.data(), B.ncol(), 0.0, C.data(), C.ncol());
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, A.nrow(), B.ncol(), A.ncol(), 1.0, A.data(), A.ncol(), B.data(), B.ncol(), 0.0, const_cast<double*>(C.data()), C.ncol());
     return C;
 }
 
