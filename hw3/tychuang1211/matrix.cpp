@@ -166,7 +166,7 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
                     {
                         for (size_t k = tk; k < std::min(tk + tsize, mat2.ncol()); ++k)
                         {
-                            ret(i,k) += mat1(i,j) * mat2(j,k);
+                            *ret.buffer(i+k*mat2.ncol()) += *mat1.buffer(i+j*mat2.ncol()) * *mat2.buffer(j+k*mat2.ncol());
                         }
                     }
                 }
