@@ -57,5 +57,5 @@ The system architecture of the library will consist of the following components:
 
 ## References
 
-[1]: https://www.boost.org/doc/libs/1_81_0/libs/graph/doc/sequential_vertex_coloring.html
-[2]: http://www.dharwadker.org/vertex_coloring/
+* https://www.boost.org/doc/libs/1_81_0/libs/graph/doc/sequential_vertex_coloring.html
+* http://www.dharwadker.org/vertex_coloring/
