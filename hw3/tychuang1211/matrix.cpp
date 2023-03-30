@@ -151,22 +151,29 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
             "the number of first matrix column "
             "differs from that of second matrix row");
     }
+    
+    const size_t nrow1 = mat1.nrow();
+    const size_t ncol1 = mat1.ncol();
+    const size_t ncol2 = mat2.ncol();
+    
+    Matrix ret(nrow1, ncol2);
 
-    Matrix ret(mat1.nrow(), mat2.ncol());
-
-    for (size_t tj = 0; tj < mat1.ncol(); tj += tsize)
+    for (size_t tk = 0; tk < ncol2; tk += tsize)
     {
-        for (size_t ti = 0; ti < mat1.nrow(); ti += tsize)
+        size_t kmax = std::min(tk + tsize, ncol2)*ncol2;
+        for (size_t ti = 0; ti < nrow1; ti += tsize)
         {
-            for (size_t tk = 0; tk < mat2.ncol(); tk += tsize)
+            size_t imax = std::min(ti + tsize, nrow1);
+            for (size_t tj = 0; tj < ncol1; tj += tsize)
             {
-                for (size_t j = tj; j < std::min(tj + tsize, mat1.ncol()); ++j)
+                size_t jmax = std::min(tj + tsize, ncol1);
+                for (size_t j = tj; j < jmax; ++j)
                 {
-                    for (size_t i = ti; i < std::min(ti + tsize, mat1.nrow()); ++i)
+                    for (size_t i = ti; i < imax; ++i)
                     {
-                        for (size_t k = tk; k < std::min(tk + tsize, mat2.ncol()); ++k)
+                        for (size_t k = tk*ncol2; k < kmax; k+=ncol2)
                         {
-                            *ret.buffer(i+k*mat2.ncol()) += *mat1.buffer(i+j*mat2.ncol()) * *mat2.buffer(j+k*mat2.ncol());
+                            ret.buffer(0)[i+k] += mat1.buffer(0)[i+j*ncol1] * mat2.buffer(0)[j+k];
                         }
                     }
                 }
@@ -174,7 +181,7 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
         }
     }
 
-    return ret;    
+    return ret;
 }
 
 /*
