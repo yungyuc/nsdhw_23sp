@@ -173,7 +173,7 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
                     {
                         for (size_t k = tk*ncol2; k < kmax; k+=ncol2)
                         {
-                            ret.buffer(0)[i+k] += mat1.buffer(0)[i+j*ncol1] * mat2.buffer(0)[j+k];
+                            ret.m_buffer[i+k] += mat1.m_buffer[i+j*ncol1] * mat2.m_buffer[j+k];
                         }
                     }
                 }
