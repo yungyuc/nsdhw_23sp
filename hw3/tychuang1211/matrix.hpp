@@ -51,8 +51,7 @@ public:
     {
         return std::vector<double>(m_buffer, m_buffer+size());
     }
-    double * m_buffer = nullptr;
-
+    
     double * m_buffer = nullptr;
 
 private:
