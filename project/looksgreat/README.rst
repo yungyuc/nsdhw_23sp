@@ -13,14 +13,14 @@ The satisfiability modulo theories (SMT) is a more general form of the SAT (sati
 Problem to Solve
 ================
 
-PCB routing is one of the problems in EDA. In this problem, we have a grid map with multiple pins on it, and several fan-out around the border of the grip map. The goal is to find a path for each pin to fan-out, and each path should not cross each other. 
+PCB escape routing is one of the problems in EDA. In this problem, we have a grid map with multiple pins on it, and several fan-out around the border of the grip map. The goal is to find a path for each pin to fan-out, and each path should not cross each other. 
 The problem is NP-hard, and there are many heuristic algorithms to solve it. However, the heuristic algorithms are not always optimal, and it is hard to find a good heuristic algorithm.
 In this project, I will transform the problem to SMT problem, and use SMT solver to solve it. The SMT solver I use here will be Z3(https://github.com/Z3Prover/z3).
 
 Prospective Users
 =================
 
-PCB company that want to solve PCB routing problem.
+PCB factory that want to solve PCB routing problem.
 The software will contain multiple option, for example, user can decide whether each fan-out's signal is given by user or decide by the software. Moreover, the software offer two modes, one is aim at minimize path length, which will reduce the production cost. The other mode is aim at making each path length as similar as possible, which will reduce the delay difference between each signal.
 
 System Architecture
@@ -28,28 +28,25 @@ System Architecture
 
 This software will be developed in C++ and use the API provided by z3, and use pybind to support python user.
 The system architecture consist of three parts:
-1. A class serve as a interface between z3 API and our software. Since z3 is a general tool for many problems, this interface will help us develop easier.
-2. A core part that transform the problem to SMT problem.
-3. An interface that allow user to use the software.
+* A class serve as a interface between z3 API and our software. Since z3 is a general tool for many problems, this interface will help us develop easier.
+* A core part that transform the problem to SMT problem.
+* An interface that allow user to use the software.
 
 API Description
 ===============
 
-1. createBoard(x, y): create a board with x*y grid.
-2. addPin(x, y): add a pin at (x, y).
-3. addFanout(x, y, signal(optional)): add a fanout at (x, y). If signal is not given, the software will decide the signal for this fanout.
-4. setMode(mode): set the mode of the software. The mode can be "minimize" or "balance".
+* createBoard(x, y): create a board with x*y grid.
+* addPin(x, y): add a pin at (x, y).
+* addFanout(x, y, signal(optional)): add a fanout at (x, y). If signal is not given, the software will decide the signal for this fanout.
+* setMode(mode): set the mode of the software. The mode can be "minimize" or "balance".
 
 Engineering Infrastructure
 ==========================
 
-Describe how you plan to put together the engineering system:
-
-1. Automatic build system: GNU make
-2. Version control: git
-3. Testing framework: pytest
-4. Documentation: README.md
-
+* Automatic build system: GNU make
+* Version control: git
+* Testing framework: pytest
+* Documentation: README.md
 
 Schedule
 ========
@@ -61,7 +58,7 @@ Schedule
 * Week 5 (5/8): Impelment transformation algorithm and API
 * Week 6 (5/15): Write test
 * Week 7 (5/22): Refactoring week (and accommodation of overflowing work).
-* Week 8 (5/29): Visualize and write documentation
+* Week 8 (5/29): Visualize using klayout and write documentation
 
 References
 ==========
