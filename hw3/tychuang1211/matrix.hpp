@@ -53,6 +53,8 @@ public:
     }
     double * m_buffer = nullptr;
 
+    double * m_buffer = nullptr;
+
 private:
 
     inline size_t index(size_t row, size_t col) const

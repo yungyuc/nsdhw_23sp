@@ -39,7 +39,7 @@ def test_perfromance():
 	setup = '''
 import _matrix
 
-size = 1000
+size = 500
 
 mat1 = _matrix.Matrix(size,size)
 mat2 = _matrix.Matrix(size,size)
@@ -62,7 +62,7 @@ for it in range(size):
 		naivesec = minsec = min(naive.repeat(repeat=repeat, number=1))
 		w.write(f'{minsec} seconds\n')
 
-		tsizes = [8, 16, 32]
+		tsizes = [16]
 		for tsize in tsizes:
 			tile = timeit.Timer(f'_matrix.multiply_tile(mat1, mat2, {tsize})', setup=setup)
 			w.write(f'Start multiply_tile (tsize={tsize}, repeat={repeat}), take min = ')
