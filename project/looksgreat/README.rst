@@ -7,7 +7,7 @@ A project that transform PCB escape routing problem to SMT problem and use SMT s
 Basic Information
 =================
 
-Github repository: 
+Github repository: https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
 
 The satisfiability modulo theories (SMT) is a more general form of the SAT (satisfiability problem). In addition to boolean variable, it can also deal with integer, and even if-else and many more statement in first order logic.
 
