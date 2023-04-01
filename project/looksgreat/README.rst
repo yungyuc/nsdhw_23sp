@@ -14,7 +14,7 @@ The satisfiability modulo theories (SMT) is a more general form of the SAT (sati
 Problem to Solve
 ================
 
-PCB escape routing is one of the problems in EDA. In this problem, we have a grid map with multiple pins on it, and several fan-out around the border of the grid map. The goal is to find a path for each pin to fan-out, and each path should not cross each other. 
+PCB escape routing is one of the problems in EDA. In this problem, we have a multilayer grid map with multiple pins on it, and several fan-out around the border of the grid map. The goal is to find a path for each pin to fan-out, and each path on the same layer should not cross each other. 
 
 The problem is NP-hard, and there are many heuristic algorithms to solve it. However, the heuristic algorithms are not always optimal, and it is hard to find a good heuristic algorithm.
 
@@ -41,7 +41,7 @@ The system architecture consist of three parts:
 API Description
 ===============
 
-* createBoard(x, y): create a board with x*y grid.
+* createBoard(x, y, z): create a board with x*y grid, and allow the software to use at most z layers.
 * addPin(x, y): add a pin at (x, y).
 * addFanout(x, y, signal(optional)): add a fanout at (x, y). If signal is not given, the software will decide the signal for this fanout.
 * setMode(mode): set the mode of the software. The mode can be "minimize" or "balance".
