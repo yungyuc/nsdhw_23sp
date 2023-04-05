@@ -27,13 +27,34 @@ The image below shows the difference between normal random values and perlin noi
     <img src="img/compare.png" alt="Minecraft">
 </p>
 
-In this project, I am going to implement a set of APIs of the Perlin Noise algorithm in 1D, 2D, and 3D (if time is enough), and use these APIs to render some terrain.
+In this project, I am going to implement a set of API (for C++ and Python) of the Perlin Noise algorithm in 1D, 2D, and 3D (if time is enough), and use these API to render some terrain.
 
 ## Prospective Users ##
 
+Anyone who wants to simulate random terrain or uses Perlin Noise for application.
+
 ## System Architecture ##
 
+- Use `C++` to implement algorithm.
+- Use `Pybind11` to wrap C++ functions for Python.
+- Use `Python` to render the terrain with these APIs.
+
 ## API Description ##
+
+A set of API for C++ and Python, respectively.
+
+```cpp
+class PerlinNoise
+{
+private:
+    int seed;
+    std::vector<std::vector<double>> data;    
+public:
+    int getSeed() const;
+    double getNoise(int _x) const;
+    std::vector<std::vector<double>> getNoises() const;
+};
+```
 
 ## Engineering Infrastructure ##
 
