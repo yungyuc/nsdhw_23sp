@@ -11,7 +11,7 @@ GitHub repository : [https://github.com/B10732009/procedural-terrain-generation]
 In video games,  **Procedural Terrain Generation** is very useful where you want generate natural terrain (caves, hills, rivers, etc.) that has a smooth feel, but is still random.
 
 <p style="text-align: center;">
-    <img src="img/minecraft.png" alt="Compare"><br>
+    <img src="img/minecraft.png" alt="minecraft"><br>
     Minecraft, a 3D graphic game <br>that has many kinds of terrain generation.
 </p>
 
@@ -24,7 +24,7 @@ Compared with just some random values, Perlin Noise can generate values very smo
 The image below shows the difference between normal random values and perlin noise.
 
 <p style="text-align: center;">
-    <img src="img/compare.png" alt="Minecraft">
+    <img src="img/compare.png" alt="compare">
 </p>
 
 In this project, I am going to implement a set of API (for C++ and Python) of the Perlin Noise algorithm in 1D, 2D, and 3D (if time is enough), and use these API to render some terrain.
@@ -37,7 +37,11 @@ Anyone who wants to simulate random terrain or uses Perlin Noise for application
 
 - Use `C++` to implement algorithm.
 - Use `Pybind11` to wrap C++ functions for Python.
-- Use `Python` to render the terrain with these APIs.
+- Use `Python` to render the terrain with these APIs (with some rendering tools).
+
+<p style="text-align: center;">
+    <img src="img/system_architecture.png" alt="system_architecture">
+</p>
 
 ## API Description ##
 
@@ -90,6 +94,9 @@ public:
 
 ## References ##
 
-- [Procedural Generation (Wikipedia)](https://en.wikipedia.org/wiki/Procedural_generation)
-- [Perlin noise (Wikipedia)](https://en.wikipedia.org/wiki/Perlin_noise)
+- [Procedural Generation (wikipedia)](https://en.wikipedia.org/wiki/Procedural_generation)
+- [Perlin Noise (wikipedia)](https://en.wikipedia.org/wiki/Perlin_noise)
 - [Minecraft terrain generation in a nutshell (YouTube)](https://www.youtube.com/watch?v=CSa5O6knuwI)
+- [Procedural Terrain Generation (YouTube)](https://www.youtube.com/playlist?list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3)
+- [Understanding Perlin Noise (article)](https://adrianb.io/2014/08/09/perlinnoise.html)
+- [Improving Noise by Ken Perlin](https://mrl.cs.nyu.edu/~perlin/paper445.pdf)
