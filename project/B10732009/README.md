@@ -8,7 +8,7 @@ GitHub repository : [https://github.com/B10732009/procedural-terrain-generation]
 
 **[Procedural Generation](https://en.wikipedia.org/wiki/Procedural_generation)** is a method of **creating data algorithmically** as opposed to manually, typically through a combination of human-generated assets and algorithms coupled with computer-generated randomness and processing power. 
 
-In video games,  **Procedural Terrain Generation** is very useful where you want generate natural terrain (caves, hills, rivers, etc.) that has a smooth feel, but is still random.
+In video games,  **Procedural Terrain Generation** is very useful where you want to generate natural terrain (caves, hills, rivers, etc.) that has a smooth feel, but is still random.
 
 ## Problem to Solve ##
 
@@ -44,7 +44,7 @@ The API will have both C++ and Python version.
 
 ```cpp
 // C++ API
-// get the value of specific coordinate
+// get the value of a specific coordinate
 double getNoise1D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x);
 double getNoise2D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x, double y);
 double getNoise3D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x, double y, double z);
@@ -57,7 +57,7 @@ std::vector<std::vector<std::vector<double>>> getNoises3D(int seed=0, int octave
 
 ```py
 # Python API
-# get the value of specific coordinate
+# get the value of a specific coordinate
 def getNoise1D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x);
 def getNoise2D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x, y);
 def getNoise3D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x, y, z);
