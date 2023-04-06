@@ -68,6 +68,9 @@ Project List by Account Name
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
+2. `B10732009 <https://github.com/B10732009>`__ for
+   `Procedural Terrain Generation <B10732009/README.md>`__:
+   https://github.com/B10732009/procedural-terrain-generation
 
 Time Table Session A
 ++++++++++++++++++++
