@@ -1,6 +1,6 @@
 # Procedural Terrain Generation #
 
-Procedurally generate random terrain with **[Perlin noise](https://en.wikipedia.org/wiki/Perlin_noise)**.
+Procedurally generate random terrain with [Perlin Noise](https://en.wikipedia.org/wiki/Perlin_noise).
 
 ## Basic Information ##
 
@@ -10,24 +10,19 @@ GitHub repository : [https://github.com/B10732009/procedural-terrain-generation]
 
 In video games,  **Procedural Terrain Generation** is very useful where you want generate natural terrain (caves, hills, rivers, etc.) that has a smooth feel, but is still random.
 
-<p style="text-align: center;">
-    <img src="img/minecraft.png" alt="minecraft"><br>
-    Minecraft, a 3D graphic game <br>that has many kinds of terrain generation.
-</p>
-
 ## Problem to Solve ##
 
-**Perlin Noise** is very pouplar an algorithm for procedural generation developed by Ken Perlin in 1983. It can be used for any sort of wave-like, undulating material, texture, or terrain. 
+**Perlin Noise** is a very popular algorithm for procedural generation developed by Ken Perlin in 1983. It can be used for any kind of wave-like, undulating material, texture, or terrain. 
 
 Compared with just some random values, Perlin Noise can generate values very smoothly and continuously, which looks more realistic in terrain generation. 
 
-The image below shows the difference between normal random values and perlin noise.
+The graph below shows the difference between normal random values and perlin noise.
 
 <p style="text-align: center;">
     <img src="img/compare.png" alt="compare">
 </p>
 
-In this project, I am going to implement a set of API (for C++ and Python) of the Perlin Noise algorithm in 1D, 2D, and 3D (if time is enough), and use these API to render some terrain.
+In this project, I am going to implement a set of API (for C++ and Python) of the Perlin Noise algorithm in 1D, 2D, and 3D (if time is enough), and use these API to render some terrain with [Ursina](https://www.ursinaengine.org/) (a game engine in Python).
 
 ## Prospective Users ##
 
@@ -35,9 +30,9 @@ Anyone who wants to simulate random terrain or uses Perlin Noise for application
 
 ## System Architecture ##
 
-- Use `C++` to implement algorithm.
+- Use `C++` to implement the algorithm.
 - Use `Pybind11` to wrap C++ functions for Python.
-- Use `Python` to render the terrain with these APIs (with some rendering tools).
+- Use `Python` to render the terrain with these APIs (with [Ursina](https://www.ursinaengine.org/)).
 
 <p style="text-align: center;">
     <img src="img/system_architecture.png" alt="system_architecture">
@@ -45,27 +40,40 @@ Anyone who wants to simulate random terrain or uses Perlin Noise for application
 
 ## API Description ##
 
-A set of API for C++ and Python, respectively.
+The API will have both C++ and Python version.
 
 ```cpp
-class PerlinNoise
-{
-private:
-    int seed;
-    std::vector<std::vector<double>> data;    
-public:
-    int getSeed() const;
-    double getNoise(int _x) const;
-    std::vector<std::vector<double>> getNoises() const;
-};
+// C++ API
+// get the value of specific coordinate
+double getNoise1D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x);
+double getNoise2D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x, double y);
+double getNoise3D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x, double y, double z);
+
+// get the values of a specific length/area/space
+std::vector<double> getNoises1D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x);
+std::vector<std::vector<double>> getNoises2D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x, double y);
+std::vector<std::vector<std::vector<double>>> getNoises3D(int seed=0, int octaves=1, double lacunarity=2.0, double persistance=0.5, double x, double y, double z);
+```
+
+```py
+# Python API
+# get the value of specific coordinate
+def getNoise1D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x);
+def getNoise2D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x, y);
+def getNoise3D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x, y, z);
+
+# get the values of a specific length/area/space
+def getNoises1D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x);
+def getNoises2D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x, y);
+def getNoises3D(seed=0, octaves=1, lacunarity=2.0, persistance=0.5, x, y, z);
 ```
 
 ## Engineering Infrastructure ##
 
-- Automatic build system : GNU Make
-- Version control : git
-- Testing framework : pytest
-- Documentation : README in the github repository 
+- Automatic build system : `GNU Make`
+- Version control : `git`
+- Testing framework : `pytest`
+- Documentation : `README.md` in the github repository 
 
 ## Schedule ##
 
