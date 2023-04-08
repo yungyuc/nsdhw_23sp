@@ -51,7 +51,7 @@ The system architecture of the library will consist of the following components:
 * Week 3 (4/24): Implement greedy/backtracking algorithm
 * Week 4 (5/1): Impelment other alorithm
 * Week 5 (5/8): Implement the API functions and write tests
-* Week 6 (5/15): Optimize
+* Week 6 (5/15): Timing & Optimize
 * Week 7 (5/22): Visualize
 * Week 8 (5/29): Write documentation
 
