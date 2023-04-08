@@ -30,10 +30,13 @@ The system architecture of the library will consist of the following components:
 
 ## API Description
 
+The following API will be provided in C++ and Python.
+
 * `create_graph(size)`: Create or resize a graph
 * `add_vertex(id)`: Add vertex
 * `add_edge(id1, id2)`: Connect two vertex with an edge
 * `set_vertex_color(id, color)`: Coloring the specific vertex
+* `get_vertex_color(id)`: Get color of vertex
 * `color_graph()`: Coloring the graph
 * `read_graph(file): Read graph from file
 
