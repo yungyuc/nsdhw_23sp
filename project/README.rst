@@ -68,6 +68,9 @@ Project List by Account Name
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
+2. `SmallHanley <https://github.com/SmallHanley>`__ for
+   `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
+   https://github.com/SmallHanley/ggdGVC
 
 Time Table Session A
 ++++++++++++++++++++
