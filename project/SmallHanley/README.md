@@ -28,6 +28,8 @@ The system architecture of the library will consist of the following components:
 * Vertex coloring algorithm
 * API
 
+ggdGVC will provide python code using VPython for visualization and testing.
+
 ## API Description
 
 The following API will be provided in C++ and Python.
