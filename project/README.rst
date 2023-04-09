@@ -68,7 +68,9 @@ Project List by Account Name
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
-
+2. `yoyojs200602 <https://github.com/yoyojs200602>`__ for
+   `GACR: A Genetic Algorithm-based Channel Router <yoyojs200602/README.md>`__:
+   https://github.com/yoyojs200602/GACR
 Time Table Session A
 ++++++++++++++++++++
 
