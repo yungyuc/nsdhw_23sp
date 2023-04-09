@@ -69,6 +69,10 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 
+2. `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__ for
+   `AQuaDRR: Adaptive Quadtree Detailed Routing with Rip-up and Reroute for VLSI <darrenleeleelee1/README.rst>`__:
+   https://github.com/darrenleeleelee1/AQuaDRR
+
 Time Table Session A
 ++++++++++++++++++++
 
