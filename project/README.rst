@@ -69,6 +69,10 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 
+2. `ksh2027 <https://github.com/ksh2027>`__ for
+   `BOP: Boolean Operations on Polygons <ksh2027e/README.rst>`__:
+   https://github.com/ksh2027/BOP
+
 Time Table Session A
 ++++++++++++++++++++
 
