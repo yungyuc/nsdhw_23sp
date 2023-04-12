@@ -1,6 +1,7 @@
 Face Recognition System
 ===========================
-## Basic Information
+
+##  Basic Information
 Developing a Face Recognition System Using C++ and Python
 
 **Github repository**: https://github.com/luuun1216/Face-Recognition-System
@@ -26,9 +27,9 @@ The Face Recognition API consists of several modules, each with its own set of f
 
 1 . Image Processing: This module provides functions for loading, resizing, cropping, and normalizing face images. Developers can use these functions to preprocess images before passing them to the feature extraction module.
 
-2 .Feature Extraction: This module provides functions for extracting facial features from input images. The functions use deep learning models to extract features such as face landmarks, embeddings, and descriptors.
+2 . Feature Extraction: This module provides functions for extracting facial features from input images. The functions use deep learning models to extract features such as face landmarks, embeddings, and descriptors.
 
-3 .Model Inference: This module provides functions for loading, training, and evaluating deep learning models. Developers can use these functions to train their own models or use pre-trained models for face recognition.
+3 . Model Inference: This module provides functions for loading, training, and evaluating deep learning models. Developers can use these functions to train their own models or use pre-trained models for face recognition.
 
 4 . Result Display: This module provides functions for visualizing the results of the face recognition system. Developers can use these functions to display the detected faces, recognized faces, and confidence scores in the input images.
 
