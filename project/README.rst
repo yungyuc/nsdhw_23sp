@@ -69,6 +69,10 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 
+2. `XDEv11 <https://github.com/XDEv11>`__ for
+   `Maximum Graph Matching Library <XDEv11/README.md>`__:
+   https://github.com/XDEv11/MGML
+
 Time Table Session A
 ++++++++++++++++++++
 
