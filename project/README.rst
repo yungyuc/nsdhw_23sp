@@ -69,7 +69,7 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
    
-1. `luuun1216 <https://github.com/luuun1216>`__ for
+2. `luuun1216 <https://github.com/luuun1216>`__ for
    `Face-Recognition-System <luuun1216/README.md>`__:
    https://github.com/luuun1216/Face-Recognition-System
 
