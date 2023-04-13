@@ -69,7 +69,7 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 2. `Yojahuang <https://github.com/Yojahuang>`__ for
-   `R tree search engine <Yojahuang/README.rst>`__:
+   `R tree search engine <Yojahuang/README.md>`__:
    https://github.com/Yojahuang/R-tree-search-engine
 
 Time Table Session A
