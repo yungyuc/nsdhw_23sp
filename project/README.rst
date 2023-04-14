@@ -74,6 +74,9 @@ Project List by Account Name
 3. `Yojahuang <https://github.com/Yojahuang>`__ for
    `R tree search engine <Yojahuang/README.md>`__:
    https://github.com/Yojahuang/R-tree-search-engine
+4. `looksgreat <https://github.com/looksgreat>`__ for
+    `SPER: SMT-Based PCB Escape Routing <looksgreat/README.rst>`__:
+   https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
 
 Time Table Session A
 ++++++++++++++++++++
