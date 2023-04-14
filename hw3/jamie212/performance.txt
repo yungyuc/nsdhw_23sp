@@ -1,0 +1,27 @@
+tile_size = 32
+Start multiply_naive (repeat=5), take min = 1.6738489319999985 seconds
+Start multiply_tile (repeat=5), take min = 0.748894555000021 seconds
+Start multiply_mkl (repeat=5), take min = 0.2586836219999782 seconds
+Tile speed-up over naive: 0.44740868825312946 x
+MKL speed-up over naive: 0.1545441867868506 x
+
+tile_size = 64
+Start multiply_naive (repeat=5), take min = 1.682697496000003 seconds
+Start multiply_tile (repeat=5), take min = 0.7507142979999912 seconds
+Start multiply_mkl (repeat=5), take min = 0.25886089699997683 seconds
+Tile speed-up over naive: 0.44613740721938405 x
+MKL speed-up over naive: 0.15383685874337116 x
+
+tile_size = 100
+Start multiply_naive (repeat=5), take min = 1.4917130630000202 seconds
+Start multiply_tile (repeat=5), take min = 0.8351749430000268 seconds
+Start multiply_mkl (repeat=5), take min = 0.22298624999996264 seconds
+Tile speed-up over naive: 0.5598764023158624 x
+MKL speed-up over naive: 0.14948333934376737 x
+
+tile_size = 128
+Start multiply_naive (repeat=5), take min = 1.6820956770000066 seconds
+Start multiply_tile (repeat=5), take min = 0.773635186000007 seconds
+Start multiply_mkl (repeat=5), take min = 0.25969206499999586 seconds
+Tile speed-up over naive: 0.4599234137381378 x
+MKL speed-up over naive: 0.15438602485629885 x
