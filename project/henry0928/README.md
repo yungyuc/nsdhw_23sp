@@ -24,13 +24,16 @@ I'm trying to...
 `Fortune's Algorithm` mainly consists of two parts: Sweep Line and Beach Line.
 
 ### Sweep Line :
+
 `Sweep Line` is a vertical or horizontal line, assuming a horizontal line is used, and moves from top to bottom. During the movement of the Sweep Line, every time an input point is passed, the input point will be included in the calculation of the `Beach Line`, forming a parabolic segment with an upward opening
 
-### Beach Line: 
+### Beach Line:
+
 Each input point passed by the `Sweep Line` will form the focus of the parabola, and the `Sweep Line` will be used as the directrix of the focus to form a parabola.
 The `Beach Line` consists of the parabola formed by all the input points included in the calculation.
 
 ### Event:
+
 The two major events that have impact on the diagram are the following:
 
 1. `Site Event`: Occurs when the Sweep Line passes through any input point, and the passed input point will be included in the calculation and change the Beach Line to form the sides of the Voronoi diagram.
@@ -79,7 +82,6 @@ Edge Voronoi(vector<Point> site_list, Point bb_point1, Point bb_point2 )
 ```
 
 ( If it is found that the API needs to be added during the development process, I will modify this part again. )
-
 
 # Engineering Infrastructure
 
