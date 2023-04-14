@@ -1,0 +1,11 @@
+Start multiply_naive (repeat=5), take min = Start multiply_naive (repeat=5), take min = 
+1.821860791000006 seconds
+
+Start multiply_tile, tile_size=64 (repeat=5), take min = 
+1.1552036799999996 seconds
+
+Start multiply_mkl (repeat=5), take min = Start multiply_mkl (repeat=5), take min = 
+0.2593256359999998 seconds
+
+MKL speed-up over naive: 7.02538 x
+MKL speed-up over tile: 1.57709 x
