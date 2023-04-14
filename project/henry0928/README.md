@@ -1,6 +1,7 @@
 # Voronoi Diagram and Delaunay Triangulation
 
 GitHub repository : https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
+
 # Basic Information
 
 To put it simply, `Voronoi Diagram` is a kind of graphic segmentation. There will be many specific points on a planar graph. The collection of these specific points is called "A". All the points on the planar graph will go to "A" to find the specific point closest to itself, and form an independent area with the specific point. Then, the planar graph can be divided into various independent areas by using specific points to form a voronoi diagram.
@@ -22,7 +23,7 @@ I'm trying to...
 
 `Fortune's Algorithm` mainly consists of two parts: Sweep Line and Beach Line.
 
-### Sweep Line:
+### Sweep Line :
 `Sweep Line` is a vertical or horizontal line, assuming a horizontal line is used, and moves from top to bottom. During the movement of the Sweep Line, every time an input point is passed, the input point will be included in the calculation of the `Beach Line`, forming a parabolic segment with an upward opening
 
 ### Beach Line: 
@@ -69,6 +70,7 @@ This is a software system of a hybrid system of C++11 (modern C++) and Python.
 def Create_diagram(site_list, bb_point1, bb_point2) # Input the site's list and bounding box points to get the Voronoi Diagram as the result_diagram 
 def Draw_diagram(result_diagram) # Draw the result diagram
 ```
+
 `Voronoi()` will get the edge information of Voronoi Diagram, user can use this function to get the edge information rathen than the complete graph. 
 
 `C++` API: <br>
@@ -78,7 +80,9 @@ Edge Voronoi(vector<Point> site_list, Point bb_point1, Point bb_point2 )
 
 ( If it is found that the API needs to be added during the development process, I will modify this part again. )
 
+
 # Engineering Infrastructure
+
 - Build: `make`
 - Version control: `git`
 - Testing infrastructure: `pytest`
