@@ -14,20 +14,19 @@ provide a API in python. Here are the problems I am going to solve.
 
 * Maximum Cardinality Bipartite Matching
 	* Hopcroft-Karp Algorithm ($O(|E|\sqrt{|V|})$)
-
 * Maximum Weight Bipartite Matching
 	* Hungarian Algorithm ($O(|V|^3)$)
-
 * Maximum Cardinality Matching in arbitrary graphs
 	* Blossom Algorithm ($|V||E|\alpha(|V|)$)
 	* MV Matching Algorithm (**optional**)
-
 * Maximum Weight Matching in arbitrary graphs
 	* Blossom Algorithm (**optional**)
 
 ## Prospective Users
 
 Anyone who needs the answer of maximum matching problem.
+
+> TODO
 
 ## System Architecture
 
@@ -39,14 +38,16 @@ interfaces in C++ for sure and in python by pybind11.
 The input will consist of a graph represented in adjacency list or
 adjacency matrix, and the output will be a matching.
 
+* `Matching MCBM(Graph g);`: Maximum Cardinality Bipartite Matching
+* `Matching MWBM(Graph g);`: Maximum Weight Bipartite Matching
+* `Matching MCM(Graph g);`: Maximum Cardinality Matching (in arbitrary graphs)
+* `Matching MWM(Graph g);`: Maximum Weight Matching (in arbitrary graphs) (**optional**)
+
 ## Engineering Infrastructure
 
 * Build: GNU Make
-
 * Version control: Git (GitHub)
-
 * Testing: unittest (python)
-
 * Document: Markdown (README.md)
 
 ## Schedule
