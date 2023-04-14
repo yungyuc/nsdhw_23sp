@@ -1,0 +1,3 @@
+multiply_naive (repeat=5), take min = 2.226795005000895 second
+multiply_tile (repeat=5), take min = 0.8063926059985533 second
+multiply_mkl (repeat=5), take min = 0.08089106899569742 second
