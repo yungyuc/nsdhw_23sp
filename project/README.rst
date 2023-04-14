@@ -68,7 +68,13 @@ Project List by Account Name
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
-2. `looksgreat <https://github.com/looksgreat>`__ for
+2. `qwe854896 <https://github.com/qwe854896>`__ for
+   `MatrixCurer <qwe854896/README.rst>`__:
+   https://github.com/qwe854896/MatrixCurer
+3. `Yojahuang <https://github.com/Yojahuang>`__ for
+   `R tree search engine <Yojahuang/README.md>`__:
+   https://github.com/Yojahuang/R-tree-search-engine
+4. `looksgreat <https://github.com/looksgreat>`__ for
     `SPER: SMT-Based PCB Escape Routing <looksgreat/README.rst>`__:
    https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
 
