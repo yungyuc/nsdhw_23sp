@@ -77,6 +77,9 @@ Project List by Account Name
 4. `looksgreat <https://github.com/looksgreat>`__ for
     `SPER: SMT-Based PCB Escape Routing <looksgreat/README.rst>`__:
    https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
+5. `SmallHanley <https://github.com/SmallHanley>`__ for
+   `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
+   https://github.com/SmallHanley/ggdGVC
 
 Time Table Session A
 ++++++++++++++++++++
