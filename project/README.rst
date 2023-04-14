@@ -80,6 +80,9 @@ Project List by Account Name
 5. `SmallHanley <https://github.com/SmallHanley>`__ for
    `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
    https://github.com/SmallHanley/ggdGVC
+6. `luuun1216 <https://github.com/luuun1216>`__ for
+   `Face-Recognition-System <luuun1216/README.md>`__:
+   https://github.com/luuun1216/Face-Recognition-System
 
 Time Table Session A
 ++++++++++++++++++++
