@@ -65,25 +65,22 @@ Project List by Account Name
 
 .. The first entry is the example; do not remove.
 
-1. `github_account_name <https://github.com/github_account_name>`__ for
-   `Project subject <github_account_name/README.rst>`__:
-   https://github.com/github_account_name/project_name
-2. `qwe854896 <https://github.com/qwe854896>`__ for
+1. `qwe854896 <https://github.com/qwe854896>`__ for
    `MatrixCurer <qwe854896/README.rst>`__:
    https://github.com/qwe854896/MatrixCurer
-3. `Yojahuang <https://github.com/Yojahuang>`__ for
+2. `Yojahuang <https://github.com/Yojahuang>`__ for
    `R tree search engine <Yojahuang/README.md>`__:
    https://github.com/Yojahuang/R-tree-search-engine
-4. `looksgreat <https://github.com/looksgreat>`__ for
-    `SPER: SMT-Based PCB Escape Routing <looksgreat/README.rst>`__:
+3. `looksgreat <https://github.com/looksgreat>`__ for
+   `SPER: SMT-Based PCB Escape Routing <looksgreat/README.rst>`__:
    https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
-5. `SmallHanley <https://github.com/SmallHanley>`__ for
+4. `SmallHanley <https://github.com/SmallHanley>`__ for
    `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
    https://github.com/SmallHanley/ggdGVC
-6. `luuun1216 <https://github.com/luuun1216>`__ for
+5. `luuun1216 <https://github.com/luuun1216>`__ for
    `Face-Recognition-System <luuun1216/README.md>`__:
    https://github.com/luuun1216/Face-Recognition-System
-7. `B10732009 <https://github.com/B10732009>`__ for
+6. `B10732009 <https://github.com/B10732009>`__ for
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
 
