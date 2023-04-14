@@ -9,7 +9,7 @@ Geometric search is important for implmenting map and geometry system. For more 
 
 ## Problem to Solve
 
-Using R-tree, kd-tree and M-tree to do query on nearest-n-points, and range-query. This project assumes using Euclidean distance for distance metric(more distance metric if possible.)
+Using R-tree, kd-tree and M-tree to do query on nearest-n-points, and range-query. This project assumes using Euclidean distance for distance metric(could add more distance metric if possible.)
 
 ## Prospective Users
 
@@ -25,8 +25,7 @@ For users that aims to build their geometric information system, the API can pro
 
 - Using ``vector<double>`` for coordinate and ``int`` for ID to represent the data points in C++.
 
-````c++=
-
+````c++
 // build data structure with coordinates of the data points and their IDs.
 Tree build(vector<vector<double>> points, vector<int> IDs);
 
@@ -37,10 +36,9 @@ vector<int> K_nearest(vector<double> coordinate);
 vector<int> range_query(vector<double> center, double distance);
 
 ````
-
 - Use ``numpy`` for data points in python and use pybind to pass it to C++.
 
-````python=
+````python
 // build data structure with coordinates of the data points and their IDs.
 def build(points: numpy.ndarray, IDs: numpy.ndarray) -> Tree
 
