@@ -39,14 +39,17 @@ vector<int> range_query(vector<double> center, double distance);
 - Use ``numpy`` for data points in python and use pybind to pass it to C++.
 
 ````python
-// build data structure with coordinates of the data points and their IDs.
-def build(points: numpy.ndarray, IDs: numpy.ndarray) -> Tree
+# build data structure with coordinates of the data points and their IDs.
+def build(points: numpy.ndarray, IDs: numpy.ndarray) -> Tree:
+    pass
 
 
-// return the ID of the data points
-def K_nearest(coordinate: numpy.ndarray) -> numpy.ndarray
+# return the ID of the data points
+def K_nearest(coordinate: numpy.ndarray) -> numpy.ndarray:
+    pass
 
-def range_query(center: numpy.ndarray, distance: float) -> numpy.ndarray
+def range_query(center: numpy.ndarray, distance: float) -> numpy.ndarray:
+    pass
 
 ````
 
