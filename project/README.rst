@@ -69,6 +69,10 @@ Project List by Account Name
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 
+2. `henry0928 <https://github.com/henry0928>`__ for
+   `Voronoi Diagram and Delaunay Triangulation <henry0928/README.rst>`__:
+   https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
+
 Time Table Session A
 ++++++++++++++++++++
 
