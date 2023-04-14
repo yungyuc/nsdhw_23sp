@@ -83,6 +83,9 @@ Project List by Account Name
 6. `luuun1216 <https://github.com/luuun1216>`__ for
    `Face-Recognition-System <luuun1216/README.md>`__:
    https://github.com/luuun1216/Face-Recognition-System
+7. `B10732009 <https://github.com/B10732009>`__ for
+   `Procedural Terrain Generation <B10732009/README.md>`__:
+   https://github.com/B10732009/procedural-terrain-generation
 
 Time Table Session A
 ++++++++++++++++++++
