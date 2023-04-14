@@ -71,6 +71,9 @@ Project List by Account Name
 2. `qwe854896 <https://github.com/qwe854896>`__ for
    `MatrixCurer <qwe854896/README.rst>`__:
    https://github.com/qwe854896/MatrixCurer
+3. `Yojahuang <https://github.com/Yojahuang>`__ for
+   `R tree search engine <Yojahuang/README.md>`__:
+   https://github.com/Yojahuang/R-tree-search-engine
 
 Time Table Session A
 ++++++++++++++++++++
