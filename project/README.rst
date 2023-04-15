@@ -83,6 +83,9 @@ Project List by Account Name
 6. `B10732009 <https://github.com/B10732009>`__ for
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
+7. `tychuang1211 <https://github.com/tychuang1211>`__ for
+   `Improve modmesh camera control<tychuang1211/README.md>`__:
+   https://github.com/tychuang1211/modmesh/tree/70-improve-camera-control
 
 Time Table Session A
 ++++++++++++++++++++
