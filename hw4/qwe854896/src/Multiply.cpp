@@ -11,11 +11,11 @@ void check_matrix(const Matrix &mat1, const Matrix &mat2)
         throw std::invalid_argument("Matrix: the number of columns in the first matrix must be equal to the number of rows in the second matrix");
 }
 
-Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2)
+Matrix &multiply_naive(const Matrix &mat1, const Matrix &mat2)
 {
     check_matrix(mat1, mat2);
 
-    Matrix rst(mat1.nrow(), mat2.ncol());
+    Matrix *rst = new Matrix(mat1.nrow(), mat2.ncol());
 
     for (size_t i = 0; i < mat1.nrow(); ++i)
     {
@@ -24,14 +24,14 @@ Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2)
             double v = 0;
             for (size_t k = 0; k < mat1.ncol(); ++k)
                 v += mat1(i, k) * mat2(k, j);
-            rst(i, j) = v;
+            (*rst)(i, j) = v;
         }
     }
 
-    return rst;
+    return *rst;
 }
 
-Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
+Matrix &multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
 {
     check_matrix(mat1, mat2);
 
@@ -151,17 +151,17 @@ Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
     delete[] block_sum;
     delete[] block_rst;
 
-    Matrix rst(nrow_1, ncol_2);
-    set(rst, rst_fix, nrow_1, ncol_2);
+    Matrix *rst = new Matrix(nrow_1, ncol_2);
+    set(*rst, rst_fix, nrow_1, ncol_2);
 
-    return rst;
+    return *rst;
 }
 
-Matrix multiply_mkl(const Matrix &mat1, const Matrix &mat2)
+Matrix &multiply_mkl(const Matrix &mat1, const Matrix &mat2)
 {
     check_matrix(mat1, mat2);
 
-    Matrix rst(mat1.nrow(), mat2.ncol());
+    Matrix *rst = new Matrix(mat1.nrow(), mat2.ncol());
 
     cblas_dgemm(
         CblasRowMajor,
@@ -176,8 +176,8 @@ Matrix multiply_mkl(const Matrix &mat1, const Matrix &mat2)
         mat2.buffer().data(),
         mat2.ncol(),
         0.0,
-        rst.buffer().data(),
-        rst.ncol());
+        rst->buffer().data(),
+        rst->ncol());
 
-    return rst;
+    return *rst;
 }

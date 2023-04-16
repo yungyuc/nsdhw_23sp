@@ -4,6 +4,7 @@ namespace py = pybind11;
 
 #include "Matrix.h"
 #include "Multiply.h"
+#include "CustomAllocator.h"
 
 PYBIND11_MODULE(_matrix, m)
 {
@@ -28,7 +29,11 @@ PYBIND11_MODULE(_matrix, m)
         .def_property_readonly("ncol", [](const Matrix &mat)
                                { return mat.ncol(); });
 
-    m.def("multiply_naive", &multiply_naive);
-    m.def("multiply_tile", &multiply_tile);
-    m.def("multiply_mkl", &multiply_mkl);
+    m.def("multiply_naive", &multiply_naive, py::return_value_policy::take_ownership);
+    m.def("multiply_tile", &multiply_tile, py::return_value_policy::take_ownership);
+    m.def("multiply_mkl", &multiply_mkl, py::return_value_policy::take_ownership);
+
+    m.def("bytes", &CustomAllocator<double>::bytes);
+    m.def("allocated", &CustomAllocator<double>::allocated);
+    m.def("deallocated", &CustomAllocator<double>::deallocated);
 }
