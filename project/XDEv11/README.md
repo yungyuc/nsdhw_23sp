@@ -24,9 +24,13 @@ provide a API in python. Here are the problems I am going to solve.
 
 ## Prospective Users
 
-Anyone who needs the answer of maximum matching problem.
-
-> TODO
+Maximum matching in bipartite graphs can be used to solve resource allocation
+problems. Additionally, in general graphs, where nodes represent individuals
+and edges represent social connections such as friendships, collaborations,
+or interactions, finding a maximum matching can help identify optimal pairs of
+individuals for potential partnerships. This has applications in social network
+analysis, where it can optimize the formation of collaborations or partnerships
+based on criteria such as common interests, skills, etc.
 
 ## System Architecture
 
@@ -68,4 +72,5 @@ Week 7 (5/29): Prepare for the presentation
 
 ## References
 
-> TODO
+* [wikipedia - matching](https://en.wikipedia.org/wiki/Matching_(graph_theory))
+
