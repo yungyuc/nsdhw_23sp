@@ -1,16 +1,14 @@
-# !/bin/bash
+#!/bin/bash
 
-# $# denote the number of parameter
 if [ $# -lt 1 ]; then
-  echo "missing file name\n"
+  echo "missing file name"
 elif [ $# -gt 1 ]; then
-  echo "only one argument is allowed\n"
+  echo "only one argument is allowed"
 else
-  fname=$1
-  if [ -e fname]; then # -e fname will return true if file exist
-    num_lines=$(wc -l < $fname) # wc will return three numbers which stand for the number of line, word and byte respectively. 
-    echo "$num_lines lines in $fname\n"
-    
-    echo "$fname not found\n"
+  if [ -f $1 ]; then
+      num_lines=$( cat $1 | wc -l)
+      echo "${num_lines} lines in $1"
+  else
+      echo "$1 not found"
   fi
 fi
