@@ -83,6 +83,9 @@ Project List by Account Name
 6. `B10732009 <https://github.com/B10732009>`__ for
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
+7. `jamie212 <https://github.com/jamie212>`__ for
+   `PolyClipper: An Intuitive Polygon Partitioning Library <jamie212/README.md>`__:
+   https://github.com/jamie212/PolyClipper
 
 Time Table Session A
 ++++++++++++++++++++
