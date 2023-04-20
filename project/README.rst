@@ -83,6 +83,9 @@ Project List by Account Name
 6. `B10732009 <https://github.com/B10732009>`__ for
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
+7. `huroy5518 <https://github.com/huroy5518>`__ for
+   `Graph Partitioner <huroy5518/README.md>`__:
+   https://github.com/huroy5518/graph-partitioner
 
 2. `XDEv11 <https://github.com/XDEv11>`__ for
    `Maximum Graph Matching Library <XDEv11/README.md>`__:
