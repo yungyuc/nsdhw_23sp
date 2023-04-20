@@ -88,6 +88,10 @@ Project List by Account Name
    `Maximum Graph Matching Library <XDEv11/README.md>`__:
    https://github.com/XDEv11/MGML
 
+2. `henry0928 <https://github.com/henry0928>`__ for
+   `Voronoi Diagram and Delaunay Triangulation <henry0928/README.rst>`__:
+   https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
+
 Time Table Session A
 ++++++++++++++++++++
 
