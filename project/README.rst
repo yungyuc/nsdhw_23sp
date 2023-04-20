@@ -95,6 +95,10 @@ Project List by Account Name
    `Voronoi Diagram and Delaunay Triangulation <henry0928/README.rst>`__:
    https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
 
+2. `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__ for
+   `AQuaDRR: Adaptive Quadtree Detailed Routing with Rip-up and Reroute for VLSI <darrenleeleelee1/README.rst>`__:
+   https://github.com/darrenleeleelee1/AQuaDRR
+
 Time Table Session A
 ++++++++++++++++++++
 
