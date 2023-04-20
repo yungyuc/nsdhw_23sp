@@ -1,4 +1,5 @@
 // #include <atomic>
+#include <algorithm>
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
@@ -17,44 +18,56 @@ namespace py = pybind11;
 template <class T> class CustomAllocator
 {
 private:
-  static std::size_t mByte;
-  static std::size_t mAllocated;
-  static std::size_t mDeallocated;
+  static std::size_t mByte;        // used bytes
+  static std::size_t mAllocated;   // allocated bytes
+  static std::size_t mDeallocated; // deallocated bytes
 
 public:
   using value_type = T;
   CustomAllocator() = default;
   T *allocate(std::size_t n);
-  void deallocate(T *p, std::size_t n);
+  void deallocate(T *ptr, std::size_t n);
   static std::size_t bytes();
   static std::size_t allocated();
   static std::size_t deallocated();
 };
 
+// initialize static variables
+template <class T> std::size_t CustomAllocator<T>::mByte = 0;
+template <class T> std::size_t CustomAllocator<T>::mAllocated = 0;
+template <class T> std::size_t CustomAllocator<T>::mDeallocated = 0;
+
 template <class T> T *CustomAllocator<T>::allocate(std::size_t n)
 {
+  // check if the size is reasonable
   if (n > std::numeric_limits<std::size_t>::max() / sizeof(T))
     throw std::bad_alloc();
 
+  // allocate
   const std::size_t bytes = n * sizeof(T);
-  T *tptr = (T *)(std::malloc(bytes));
+  T *ptr = (T *)(std::malloc(bytes));
 
-  if (tptr == nullptr)
+  // check if allocation is successful
+  if (ptr == nullptr)
     throw std::bad_alloc();
 
-  mByte = mByte + bytes;
-  mAllocated = mAllocated + bytes;
-  std::cout << "aaa\n";
-  return tptr;
+  // count bytes
+  mByte += bytes;
+  mAllocated += bytes;
+
+  return ptr;
 }
 
-template <class T> void CustomAllocator<T>::deallocate(T *p, std::size_t n)
+template <class T> void CustomAllocator<T>::deallocate(T *ptr, std::size_t n)
 {
   const std::size_t bytes = n * sizeof(T);
+
+  // free the memory
+  std::free(ptr);
+
+  // count bytes
   mByte -= bytes;
   mDeallocated += bytes;
-  std::free(p);
-  std::cout << "ccc\n";
 }
 
 template <class T> std::size_t CustomAllocator<T>::bytes()
@@ -77,13 +90,12 @@ class Matrix
 private:
   std::size_t mRow;
   std::size_t mCol;
-
-public:
   std::vector<double, CustomAllocator<double>> mBuffer;
 
-  // Matrix();
+public:
+  Matrix();
   Matrix(std::size_t row, std::size_t col);
-  // Matrix(std::size_t row, std::size_t col, std::vector<double> const &data);
+  Matrix(std::size_t row, std::size_t col, std::vector<double> const &data);
   // Matrix(Matrix const &other) = default;
   // Matrix &operator=(Matrix const &other) = default;
   // ~Matrix() = default;
@@ -97,29 +109,29 @@ public:
   std::size_t row() const;
   std::size_t col() const;
   double *buffer() const;
-  std::size_t size() const;
 };
 
-// Matrix::Matrix() : mRow(0), mCol(0), mBuffer({})
-// {
-// }
-
-Matrix::Matrix(std::size_t row, std::size_t col)
-    : mRow(row), mCol(col), mBuffer(std::vector<double, CustomAllocator<double>>(row * col, 0))
+Matrix::Matrix() : mRow(0), mCol(0), mBuffer({})
 {
-  std::cout << "here\n";
 }
 
-// Matrix::Matrix(std::size_t row, std::size_t col, std::vector<double> const &data)
-// {
-//   // check size correctness
-//   if (row * col != data.size())
-//     throw std::out_of_range("number of elements mismatch");
-//   // copy data
-//   mRow = row;
-//   mCol = col;
-//   mBuffer = std::vector<double>(data);
-// }
+Matrix::Matrix(std::size_t row, std::size_t col)
+    : mRow(row), mCol(col), mBuffer(std::vector<double, CustomAllocator<double>>(row * col))
+{
+}
+
+Matrix::Matrix(std::size_t row, std::size_t col, std::vector<double> const &data)
+{
+  // check size correctness
+  if (row * col != data.size())
+    throw std::out_of_range("Number of elements mismatch");
+  // copy data
+  mRow = row;
+  mCol = col;
+  mBuffer = std::vector<double, CustomAllocator<double>>(row * col);
+  for (std::size_t i = 0; i < data.size(); i++)
+    mBuffer[i] = data[i];
+}
 
 // Matrix::Matrix(Matrix const &other)
 // {
@@ -134,7 +146,8 @@ Matrix::Matrix(std::size_t row, std::size_t col)
 //     // copy data
 //     mRow = other.row();
 //     mCol = other.col();
-//     mBuffer = other.mBuffer;
+//     for (std::size_t i = 0; i < other.mBuffer.size(); i++)
+//       mBuffer[i] = other.mBuffer[i];
 //   }
 //   return (*this);
 // }
@@ -145,14 +158,14 @@ Matrix::Matrix(std::size_t row, std::size_t col)
 
 double Matrix::operator()(std::size_t row, std::size_t col) const
 {
-  if (row < 0 || row >= mRow || col < 0 || col > mCol)
+  if (row < 0 || row >= mRow || col < 0 || col >= mCol)
     throw std::out_of_range("Index out of range");
   return mBuffer[row * mCol + col];
 }
 
 double &Matrix::operator()(std::size_t row, std::size_t col)
 {
-  if (row < 0 || row >= mRow || col < 0 || col > mCol)
+  if (row < 0 || row >= mRow || col < 0 || col >= mCol)
     throw std::out_of_range("Index out of range");
   return mBuffer[row * mCol + col];
 }
@@ -182,23 +195,13 @@ double *Matrix::buffer() const
   return (double *)mBuffer.data();
 }
 
-std::size_t Matrix::size() const
-{
-  return mRow * mCol;
-}
-
-// initialize static variables
-template <class T> std::size_t CustomAllocator<T>::mByte = 0;
-template <class T> std::size_t CustomAllocator<T>::mAllocated = 0;
-template <class T> std::size_t CustomAllocator<T>::mDeallocated = 0;
-
 Matrix multiply_naive(Matrix const &m1, Matrix const &m2)
 {
   if (m1.col() != m2.row())
-    throw std::out_of_range("dimension mismatch");
+    throw std::out_of_range("Dimension mismatch");
 
   Matrix ret(m1.row(), m2.col());
-  std::cout << "bbb\n";
+
   for (std::size_t i = 0; i < m1.row(); i++)
   {
     for (std::size_t j = 0; j < m2.col(); j++)
@@ -207,14 +210,14 @@ Matrix multiply_naive(Matrix const &m1, Matrix const &m2)
         ret(i, j) += m1(i, k) * m2(k, j);
     }
   }
-  std::cout << "bbb\n";
+
   return ret;
 }
 
 Matrix multiply_tile(Matrix const &m1, Matrix const &m2, std::size_t tsize)
 {
   if (m1.col() != m2.row())
-    throw std::out_of_range("dimension mismatch");
+    throw std::out_of_range("Dimension mismatch");
 
   Matrix ret(m1.row(), m2.col());
 
@@ -239,14 +242,13 @@ Matrix multiply_tile(Matrix const &m1, Matrix const &m2, std::size_t tsize)
   return ret;
 }
 
-Matrix multiply_mkl(const Matrix &mat1, const Matrix &mat2)
+Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
 {
   if (mat1.col() != mat2.row())
-    throw std::out_of_range("dimension mismatch");
+    throw std::out_of_range("Dimension mismatch");
 
-  // Matrix ret(0, 0);
-  std::size_t tmp = mat1.row();
   Matrix ret(mat1.row(), mat2.col());
+
   cblas_dgemm(CblasRowMajor, /* const CBLAS_LAYOUT Layout */
               CblasNoTrans,  /* const CBLAS_TRANSPOSE transa */
               CblasNoTrans,  /* const CBLAS_TRANSPOSE transb */
@@ -269,14 +271,15 @@ Matrix multiply_mkl(const Matrix &mat1, const Matrix &mat2)
 PYBIND11_MODULE(_matrix, m)
 {
   py::class_<Matrix>(m, "Matrix")
+      .def(py::init<>())
       .def(py::init<std::size_t, std::size_t>())
-      .def(py::init<Matrix>())
-      // .def(py::init<std::size_t, std::size_t, std::vector<double>>())
+      .def(py::init<std::size_t, std::size_t, std::vector<double>>())
       .def_property_readonly("nrow", [](Matrix const &m) { return m.row(); })
       .def_property_readonly("ncol", [](Matrix const &m) { return m.col(); })
       .def("__setitem__", [](Matrix &m, std::vector<std::size_t> idx, double val) { m(idx[0], idx[1]) = val; })
       .def("__getitem__", [](Matrix const &m, std::vector<std::size_t> idx) { return m(idx[0], idx[1]); })
-      .def("__eq__", [](Matrix const &m1, Matrix const &m2) { return (m1 == m2); });
+      .def("__eq__", [](Matrix const &m1, Matrix const &m2) { return (m1 == m2); })
+      .def("__ne__", [](Matrix const &m1, Matrix const &m2) { return (m1 != m2); });
 
   m.def("multiply_naive", &multiply_naive, "");
   m.def("multiply_tile", &multiply_tile, "");
