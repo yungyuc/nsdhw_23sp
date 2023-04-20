@@ -99,6 +99,10 @@ Project List by Account Name
    `AQuaDRR: Adaptive Quadtree Detailed Routing with Rip-up and Reroute for VLSI <darrenleeleelee1/README.rst>`__:
    https://github.com/darrenleeleelee1/AQuaDRR
 
+2. `yoyojs200602 <https://github.com/yoyojs200602>`__ for
+   `GACR: A Genetic Algorithm-based Channel Router <yoyojs200602/README.md>`__:
+   https://github.com/yoyojs200602/GACR
+
 Time Table Session A
 ++++++++++++++++++++
 
