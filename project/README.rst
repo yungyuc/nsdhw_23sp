@@ -103,6 +103,10 @@ Project List by Account Name
    `GACR: A Genetic Algorithm-based Channel Router <yoyojs200602/README.md>`__:
    https://github.com/yoyojs200602/GACR
 
+2. `ksh2027 <https://github.com/ksh2027>`__ for
+   `BOP: Boolean Operations on Polygons <ksh2027/README.rst>`__:
+   https://github.com/ksh2027/BOP
+
 Time Table Session A
 ++++++++++++++++++++
 
