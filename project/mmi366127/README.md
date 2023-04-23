@@ -27,7 +27,7 @@ For users that aims to build their geometric information system, the API can pro
 
 ````c++
 // build data structure with coordinates of the data points and their IDs.
-Tree build(vector<vector<double>> points, vector<int> IDs);
+Tree build(vector<vector<double>> points, vector<int32_t> IDs);
 
 
 // return the ID of the data points
