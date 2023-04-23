@@ -65,22 +65,22 @@ Project List by Account Name
 
 .. The first entry is the example; do not remove.
 1. `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__ for
-    `AQuaDRR: Adaptive Quadtree Detailed Routing with Rip-up and Reroute for
-    VLSI <darrenleeleelee1/README.rst>`__:
-    https://github.com/darrenleeleelee1/AQuaDRR
+   `AQuaDRR: Adaptive Quadtree Detailed Routing with Rip-up and Reroute for
+   VLSI <darrenleeleelee1/README.rst>`__:
+   https://github.com/darrenleeleelee1/AQuaDRR
 2. `ksh2027 <https://github.com/ksh2027>`__ for
-    `BOP: Boolean Operations on Polygons <ksh2027/README.rst>`__:
-    https://github.com/ksh2027/BOP
+   `BOP: Boolean Operations on Polygons <ksh2027/README.rst>`__:
+   https://github.com/ksh2027/BOP
 3. `luuun1216 <https://github.com/luuun1216>`__ for
    `Face-Recognition-System <luuun1216/README.md>`__:
    https://github.com/luuun1216/Face-Recognition-System
 4. `yoyojs200602 <https://github.com/yoyojs200602>`__ for
-    `GACR: A Genetic Algorithm-based Channel Router
-    <yoyojs200602/README.md>`__:
-    https://github.com/yoyojs200602/GACR
+   `GACR: A Genetic Algorithm-based Channel Router
+   <yoyojs200602/README.md>`__:
+   https://github.com/yoyojs200602/GACR
 5. `mmi3661227 <https://github.com/mmi3661227>`__ for
-    `Geometric-Search-Engine <mmi3661227/README.rst>`__:
-    https://github.com/mmi3661227/Geometric-Search-Engine
+   `Geometric-Search-Engine <mmi3661227/README.rst>`__:
+   https://github.com/mmi3661227/Geometric-Search-Engine
 6. `SmallHanley <https://github.com/SmallHanley>`__ for
    `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
    https://github.com/SmallHanley/ggdGVC
@@ -94,8 +94,8 @@ Project List by Account Name
    `Maximum Graph Matching Library <XDEv11/README.md>`__:
    https://github.com/XDEv11/MGML
 10. `BillyNI-OUO <https://github.com/BillyNI-OUO>`__ for
-    `Project subject <BillyNI-OUO/README.rst>`__:
-    https://github.com/BillyNI-OUO/MinSteinerTree
+   `Project subject <BillyNI-OUO/README.rst>`__:
+   https://github.com/BillyNI-OUO/MinSteinerTree
 11. `B10732009 <https://github.com/B10732009>`__ for
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
