@@ -1,4 +1,4 @@
-# Geometric search engine
+# Geometric Search Engine
 
 A project that implement R-tree, kd-tree, M-tree for geometric searching.
 
@@ -9,7 +9,7 @@ Geometric search is important for implmenting map and geometry system. For more 
 
 ## Problem to Solve
 
-Using R-tree, kd-tree and M-tree to do query on nearest-n-points, and range-query. This project assumes using Euclidean distance for distance metric(could add more distance metric if possible.)
+Create a library that provide R-tree, kd-tree, and M-tree to do query on nearest-n-points, and range-query.(Provide choices for data structure, not combining them together.) This project assumes using Euclidean distance for distance metric(could add more distance metric if possible.)
 
 ## Prospective Users
 
@@ -23,7 +23,7 @@ For users that aims to build their geometric information system, the API can pro
 
 ## API Description
 
-- Using ``vector<double>`` for coordinate and ``int`` for ID to represent the data points in C++.
+- Using ``vector<double>`` for coordinate and ``int32_t`` for ID to represent the data points in C++.
 
 ````c++
 // build data structure with coordinates of the data points and their IDs.
