@@ -1,5 +1,7 @@
 #include <atomic>
-
+#include <stddef.h>
+#include <stdexcept>
+#include <limits.h>
 struct ByteCounterImpl
 {
 
