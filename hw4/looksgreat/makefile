@@ -1,5 +1,5 @@
 CXX = clang++
-CXXFLAGS = -std=c++11 -O3 -shared -m64
+CXXFLAGS = -std=c++17 -O3 -shared -m64
 HEADERS = -I/usr/include/mkl #-I/DATA/lllll/.local/lib/python3.6/site-packages/pybind11/include
 PIBINDFLAG = -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 PY_OBJ = _matrix.so

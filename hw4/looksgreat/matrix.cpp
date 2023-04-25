@@ -63,10 +63,8 @@ public:
         if (m_rows != m.nrow() || m_cols != m.ncol())
             return false;
 
-        for (int i = 0; i < m_rows; i++)
-        {
-            for (int j = 0; j < m_cols; j++)
-            {
+        for (int i = 0; i < m_rows; i++){
+            for (int j = 0; j < m_cols; j++){
                 if (this->operator()(i, j) != m(i, j))
                     return false;
             }
