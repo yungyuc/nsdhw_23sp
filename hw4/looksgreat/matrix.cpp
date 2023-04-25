@@ -49,8 +49,8 @@ template <class T> size_t CustomAllocator<T>::m_byte = 0;
 
 class Matrix {
 public:
-    Matrix(): m_rows(0), m_cols(0) {}
-    Matrix(int nrow, int ncol): m_rows(nrow), m_cols(ncol), m_data(nrow * ncol) {}
+    Matrix(): m_rows(0), m_cols(0), m_data(vector<double, CustomAllocator<double>>(0)) {}
+    Matrix(int nrow, int ncol): m_rows(nrow), m_cols(ncol), m_data(vector<double, CustomAllocator<double>>(nrow * ncol)) {}
     double& operator()(int i, int j) {
         return m_data[i*m_cols+j];
     }
@@ -87,7 +87,7 @@ public:
 
 private:
     int m_rows, m_cols;
-    std::vector<double, CustomAllocator<double>> m_data;
+    vector<double, CustomAllocator<double>> m_data;
 };
 
 Matrix multiply_naive(Matrix const &m1, Matrix const &m2){
