@@ -1,4 +1,4 @@
-.PHONY: all clean test
+.HONY: all clean test
 
 CC = clang++
 CFLAGS = -O3 -Wall -m64 -shared -std=c++11 -fPIC
@@ -19,3 +19,4 @@ test: $(LIB_TARGET)
 
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
+	rm -rf *.dSYM
