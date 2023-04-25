@@ -1,7 +1,7 @@
 #include <atomic>
-#include <stddef.h>
+// #include <stddef.h>
 #include <stdexcept>
-#include <limits.h>
+#include <limits>
 struct ByteCounterImpl
 {
 
@@ -9,14 +9,8 @@ struct ByteCounterImpl
     std::atomic_size_t deallocated = {0};
     std::atomic_size_t refcount = {0};
 
-}; /* end struct ByteCounterImpl */
+};
 
-/**
- * One instance of this counter is shared among a set of allocators.
- *
- * The counter keeps track of the bytes allocated and deallocated, and report
- * those two numbers in addition to bytes that remain allocated.
- */
 class ByteCounter
 {
 public:
@@ -75,7 +69,7 @@ public:
     std::size_t bytes() const { return m_impl->allocated - m_impl->deallocated; }
     std::size_t allocated() const { return m_impl->allocated; }
     std::size_t deallocated() const { return m_impl->deallocated; }
-    /* This is for debugging. */
+
     std::size_t refcount() const { return m_impl->refcount; }
 
 private:
@@ -86,7 +80,7 @@ private:
     {
         if (nullptr == m_impl)
         {
-            return;// Do nothing.
+            return;
         }
         else if (1 == m_impl->refcount)
         {
@@ -109,8 +103,7 @@ struct CustomAllocator
 
     using value_type = T;
 
-    // Just use the default constructor of ByteCounter for the data member
-    // "counter".
+
     CustomAllocator() = default;
 
     template <class U>
