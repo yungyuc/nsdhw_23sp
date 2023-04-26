@@ -112,6 +112,9 @@ Project List by Account Name
 15. `Calvin9c <https://github.com/Calvin9c>`__ for
     `RayMarching <https://github.com/Calvin9c/nsdhw_23sp/blob/Calvin9c-proposal/project/Calvin9c/README.md>`__:
     https://github.com/Calvin9c/RayMarching
+16. `tychuang1211 <https://github.com/tychuang1211>`__ for
+    `Improve modmesh camera control <tychuang1211/README.md>`__:
+    https://github.com/tychuang1211/modmesh/tree/70-improve-camera-control
 
 Time Table Session A
 ++++++++++++++++++++
