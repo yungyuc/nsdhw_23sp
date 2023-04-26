@@ -106,6 +106,9 @@ Project List by Account Name
 13. `BillyNI-OUO <https://github.com/BillyNI-OUO>`__ for
     `Project subject <BillyNI-OUO/README.rst>`__:
     https://github.com/BillyNI-OUO/MinSteinerTree
+14. `jamie212 <https://github.com/jamie212>`__ for
+    `PolyClipper: An Intuitive Polygon Partitioning Library <jamie212/README.md>`__:
+    https://github.com/jamie212/PolyClipper
 
 Time Table Session A
 ++++++++++++++++++++
