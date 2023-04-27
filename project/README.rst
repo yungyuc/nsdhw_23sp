@@ -68,53 +68,73 @@ Project List by Account Name
 1. `B10732009 <https://github.com/B10732009>`__ for
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
-2. `BillyNI-OUO <https://github.com/BillyNI-OUO>`__ for
-   `MinSteinerTree <BillyNI-OUO/README.rst>`__:
-   https://github.com/BillyNI-OUO/MinSteinerTree
-3. `Calvin9c <https://github.com/Calvin9c>`__ for
-   `RayMarching <https://github.com/Calvin9c/nsdhw_23sp/blob/Calvin9c-proposal/project/Calvin9c/README.md>`__:
-   https://github.com/Calvin9c/RayMarching
-4. `SmallHanley <https://github.com/SmallHanley>`__ for
-   `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
-   https://github.com/SmallHanley/ggdGVC
-5. `XDEv11 <https://github.com/XDEv11>`__ for
-   `Maximum Graph Matching Library <XDEv11/README.md>`__:
-   https://github.com/XDEv11/MGML
-6. `Yojahuang <https://github.com/Yojahuang>`__ for
-   `R tree search engine <Yojahuang/README.md>`__:
-   https://github.com/Yojahuang/R-tree-search-engine
-7. `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__ for
-   `AQuaDRR <darrenleeleelee1/README.rst>`__:
-   https://github.com/darrenleeleelee1/AQuaDRR
-8. `henry0928 <https://github.com/henry0928>`__ for
+2. `henry0928 <https://github.com/henry0928>`__ for
    `Voronoi Diagram and Delaunay Triangulation <henry0928/README.md>`__:
    https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
-9. `huroy5518 <https://github.com/huroy5518>`__ for
+3. `luuun1216 <https://github.com/luuun1216>`__ for
+   `Face-Recognition-System <luuun1216/README.md>`__:
+   https://github.com/luuun1216/Face-Recognition-System
+4. `qwe854896 <https://github.com/qwe854896>`__ for
+   `MatrixCurer <qwe854896/README.rst>`__:
+   https://github.com/qwe854896/MatrixCurer
+5. `yoyojs200602 <https://github.com/yoyojs200602>`__ for
+   `GACR <yoyojs200602/README.rst>`__:
+   https://github.com/yoyojs200602/GACR
+
+Routing
+-------
+
+1. `BillyNI-OUO <https://github.com/BillyNI-OUO>`__ for
+   `MinSteinerTree <BillyNI-OUO/README.rst>`__:
+   https://github.com/BillyNI-OUO/MinSteinerTree
+2. `looksgreat <https://github.com/looksgreat>`__ for
+   `SPER <looksgreat/README.rst>`__:
+   https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
+
+Visualization
+-------------
+
+1. `Calvin9c <https://github.com/Calvin9c>`__ for
+   `RayMarching <https://github.com/Calvin9c/nsdhw_23sp/blob/Calvin9c-proposal/project/Calvin9c/README.md>`__:
+   https://github.com/Calvin9c/RayMarching
+2. `tychuang1211 <https://github.com/tychuang1211>`__ for
+   `Camera control <tychuang1211/README.md>`__:
+   https://github.com/tychuang1211/modmesh/tree/70-improve-camera-control
+
+Graph
+-----
+
+1. `SmallHanley <https://github.com/SmallHanley>`__ for
+   `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
+   https://github.com/SmallHanley/ggdGVC
+2. `XDEv11 <https://github.com/XDEv11>`__ for
+   `Maximum Graph Matching Library <XDEv11/README.md>`__:
+   https://github.com/XDEv11/MGML
+3. `huroy5518 <https://github.com/huroy5518>`__ for
    `Graph Partitioner <huroy5518/README.md>`__:
    https://github.com/huroy5518/graph-partitioner
-10. `jamie212 <https://github.com/jamie212>`__ for
-    `PolyClipper <jamie212/README.md>`__:
-    https://github.com/jamie212/PolyClipper
-11. `ksh2027 <https://github.com/ksh2027>`__ for
-    `BOP <ksh2027/README.rst>`__: https://github.com/ksh2027/BOP
-12. `looksgreat <https://github.com/looksgreat>`__ for
-    `SPER <looksgreat/README.rst>`__:
-    https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
-13. `luuun1216 <https://github.com/luuun1216>`__ for
-    `Face-Recognition-System <luuun1216/README.md>`__:
-    https://github.com/luuun1216/Face-Recognition-System
-14. `mmi3661227 <https://github.com/mmi3661227>`__ for
-    `Geometric-Search-Engine <mmi3661227/README.md>`__:
-    https://github.com/mmi3661227/Geometric-Search-Engine
-15. `qwe854896 <https://github.com/qwe854896>`__ for
-    `MatrixCurer <qwe854896/README.rst>`__:
-    https://github.com/qwe854896/MatrixCurer
-16. `yoyojs200602 <https://github.com/yoyojs200602>`__ for
-    `GACR <yoyojs200602/README.rst>`__:
-    https://github.com/yoyojs200602/GACR
-17. `tychuang1211 <https://github.com/tychuang1211>`__ for
-    `Camera control <tychuang1211/README.md>`__:
-    https://github.com/tychuang1211/modmesh/tree/70-improve-camera-control
+
+Spatial Search
+--------------
+
+1. `Yojahuang <https://github.com/Yojahuang>`__ for
+   `R tree search engine <Yojahuang/README.md>`__:
+   https://github.com/Yojahuang/R-tree-search-engine
+2. `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__ for
+   `AQuaDRR <darrenleeleelee1/README.rst>`__:
+   https://github.com/darrenleeleelee1/AQuaDRR
+3. `mmi3661227 <https://github.com/mmi3661227>`__ for
+   `Geometric-Search-Engine <mmi3661227/README.md>`__:
+   https://github.com/mmi3661227/Geometric-Search-Engine
+
+Polygon Boolean
+---------------
+
+1. `jamie212 <https://github.com/jamie212>`__ for
+   `PolyClipper <jamie212/README.md>`__:
+   https://github.com/jamie212/PolyClipper
+2. `ksh2027 <https://github.com/ksh2027>`__ for
+   `BOP <ksh2027/README.rst>`__: https://github.com/ksh2027/BOP
 
 Time Table Session A
 ++++++++++++++++++++
@@ -133,8 +153,9 @@ Time Table Session A
     - Project
   * - A1
     - 07:00 - 07:15
-    -
-    -
+    - `B10732009 <https://github.com/B10732009>`__
+    - `Procedural Terrain Generation <B10732009/README.md>`__:
+      https://github.com/B10732009/procedural-terrain-generation
   * - A2
     - 07:15 - 07:30
     -
