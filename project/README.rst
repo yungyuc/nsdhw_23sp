@@ -69,7 +69,7 @@ Project List by Account Name
    `Procedural Terrain Generation <B10732009/README.md>`__:
    https://github.com/B10732009/procedural-terrain-generation
 2. `BillyNI-OUO <https://github.com/BillyNI-OUO>`__ for
-   `Project subject <BillyNI-OUO/README.rst>`__:
+   `MinSteinerTree <BillyNI-OUO/README.rst>`__:
    https://github.com/BillyNI-OUO/MinSteinerTree
 3. `Calvin9c <https://github.com/Calvin9c>`__ for
    `RayMarching <https://github.com/Calvin9c/nsdhw_23sp/blob/Calvin9c-proposal/project/Calvin9c/README.md>`__:
@@ -84,39 +84,36 @@ Project List by Account Name
    `R tree search engine <Yojahuang/README.md>`__:
    https://github.com/Yojahuang/R-tree-search-engine
 7. `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__ for
-   `AQuaDRR: Adaptive Quadtree Detailed Routing with Rip-up and Reroute for
-   VLSI <darrenleeleelee1/README.rst>`__:
+   `AQuaDRR <darrenleeleelee1/README.rst>`__:
    https://github.com/darrenleeleelee1/AQuaDRR
 8. `henry0928 <https://github.com/henry0928>`__ for
-   `Voronoi Diagram and Delaunay Triangulation <henry0928/README.rst>`__:
+   `Voronoi Diagram and Delaunay Triangulation <henry0928/README.md>`__:
    https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
 9. `huroy5518 <https://github.com/huroy5518>`__ for
    `Graph Partitioner <huroy5518/README.md>`__:
    https://github.com/huroy5518/graph-partitioner
 10. `jamie212 <https://github.com/jamie212>`__ for
-    `PolyClipper: An Intuitive Polygon Partitioning Library
-    <jamie212/README.md>`__: https://github.com/jamie212/PolyClipper
+    `PolyClipper <jamie212/README.md>`__:
+    https://github.com/jamie212/PolyClipper
 11. `ksh2027 <https://github.com/ksh2027>`__ for
-    `BOP: Boolean Operations on Polygons <ksh2027/README.rst>`__:
-    https://github.com/ksh2027/BOP
+    `BOP <ksh2027/README.rst>`__: https://github.com/ksh2027/BOP
 12. `looksgreat <https://github.com/looksgreat>`__ for
-    `SPER: SMT-Based PCB Escape Routing <looksgreat/README.rst>`__:
+    `SPER <looksgreat/README.rst>`__:
     https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
 13. `luuun1216 <https://github.com/luuun1216>`__ for
     `Face-Recognition-System <luuun1216/README.md>`__:
     https://github.com/luuun1216/Face-Recognition-System
 14. `mmi3661227 <https://github.com/mmi3661227>`__ for
-    `Geometric-Search-Engine <mmi3661227/README.rst>`__:
+    `Geometric-Search-Engine <mmi3661227/README.md>`__:
     https://github.com/mmi3661227/Geometric-Search-Engine
 15. `qwe854896 <https://github.com/qwe854896>`__ for
     `MatrixCurer <qwe854896/README.rst>`__:
     https://github.com/qwe854896/MatrixCurer
 16. `yoyojs200602 <https://github.com/yoyojs200602>`__ for
-    `GACR: A Genetic Algorithm-based Channel Router
-    <yoyojs200602/README.md>`__:
+    `GACR <yoyojs200602/README.rst>`__:
     https://github.com/yoyojs200602/GACR
 17. `tychuang1211 <https://github.com/tychuang1211>`__ for
-    `Improve modmesh camera control <tychuang1211/README.md>`__:
+    `Camera control <tychuang1211/README.md>`__:
     https://github.com/tychuang1211/modmesh/tree/70-improve-camera-control
 
 Time Table Session A
