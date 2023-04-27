@@ -93,6 +93,17 @@ Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
     return ret;
 }
 
+bool operator==(Matrix const &mat1, Matrix const &mat2)
+{
+    for (size_t i = 0; i < mat1.nrow(); ++i) {
+        for (size_t j = 0; j < mat1.ncol(); ++j) {
+            if (mat1(i, j) != mat2(i, j))
+                return false;
+        }
+    }
+    return true;
+}
+
 std::size_t bytes()
 {
     return alloc.bytes();
@@ -120,7 +131,7 @@ PYBIND11_MODULE(_matrix, m)
         .def(py::init<size_t, size_t>())
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol)
-        .def("__eq__", [](const Matrix &a, const Matrix &b) { return a == b; })
+        .def("__eq__", &operator==)
         .def("__setitem__",
              [](Matrix &self, std::pair<size_t, size_t> idx, double val) {
                  self(idx.first, idx.second) = val;
