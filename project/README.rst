@@ -158,40 +158,49 @@ Time Table Session A
       https://github.com/B10732009/procedural-terrain-generation
   * - A2
     - 07:15 - 07:30
-    -
-    -
+    - `henry0928 <https://github.com/henry0928>`__
+    - `Voronoi Diagram and Delaunay Triangulation <henry0928/README.md>`__:
+      https://github.com/henry0928/Voronoi-Diagram-and-Delaunay-Triangulation
   * - A3
     - 07:30 - 07:45
-    -
-    -
+    - `luuun1216 <https://github.com/luuun1216>`__
+    - `Face-Recognition-System <luuun1216/README.md>`__:
+      https://github.com/luuun1216/Face-Recognition-System
   * - A4
     - 07:45 - 08:00
-    -
-    -
+    - `qwe854896 <https://github.com/qwe854896>`__
+    - `MatrixCurer <qwe854896/README.rst>`__:
+      https://github.com/qwe854896/MatrixCurer
   * - A5
     - 08:00 - 08:15
-    -
-    -
+    - `yoyojs200602 <https://github.com/yoyojs200602>`__
+    - `GACR <yoyojs200602/README.rst>`__:
+      https://github.com/yoyojs200602/GACR
   * - A6
     - 08:15 - 08:30
-    -
-    -
+    - `BillyNI-OUO <https://github.com/BillyNI-OUO>`__
+    - `MinSteinerTree <BillyNI-OUO/README.rst>`__:
+      https://github.com/BillyNI-OUO/MinSteinerTree
   * - A7
     - 08:30 - 08:45
-    -
-    -
+    - `looksgreat <https://github.com/looksgreat>`__
+    - `SPER <looksgreat/README.rst>`__:
+      https://github.com/looksgreat/SPER-SMT-Based-PCB-Escape-Routing
   * - A8
     - 08:45 - 09:00
-    -
-    -
+    - `SmallHanley <https://github.com/SmallHanley>`__
+    - `ggdGVC: A Simple Vertex Coloring Library <SmallHanley/README.md>`__:
+      https://github.com/SmallHanley/ggdGVC
   * - A9
     - 09:00 - 09:15
-    -
-    -
+    - `XDEv11 <https://github.com/XDEv11>`__
+    - `Maximum Graph Matching Library <XDEv11/README.md>`__:
+      https://github.com/XDEv11/MGML
   * - A10
     - 09:15 - 09:30
-    -
-    -
+    - `huroy5518 <https://github.com/huroy5518>`__
+    - `Graph Partitioner <huroy5518/README.md>`__:
+      https://github.com/huroy5518/graph-partitioner
 
 Time Table Session B
 ++++++++++++++++++++
@@ -210,29 +219,35 @@ Time Table Session B
     - Project
   * - B1
     - 10:00 - 10:15
-    -
-    -
+    - `Calvin9c <https://github.com/Calvin9c>`__
+    - `RayMarching <https://github.com/Calvin9c/nsdhw_23sp/blob/Calvin9c-proposal/project/Calvin9c/README.md>`__:
+      https://github.com/Calvin9c/RayMarching
   * - B2
     - 10:15 - 10:30
-    -
-    -
+    - `tychuang1211 <https://github.com/tychuang1211>`__
+    - `Camera control <tychuang1211/README.md>`__:
+      https://github.com/tychuang1211/modmesh/tree/70-improve-camera-control
   * - B3
     - 10:30 - 10:45
-    -
-    -
+    - `Yojahuang <https://github.com/Yojahuang>`__
+    - `R tree search engine <Yojahuang/README.md>`__:
+      https://github.com/Yojahuang/R-tree-search-engine
   * - B4
     - 10:45 - 11:00
-    -
-    -
+    - `darrenleeleelee1 <https://github.com/darrenleeleelee1>`__
+    - `AQuaDRR <darrenleeleelee1/README.rst>`__:
+      https://github.com/darrenleeleelee1/AQuaDRR
   * - B5
     - 11:00 - 11:15
-    -
-    -
+    - `mmi3661227 <https://github.com/mmi3661227>`__
+    - `Geometric-Search-Engine <mmi3661227/README.md>`__:
+      https://github.com/mmi3661227/Geometric-Search-Engine
   * - B6
     - 11:15 - 11:30
-    -
-    -
+    - `jamie212 <https://github.com/jamie212>`__
+    - `PolyClipper <jamie212/README.md>`__:
+      https://github.com/jamie212/PolyClipper
   * - B7
     - 11:30 - 11:45
-    -
-    -
+    - `ksh2027 <https://github.com/ksh2027>`__
+    - `BOP <ksh2027/README.rst>`__: https://github.com/ksh2027/BOP
