@@ -35,9 +35,9 @@ public:
                     return 0;
         return 1;
     }
-    bool operator != (const Matrix& other) const{
-        return !(*this == other);
-    }
+    // bool operator != (const Matrix& other) const{
+    //     return !(*this == other);
+    // }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
@@ -114,7 +114,7 @@ PYBIND11_MODULE(_matrix, m) {
         .def("__setitem__", [](Matrix& mat, std::pair<size_t, size_t> idx, double val){ mat(idx.first, idx.second) = val; })
         .def("__getitem__", [](const Matrix& mat, std::pair<size_t, size_t> idx){ return mat(idx.first, idx.second); })
         .def("__eq__", &Matrix::operator==)
-        .def("__ne__", &Matrix::operator!=)
+        // .def("__ne__", &Matrix::operator!=)
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol);
 
