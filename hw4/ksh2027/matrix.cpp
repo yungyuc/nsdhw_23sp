@@ -16,7 +16,7 @@ class Matrix {
 
 public:
 
-    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(nrow*ncol, 0.0, MyAllocator<double>()){}
+    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(std::vector<double, MyAllocator<double>>(nrow * ncol)){}
 
     ~Matrix(){}
 
