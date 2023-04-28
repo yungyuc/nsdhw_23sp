@@ -5,17 +5,16 @@
 #include <pybind11/operators.h>
 #include "allocator.hpp"
 
-static CustomAllocator<double> allocator;
-
 namespace py = pybind11;
+
+static CustomAllocator<double> allocator;
 
 class Matrix{
 
     friend Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2);
     friend Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t const tsize);
     friend Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2);
-    friend bool operator==(Matrix const &mat1, Matrix const &mat2);
-
+    
     public:
         
         Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), m_buffer(allocator){
@@ -37,6 +36,18 @@ class Matrix{
             return m_buffer[index(row, col)];
         }
 
+        bool operator==(Matrix const &other) const {
+
+            if((m_ncol != other.ncol()) && (m_nrow != other.ncol())) return false;
+
+            for (size_t i = 0; i < m_nrow; ++i){
+                for (size_t j = 0; j < m_ncol; ++j){
+                    if (m_buffer[index(i, j)] != other(i, j)) return false;
+                }
+            }
+            return true;
+        }
+
         void reset_buffer(size_t nrow, size_t ncol){
             m_buffer.reserve(nrow*ncol);	
             m_nrow = nrow;
@@ -51,30 +62,18 @@ class Matrix{
 
 };
 
-bool operator==(Matrix const &mat1, Matrix const &mat2){
-
-    if((mat1.ncol() != mat2.ncol()) && (mat1.nrow() != mat2.ncol())) return false;
-
-    for (size_t i = 0; i < mat1.nrow(); ++i){
-        for (size_t j = 0; j < mat1.ncol(); ++j){
-            if (mat1(i, j) != mat2(i, j)) return false;
-        }
-    }
-    return true;
-}
-
 Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2){
-    Matrix res(mat1.nrow(), mat2.ncol());
+    Matrix ret(mat1.nrow(), mat2.ncol());
     for (size_t i = 0; i < mat1.nrow(); ++i){
         for (size_t k = 0; k < mat2.ncol(); ++k){
             double result = 0;
             for (size_t j = 0; j < mat1.ncol(); ++j){
                 result += mat1(i, j) * mat2(j, k);
             }
-            res(i, k) = result;
+            ret(i, k) = result;
         }
     }
-    return res;
+    return ret;
 }
 
 Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2){
@@ -134,7 +133,7 @@ PYBIND11_MODULE(_matrix, m){
         .def(py::init<size_t, size_t>())
         .def("__setitem__", [](Matrix &self, std::pair<size_t, size_t> index, double value) {self(index.first, index.second) = value;})
         .def("__getitem__", [](Matrix &self, std::pair<size_t, size_t> index) {return self(index.first, index.second);})
-        .def("__eq__", &operator==)
+        .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
         .def_property_readonly("nrow",&Matrix::nrow)
         .def_property_readonly("ncol",&Matrix::nrow);
 }
