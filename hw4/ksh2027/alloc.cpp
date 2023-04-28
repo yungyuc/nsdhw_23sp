@@ -36,6 +36,12 @@ public:
         dealloc += bytes;
     }
 
+    static size_t bytes() { return  alloc - dealloc; }
+    static size_t allocated() { return  alloc; }
+    static size_t deallocated() { return dealloc; }
+
+private:
+
     static std::size_t alloc;
     static std::size_t dealloc;
 

@@ -27,17 +27,17 @@ public:
     double & operator() (size_t row, size_t col){
         return data_v[row*m_ncol + col];
     }
-    // bool operator == (const Matrix& other) const{
-    //     if(nrow() != other.nrow() || ncol() != other.ncol()) {return 0;}
-    //     for(size_t i=0; i<m_nrow; i++)
-    //         for(size_t j=0; j<m_ncol; j++)
-    //             if( (*this)(i,j) != other(i,j) )
-    //                 return 0;
-    //     return 1;
-    // }
-    // bool operator != (const Matrix& other) const{
-    //     return !(*this == other);
-    // }
+    bool operator == (const Matrix& other) const{
+        if(nrow() != other.nrow() || ncol() != other.ncol()) {return 0;}
+        for(size_t i=0; i<m_nrow; i++)
+            for(size_t j=0; j<m_ncol; j++)
+                if( (*this)(i,j) != other(i,j) )
+                    return 0;
+        return 1;
+    }
+    bool operator != (const Matrix& other) const{
+        return !(*this == other);
+    }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
@@ -103,9 +103,9 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     return C;
 }
 
-std::size_t get_bytes() { return MyAllocator<double>::alloc - MyAllocator<double>::dealloc; }
-std::size_t get_allocated() { return MyAllocator<double>::alloc; }
-std::size_t get_deallocated() { return MyAllocator<double>::dealloc; }
+std::size_t get_bytes() { return MyAllocator<double>::bytes(); }
+std::size_t get_allocated() { return MyAllocator<double>::allocated(); }
+std::size_t get_deallocated() { return MyAllocator<double>::deallocated(); }
 
 PYBIND11_MODULE(_matrix, m) {
     m.doc() = "pybind11 matrix multiplication";
@@ -113,8 +113,8 @@ PYBIND11_MODULE(_matrix, m) {
         .def(py::init<size_t, size_t>())
         .def("__setitem__", [](Matrix& mat, std::pair<size_t, size_t> idx, double val){ mat(idx.first, idx.second) = val; })
         .def("__getitem__", [](const Matrix& mat, std::pair<size_t, size_t> idx){ return mat(idx.first, idx.second); })
-        // .def("__eq__", &Matrix::operator==)
-        // .def("__ne__", &Matrix::operator!=)
+        .def("__eq__", &Matrix::operator==)
+        .def("__ne__", &Matrix::operator!=)
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol);
 
