@@ -21,20 +21,20 @@ public:
     ~Matrix(){}
 
     // No bound check.
-    const double   operator() (size_t row, size_t col) const{
+    const double operator() (size_t row, size_t col) const{
         return data_v[row*m_ncol + col];
     }
     double & operator() (size_t row, size_t col){
         return data_v[row*m_ncol + col];
     }
-    bool operator == (const Matrix& other) const{
-        if(nrow() != other.nrow() || ncol() != other.ncol()) {return 0;}
-        for(size_t i=0; i<m_nrow; i++)
-            for(size_t j=0; j<m_ncol; j++)
-                if( (*this)(i,j) != other(i,j) )
-                    return 0;
-        return 1;
-    }
+    // bool operator == (const Matrix& other) const{
+    //     if(nrow() != other.nrow() || ncol() != other.ncol()) {return 0;}
+    //     for(size_t i=0; i<m_nrow; i++)
+    //         for(size_t j=0; j<m_ncol; j++)
+    //             if( (*this)(i,j) != other(i,j) )
+    //                 return 0;
+    //     return 1;
+    // }
     // bool operator != (const Matrix& other) const{
     //     return !(*this == other);
     // }
@@ -113,7 +113,7 @@ PYBIND11_MODULE(_matrix, m) {
         .def(py::init<size_t, size_t>())
         .def("__setitem__", [](Matrix& mat, std::pair<size_t, size_t> idx, double val){ mat(idx.first, idx.second) = val; })
         .def("__getitem__", [](const Matrix& mat, std::pair<size_t, size_t> idx){ return mat(idx.first, idx.second); })
-        .def("__eq__", &Matrix::operator==)
+        // .def("__eq__", &Matrix::operator==)
         // .def("__ne__", &Matrix::operator!=)
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol);
