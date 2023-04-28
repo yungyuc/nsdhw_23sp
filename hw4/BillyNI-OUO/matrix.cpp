@@ -250,6 +250,9 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_naive", &multiply_naive, "basic Matrix-Matrix Multiplication");
     m.def("multiply_tile", &multiply_tile, "tile Matrix-Matrix Multiplication");
     m.def("multiply_mkl", &multiply_mkl, "mkl Matrix-Matrix Multiplication");
+    m.def("bytes", &CustomAllocator<double>::bytes);
+    m.def("allocated", &CustomAllocator<double>::allocated);
+    m.def("deallocated", &CustomAllocator<double>::deallocated);
 }
 
 
