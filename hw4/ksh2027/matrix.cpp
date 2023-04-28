@@ -21,7 +21,7 @@ public:
     ~Matrix(){}
 
     // No bound check.
-    double   operator() (size_t row, size_t col) const{
+    const double   operator() (size_t row, size_t col) const{
         return data_v[row*m_ncol + col];
     }
     double & operator() (size_t row, size_t col){
