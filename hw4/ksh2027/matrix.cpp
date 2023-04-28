@@ -19,7 +19,7 @@ public:
 
     Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(std::vector<double, MyAllocator<double>>(nrow * ncol)){}
 
-    // ~Matrix(){}
+    ~Matrix(){}
 
     // No bound check.
     double operator() (size_t row, size_t col) const{
