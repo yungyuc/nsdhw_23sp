@@ -19,7 +19,6 @@ public:
         T * p = static_cast<T *>(std::malloc(bytes));
         if (p)
         {
-            // counter.increase(bytes);
             alloc += bytes;
             return p;
         }
@@ -35,16 +34,10 @@ public:
 
         const std::size_t bytes = n*sizeof(T);
         dealloc += bytes;
-        // counter.decrease(bytes);
     }
 
-    std::size_t bytes() const { return alloc - dealloc; }
-    std::size_t allocated() const { return alloc; }
-    std::size_t deallocated() const { return dealloc; }
-
-private:
-    std::size_t alloc = 0;
-    std::size_t dealloc = 0;
+    static std::size_t alloc;
+    static std::size_t dealloc;
 
 }; /* end struct MyAllocator */
 

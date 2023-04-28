@@ -27,6 +27,7 @@ SO = _matrix.so
 all: $(SO)
 
 _matrix.so: matrix.cpp
+# $(CLANG) -o $@ $< $(CFLAGS)
 	$(CLANG) -o $@ $< $(CFLAGS) $(HEADERS) ${MKL_LIBS}
 
 test: $(SO)

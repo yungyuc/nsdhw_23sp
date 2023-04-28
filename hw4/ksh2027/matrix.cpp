@@ -6,13 +6,17 @@
 #include "alloc.cpp"
 namespace py = pybind11;
 
-MyAllocator<double> alloc;
+template<typename T>
+size_t MyAllocator<T>::alloc = 0;
+
+template<typename T>
+size_t MyAllocator<T>::dealloc = 0;
 
 class Matrix {
 
 public:
 
-    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(alloc){}
+    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(nrow*ncol, 0.0, MyAllocator<double>()){}
 
     ~Matrix(){}
 
@@ -99,9 +103,9 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     return C;
 }
 
-std::size_t get_bytes() { return alloc.bytes(); }
-std::size_t get_allocated() { return alloc.allocated(); }
-std::size_t get_deallocated() { return alloc.deallocated(); }
+std::size_t get_bytes() { return MyAllocator<double>::alloc - MyAllocator<double>::dealloc; }
+std::size_t get_allocated() { return MyAllocator<double>::alloc; }
+std::size_t get_deallocated() { return MyAllocator<double>::dealloc; }
 
 PYBIND11_MODULE(_matrix, m) {
     m.doc() = "pybind11 matrix multiplication";
