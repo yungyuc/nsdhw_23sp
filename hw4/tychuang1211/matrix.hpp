@@ -33,16 +33,18 @@ public:
     T* allocate( std::size_t n );
     void deallocate( T* p, std::size_t n ) noexcept;
 
-    std::atomic_size_t bytes() const { return m_allocated - m_deallocated; }
-    std::atomic_size_t allocated() const { return m_allocated; };
-    std::atomic_size_t deallocated() const { return m_deallocated; };
+    static std::size_t bytes() { return m_allocated - m_deallocated; }
+    static std::size_t allocated() { return m_allocated; };
+    static std::size_t deallocated() { return m_deallocated; };
 
 private:
 
-    std::atomic_size_t m_allocated = 0;
-    std::atomic_size_t m_deallocated = 0;
+    static std::atomic_size_t m_allocated;
+    static std::atomic_size_t m_deallocated;
 
 };
+template <class T> std::atomic_size_t CustomAllocator<T>::m_allocated = 0;
+template <class T> std::atomic_size_t CustomAllocator<T>::m_deallocated = 0;
 
 class Matrix {
 
@@ -131,5 +133,9 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_tile", &multiply_tile, 
             "A function that performs matrix-matrix multiplication with tiling.");
     m.def("multiply_mkl", &multiply_mkl, 
-            "A function that uses DGEMM for matrix-matrix multiplication.");  
+            "A function that uses DGEMM for matrix-matrix multiplication.");
+
+    m.def("bytes", &CustomAllocator<double>::bytes);
+    m.def("allocated", &CustomAllocator<double>::allocated);
+    m.def("deallocated", &CustomAllocator<double>::deallocated);
 }
