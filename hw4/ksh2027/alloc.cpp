@@ -1,3 +1,6 @@
+#include <limits>
+#include <memory>
+
 template <class T>
 struct MyAllocator
 {
