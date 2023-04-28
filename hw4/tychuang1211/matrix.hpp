@@ -49,7 +49,7 @@ template <class T> std::atomic_size_t CustomAllocator<T>::m_deallocated = 0;
 template <class T, class U>
 bool operator==(const CustomAllocator<T> & a, const CustomAllocator<U> & b)
 {
-    return a.counter == b.counter;
+    return a == b;
 }
 
 template <class T, class U>
