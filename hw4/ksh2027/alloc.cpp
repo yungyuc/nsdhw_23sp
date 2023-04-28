@@ -39,5 +39,5 @@ public:
     static std::size_t alloc;
     static std::size_t dealloc;
 
-}; /* end struct MyAllocator */
+};
 
