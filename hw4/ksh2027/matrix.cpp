@@ -19,10 +19,10 @@ public:
 
     Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(std::vector<double, MyAllocator<double>>(nrow * ncol)){}
 
-    ~Matrix(){}
+    // ~Matrix(){}
 
     // No bound check.
-    double operator() (size_t row, size_t col) const{
+    const double operator() (size_t row, size_t col) const{
         return data_v[row*m_ncol + col];
     }
     double & operator() (size_t row, size_t col){
@@ -42,7 +42,7 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    double* data() const { return const_cast<double *>(data_v.data()); }
+    const double* data() const { return const_cast<double *>(data_v.data()); }
 
 private:
 
@@ -104,9 +104,9 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     return C;
 }
 
-// std::size_t get_bytes() { return MyAllocator<double>::bytes(); }
-// std::size_t get_allocated() { return MyAllocator<double>::allocated(); }
-// std::size_t get_deallocated() { return MyAllocator<double>::deallocated(); }
+std::size_t get_bytes() { return MyAllocator<double>::alloc - MyAllocator<double>::dealloc; }
+std::size_t get_allocated() { return MyAllocator<double>::alloc; }
+std::size_t get_deallocated() { return MyAllocator<double>::dealloc; }
 
 PYBIND11_MODULE(_matrix, m) {
     m.doc() = "pybind11 matrix multiplication";
@@ -122,7 +122,7 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_naive", &multiply_naive, "naive matrix-matrix multiplication");
     m.def("multiply_tile", &multiply_tile, "matrix-matrix multiplication with tiling");
     m.def("multiply_mkl", &multiply_mkl, "multiplication by using DGEMM");
-    m.def("bytes", &MyAllocator<double>::bytes);
-    m.def("allocated", &MyAllocator<double>::allocated);
-    m.def("deallocated", &MyAllocator<double>::deallocated);
+    m.def("bytes", &get_bytes);
+    m.def("allocated", &get_allocated);
+    m.def("deallocated", &get_deallocated);
 }
