@@ -1,33 +1,25 @@
 #pragma once
 #include <cstddef>
 #include <algorithm>
+#include <vector>
+#include <cstring>
+#include <memory>
+#include "allocator.hpp"
 class Matrix {
 
 public:
     Matrix() = default;
+    
     Matrix(size_t nrow, size_t ncol)
-      : m_nrow(nrow), m_ncol(ncol)
-    {
-        size_t nelement = nrow * ncol;
-        m_buffer = new double[nelement];
+        : m_nrow(nrow), m_ncol(ncol), m_data(std::vector<double, CustomAllocator<double>>(nrow * ncol)) {
     }
-
-    ~Matrix()
-    {
-        delete[] m_buffer;
-    }
-
-    Matrix(const Matrix &matrix){
-            m_nrow = matrix.m_nrow;
-            m_ncol = matrix.m_ncol;
-            m_buffer = new double[m_nrow * m_ncol](); 
-            memcpy(m_buffer, matrix.m_buffer, m_nrow * m_ncol*sizeof(double));
-    }
-
-    Matrix& operator= (const Matrix& matrix) {
-        m_buffer = matrix.m_buffer;
-        return *this;
-    }
+    
+    // Matrix &operator=(const Matrix &matrix) {
+    //     m_nrow = matrix.m_nrow;
+    //     m_ncol = matrix.m_ncol;
+    //     m_data = matrix.m_data;
+    //     return *this;
+    // }
 
     bool operator==(const Matrix &other) const
     {
@@ -52,28 +44,28 @@ public:
     
     // No bound check.
     double   operator() (size_t row, size_t col) const{
-        return m_buffer[row*m_ncol + col];
+        return m_data[row*m_ncol + col];
     }
     
     double & operator() (size_t row, size_t col){
-        return m_buffer[row*m_ncol + col];
+        return m_data[row*m_ncol + col];
     }
 
     void zero(){
         for(size_t r = 0; r < m_nrow; r++){
             for(size_t c = 0; c < m_ncol; c++){
-                m_buffer[r*m_ncol + c] = 0.0;
+                m_data[r*m_ncol + c] = 0.0;
             }
         }
     }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    double *buffer() const { return m_buffer; }
+    double *buffer() const { return const_cast<double *>(m_data.data()); }
 private:
 
     size_t m_nrow;
     size_t m_ncol;
-    double * m_buffer;
+    std::vector<double, CustomAllocator<double>> m_data;
 
 };

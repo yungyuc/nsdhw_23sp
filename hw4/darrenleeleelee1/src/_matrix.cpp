@@ -5,12 +5,15 @@ namespace py = pybind11;
 #include "matrix.hpp"
 #include "matrix_multiply.hpp"
 
+template <class T> size_t CustomAllocator<T>::m_allocated = 0;
+template <class T> size_t CustomAllocator<T>::m_deallocated = 0;
+// template <class T> size_t CustomAllocator<T>::m_byte = 0;
+
 PYBIND11_MODULE(_matrix, m)
 {
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
-        .def(py::init<const Matrix &>())
-        .def("assign", &Matrix::operator=)
+        // .def("assign", &Matrix::operator=)
         .def("__getitem__",
              [](const Matrix &m, std::pair<size_t, size_t> idx) {
                  return m(idx.first, idx.second);
@@ -26,6 +29,10 @@ PYBIND11_MODULE(_matrix, m)
         .def(py::self == py::self)
         .def(py::self != py::self)
         .def("zero", &Matrix::zero);
+    
+    m.def("bytes", &CustomAllocator<double>::bytes);
+    m.def("allocated", &CustomAllocator<double>::allocated);
+    m.def("deallocated", &CustomAllocator<double>::deallocated);
 
     m.def("multiply_naive", &MatrixMultiply::multiply_naive);
     m.def("multiply_tile", &MatrixMultiply::multiply_tile);
