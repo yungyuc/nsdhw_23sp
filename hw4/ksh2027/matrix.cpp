@@ -68,7 +68,7 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    double *buffer() const { return const_cast<double *>(m_data.data()); }
+    double *data() const { return const_cast<double *>(m_data.data()); }
 private:
 
     size_t m_nrow;
