@@ -1,7 +1,9 @@
 #pragma once
 
+#include <atomic>
 #include <iostream>
 #include <iomanip>
+#include <memory>
 #include <vector>
 #include <stdexcept>
 #include <sstream>
@@ -13,6 +15,34 @@
 #include <pybind11/stl.h>
 
 namespace py = pybind11;
+
+template<typename T> 
+class CustomAllocator {
+
+public:
+
+    using value_type = T;
+
+    CustomAllocator() = default; // default constructor.
+    CustomAllocator(CustomAllocator const & ) = default; // copy constructor.
+    CustomAllocator(CustomAllocator       &&) = default; // move constructor.
+    CustomAllocator & operator=(CustomAllocator const & ) = default; // copy assignment operator.
+    CustomAllocator & operator=(CustomAllocator       &&) = default; // move assignment operator.
+    ~CustomAllocator() = default;
+
+    T* allocate( std::size_t n );
+    void deallocate( T* p, std::size_t n ) noexcept;
+
+    std::atomic_size_t bytes() const { return m_allocated - m_deallocated; }
+    std::atomic_size_t allocated() const { return m_allocated; };
+    std::atomic_size_t deallocated() const { return m_deallocated; };
+
+private:
+
+    std::atomic_size_t m_allocated = 0;
+    std::atomic_size_t m_deallocated = 0;
+
+};
 
 class Matrix {
 
@@ -62,7 +92,7 @@ private:
 
     size_t m_nrow = 0;
     size_t m_ncol = 0;
-    std::vector<double> m_buffer;
+    std::vector<double, CustomAllocator<double>> m_buffer;
 
 };
 

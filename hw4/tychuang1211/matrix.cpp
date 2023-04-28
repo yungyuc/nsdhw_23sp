@@ -1,5 +1,34 @@
 #include "matrix.hpp"
 
+template <class T>
+T* CustomAllocator<T>::allocate( std::size_t n )
+{
+    if (n > std::numeric_limits<std::size_t>::max() / sizeof(T))
+    {
+        throw std::bad_alloc();
+    }
+    const std::size_t bytes = n*sizeof(T);
+    T * p = static_cast<T *>(std::malloc(bytes));
+    if (p)
+    {
+        m_allocated += bytes;
+        return p;
+    }
+    else
+    {
+        throw std::bad_alloc();
+    }
+}
+
+template <class T>
+void CustomAllocator<T>::deallocate( T* p, std::size_t n ) noexcept
+{
+    std::free(p);
+
+    const std::size_t bytes = n*sizeof(T);
+    m_deallocated += bytes;
+}
+
 Matrix::Matrix(size_t nrow, size_t ncol)
   : m_nrow(nrow), m_ncol(ncol)
 {
