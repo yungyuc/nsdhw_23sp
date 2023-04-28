@@ -103,9 +103,9 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     return C;
 }
 
-std::size_t get_bytes() { return MyAllocator<double>::bytes(); }
-std::size_t get_allocated() { return MyAllocator<double>::allocated(); }
-std::size_t get_deallocated() { return MyAllocator<double>::deallocated(); }
+// std::size_t get_bytes() { return MyAllocator<double>::bytes(); }
+// std::size_t get_allocated() { return MyAllocator<double>::allocated(); }
+// std::size_t get_deallocated() { return MyAllocator<double>::deallocated(); }
 
 PYBIND11_MODULE(_matrix, m) {
     m.doc() = "pybind11 matrix multiplication";
@@ -121,7 +121,7 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_naive", &multiply_naive, "naive matrix-matrix multiplication");
     m.def("multiply_tile", &multiply_tile, "matrix-matrix multiplication with tiling");
     m.def("multiply_mkl", &multiply_mkl, "multiplication by using DGEMM");
-    m.def("bytes", &get_bytes);
-    m.def("allocated", &get_allocated);
-    m.def("deallocated", &get_deallocated);
+    m.def("bytes", &MyAllocator<double>::bytes);
+    m.def("allocated", &MyAllocator<double>::allocated);
+    m.def("deallocated", &MyAllocator<double>::deallocated);
 }
