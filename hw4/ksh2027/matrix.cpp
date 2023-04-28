@@ -17,65 +17,41 @@ class Matrix {
 public:
     Matrix() = default;
 
-    Matrix(size_t nrow, size_t ncol)
-        : m_nrow(nrow), m_ncol(ncol), m_data(std::vector<double, MyAllocator<double>>(nrow * ncol)) {
-    }
+    Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol), data_v(std::vector<double, MyAllocator<double>>(nrow * ncol)){}
 
-    // Matrix &operator=(const Matrix &matrix) {
-    //     m_nrow = matrix.m_nrow;
-    //     m_ncol = matrix.m_ncol;
-    //     m_data = matrix.m_data;
-    //     return *this;
-    // }
-
-    bool operator==(const Matrix &other) const
-    {
-        if (nrow() != other.nrow() || ncol() != other.ncol()) {
-            return false;
-        }
-
-        for (size_t i = 0; i < m_nrow; i++) {
-            for (size_t j = 0; j < m_ncol; j++) {
-                if ((*this)(i, j) != other(i, j)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    bool operator!=(const Matrix &other) const
-    {
-        return !(*this == other);
-    }
+    ~Matrix(){}
 
     // No bound check.
-    double   operator() (size_t row, size_t col) const{
-        return m_data[row*m_ncol + col];
+    const double operator() (size_t row, size_t col) const{
+        return data_v[row*m_ncol + col];
     }
-
     double & operator() (size_t row, size_t col){
-        return m_data[row*m_ncol + col];
+        return data_v[row*m_ncol + col];
     }
-
-    void zero(){
-        for(size_t r = 0; r < m_nrow; r++){
-            for(size_t c = 0; c < m_ncol; c++){
-                m_data[r*m_ncol + c] = 0.0;
-            }
-        }
+    bool operator == (const Matrix& other) const{
+        if(nrow() != other.nrow() || ncol() != other.ncol()) {return 0;}
+        for(size_t i=0; i<m_nrow; i++)
+            for(size_t j=0; j<m_ncol; j++)
+                if( (*this)(i,j) != other(i,j) )
+                    return 0;
+        return 1;
+    }
+    bool operator != (const Matrix& other) const{
+        return !(*this == other);
     }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    double *data() const { return const_cast<double *>(m_data.data()); }
+    const double* data() const { return const_cast<double *>(data_v.data()); }
+
 private:
 
     size_t m_nrow;
     size_t m_ncol;
-    std::vector<double, MyAllocator<double>> m_data;
+    std::vector<double, MyAllocator<double>> data_v;
 
 };
+
 Matrix multiply_naive(Matrix const & A, Matrix const & B) {
     if (A.ncol() != B.nrow()){
         throw std::out_of_range("the number of first matrix column differs from that of second matrix row");
