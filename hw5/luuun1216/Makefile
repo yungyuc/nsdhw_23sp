@@ -20,6 +20,6 @@ test: matrix.*.so
 	python3 -m pytest -v
 
 target: ../mod.cpp
-	$(CXX) $(CXXFLAGS) -I./ -I$(NUMPY_PATH) $(MKL_LIBS) $(MKLLIB) `$(PYTHON) -m pybind11 --includes` $< -o _matrix`$(PYTHON)-config --extension-suffix` -I /usr/include/python3.8 -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm
+	$(CXX) $(CXXFLAGS) -I./ -I$(NUMPY_PATH) $(MKL_LIBS) $(MKLLIB) `$(PYTHON) -m pybind11 --includes` $< -o _matrix`$(PYTHON)-config --extension-suffix` -I /usr/include/python3.10 -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm
 clean:
 	$(RM) -r $(TARGET) *.so *.txt
