@@ -1,15 +1,16 @@
 #include <vector>
 #include <mkl.h>
 
-namespace py = pybind11
+namespace py = pybind11;
 
 class Matrix{
     friend Matrix multiply_naive(Matrix const &mat1; Matrix const &mat2);
-    friend Matrix multiply_tile(Matrix const &mat1; Matrix const &mat2, size_t const size);
+    friend Matrix multiply_tile(Matrix const &mat1; Matrix const &mat2, size_t const tsize);
     friend Matrix multiply_mkl(Matrix const &mat1; Matrix const &mat2);
+    friend bool operator==(Matrix const &mat1, Matrix const &mat2);
 
     public:
-        Matrix(size_t nrow , size_t ncol):m_nrow(nrow), m_col(ncol){
+        Matrix(size_t nrow, size_t ncol) : m_nrow(nrow), m_ncol(ncol){
             reset_buffer(nrow,ncol);
         }
 
@@ -41,28 +42,16 @@ class Matrix{
                 m_buffer = nullptr; 
             }
             m_nrow = nrow;
+        size_t m_nrow = 0;
+        size_t m_ncol = 0;
+        double * m_buffer = nullptr;
             m_ncol = ncol;
         }
 
         size_t m_nrow = 0;
         size_t m_ncol = 0;
         double * m_buffer = nullptr;
-}
-
-bool operator==(Matrix const &mat1, Matrix const &mat2){
-
-    if((mat1.ncol() != mat2.ncol()) && (mat1.nrow() != mat2.ncol())){
-        return false;
-    }
-
-    for (size_t i = 0; i < mat1.nrow(); ++i){
-        for (size_t j = 0; j < mat1.ncol(); ++j){   
-            if (mat1(i, j) != mat2(i, j))
-                return false;
-        }
-    }
-    return true;
-}
+};
 
 Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2){
     Matrix res(mat1.nrow(), mat2.ncol());
@@ -77,6 +66,26 @@ Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2){
     }
     return res;
 }
+
+Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t tsize)
+{
+    Matrix ret(mat1.nrow(), mat2.ncol());
+    for (size_t o_i = 0; o_i < mat1.nrow(); o_i += tsize){
+        for (size_t o_j = 0; o_j < mat2.ncol(); o_j += tsize){
+            for (size_t o_k = 0; o_k < mat2.ncol(); o_k += tsize){
+                for (size_t i = o_i; i < std::min(o_i + tsize, mat1.nrow()); i++){
+                    for (size_t j = o_j; j < std::min(o_j + tsize, mat2.ncol()); j++){
+                        for (size_t k = o_k; k < std::min(tsize + o_k, mat1.nrow()); k++){
+                            ret(i, j) += mat1(i, k) * mat2(k, j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return ret;
+}
+
 
 Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
 {
@@ -105,21 +114,18 @@ Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
     return ret;
 }
 
-Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t size)
-{
-    Matrix ret(mat1.nrow(), mat2.ncol());
-    for (size_t o_i = 0; o_i < mat1.nrow(); o_i += size){
-        for (size_t o_j = 0; o_j < mat2.ncol(); o_j += size){
-            for (size_t o_k = 0; o_k < mat2.ncol(); o_k += size){
-                for (size_t i = o_i; i < std::min(o_i + size, mat1.nrow()); i++){
-                    for (size_t j = o_j; j < std::min(o_j + size, mat2.ncol()); j++){
-                        for (size_t k = o_k; k < std::min(size + o_k, mat1.nrow()); k++){
-                            ret(i, j) += mat1(i, k) * mat2(k, j);
-                        }
-                    }
-                }
-            }
+
+bool operator==(Matrix const &mat1, Matrix const &mat2){
+
+    if((mat1.ncol() != mat2.ncol()) && (mat1.nrow() != mat2.ncol())){
+        return false;
+    }
+
+    for (size_t i = 0; i < mat1.nrow(); ++i){
+        for (size_t j = 0; j < mat1.ncol(); ++j){   
+            if (mat1(i, j) != mat2(i, j))
+                return false;
         }
     }
-    return ret;
+    return true;
 }
