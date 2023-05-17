@@ -29,7 +29,7 @@ SO = _matrix$(MODULE_NAME)
 
 all: $(SO)
 
-_matrix.so: ../mod.cpp
+$(SO): ../mod.cpp
 	$(CLANG) -I. -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) -I$(NUMPY_INC) ${MKL_LIBS}
 
 test: $(SO)
