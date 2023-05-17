@@ -23,14 +23,14 @@ MKL_LIBS=$(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
 # -lmkl_core: core library for all functions in MKL
 # -liomp5: Intel OpenMP runtime library
 
-SO = _matrix.so
+SO = _matrix$(MODULE_NAME)
 
 .PHONY: test clean
 
 all: $(SO)
 
 _matrix.so: ../mod.cpp
-	$(CLANG) -I. -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) _matrix$(MODULE_NAME) -I$(NUMPY_INC) ${MKL_LIBS}
+	$(CLANG) -I. -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) -I$(NUMPY_INC) ${MKL_LIBS}
 
 test: $(SO)
 	python3 -m pytest -v -s
