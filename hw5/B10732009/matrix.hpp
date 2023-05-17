@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstddef>
-#include <vector>
 
 class Matrix
 {
@@ -13,7 +12,6 @@ private:
 public:
   Matrix();
   Matrix(std::size_t row, std::size_t col);
-  // Matrix(std::size_t row, std::size_t col, std::vector<double> const &buffer);
   Matrix(Matrix const &other);
   Matrix &operator=(Matrix const &other);
   ~Matrix();

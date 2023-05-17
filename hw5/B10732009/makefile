@@ -14,9 +14,6 @@ TARGET = _matrix.so
 
 all: $(TARGET)
 
-test: $(TARGET)
-	python3 -m pytest -v
-
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
 

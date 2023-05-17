@@ -1,8 +1,6 @@
 #include <cstring>
 #include <stdexcept>
 
-#include <iostream>
-
 #include <mkl.h>
 #include <mkl_lapack.h>
 #include <mkl_lapacke.h>
@@ -17,18 +15,6 @@ Matrix::Matrix(std::size_t row, std::size_t col) : mRow(row), mCol(col), mBuffer
 {
 }
 
-// Matrix::Matrix(std::size_t row, std::size_t col, std::vector<double> const &buffer)
-// {
-//   // check size correctness
-//   if (row * col != buffer.size())
-//     throw std::out_of_range("number of elements mismatch");
-//   // copy data
-//   mRow = row;
-//   mCol = col;
-//   mBuffer = new double[buffer.size()];
-//   std::memcpy(mBuffer, buffer.data(), buffer.size() * sizeof(double));
-// }
-
 Matrix::Matrix(Matrix const &other)
 {
   (*this) = other;
@@ -38,21 +24,13 @@ Matrix &Matrix::operator=(Matrix const &other)
 {
   if (this != &other)
   {
-    // free old buffer
     if (mBuffer)
       delete[] mBuffer;
-    // copy data
+
     mRow = other.nrow();
     mCol = other.ncol();
-    if (other.size() > 0)
-    {
-      mBuffer = new double[other.size()];
-      // std::memcpy(mBuffer, other.mBuffer, other.size() * sizeof(double));
-      for (std::size_t i = 0; i < other.size(); i++)
-        mBuffer[i] = other.mBuffer[i];
-    }
-    else
-      mBuffer = nullptr;
+    mBuffer = (other.size() == 0) ? (nullptr) : (new double[other.size()]);
+    std::memcpy(mBuffer, other.mBuffer, other.size() * sizeof(double));
   }
   return (*this);
 }
@@ -81,7 +59,7 @@ bool Matrix::operator==(Matrix const &other) const
 {
   if (mRow != other.mRow || mCol != other.mCol)
     return false;
-  for (std::size_t i = 0; i < mRow * mCol; i++)
+  for (std::size_t i = 0; i < size(); i++)
   {
     if (mBuffer[i] != other.mBuffer[i])
       return false;
@@ -112,7 +90,7 @@ std::size_t Matrix::size() const
 Matrix multiply_naive(Matrix const &m1, Matrix const &m2)
 {
   if (m1.ncol() != m2.nrow())
-    throw std::out_of_range("dimension mismatch");
+    throw std::out_of_range("Dimension mismatch");
 
   Matrix ret(m1.nrow(), m2.ncol());
 
@@ -125,24 +103,13 @@ Matrix multiply_naive(Matrix const &m1, Matrix const &m2)
     }
   }
 
-  // std::cout << "--------------------------\n";
-  // for (std::size_t i = 0; i < ret.nrow(); i++)
-  // {
-  //   for (std::size_t j = 0; j < ret.ncol(); j++)
-  //     std::cout << ret(i, j) << " ";
-  //   std::cout << "\n";
-  // }
-  // std::cout << "--------------------------\n";
-
-  // std::cout << "here\n";
-
   return ret;
 }
 
 Matrix multiply_tile(Matrix const &m1, Matrix const &m2, std::size_t tsize)
 {
   if (m1.ncol() != m2.nrow())
-    throw std::out_of_range("dimension mismatch");
+    throw std::out_of_range("Dimension mismatch");
 
   Matrix ret(m1.nrow(), m2.ncol());
 
@@ -170,7 +137,7 @@ Matrix multiply_tile(Matrix const &m1, Matrix const &m2, std::size_t tsize)
 Matrix multiply_mkl(Matrix const &m1, Matrix const &m2)
 {
   if (m1.ncol() != m2.nrow())
-    throw std::out_of_range("dimension mismatch");
+    throw std::out_of_range("Dimension mismatch");
 
   Matrix ret(m1.nrow(), m2.ncol());
   cblas_dgemm(CblasRowMajor, /* const CBLAS_LAYOUT Layout */
