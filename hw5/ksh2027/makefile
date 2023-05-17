@@ -1,6 +1,7 @@
 CLANG = clang++
 CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC -m64
 PYFLAGS = `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+MODULE_NAME = `python3-config --extension-suffix`
 NUMPY_INC = $(shell python3 -c "import numpy; print(numpy.get_include())")
 HEADERS = -I/usr/include/mkl
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
@@ -29,7 +30,7 @@ SO = _matrix.so
 all: $(SO)
 
 _matrix.so: ../mod.cpp
-	$(CLANG) -I . -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) -I$(NUMPY_INC) ${MKL_LIBS}
+	$(CLANG) -I. -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) _matrix$(MODULE_NAME) -I$(NUMPY_INC) ${MKL_LIBS}
 
 test: $(SO)
 	python3 -m pytest -v -s
