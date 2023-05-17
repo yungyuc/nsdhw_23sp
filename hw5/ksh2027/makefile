@@ -27,7 +27,7 @@ SO = _matrix.so
 all: $(SO)
 
 _matrix.so: ../mod.cpp
-	$(CLANG) -I . -o $@ $< $(CFLAGS) $(HEADERS)
+	$(CLANG) -I . -o $@ $< $(CFLAGS) $(HEADERS) ${MKL_LIBS}
 
 test: $(SO)
 	python3 -m pytest -v -s
