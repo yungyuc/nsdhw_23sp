@@ -1,5 +1,5 @@
 CLANG = clang++
-CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC -m64
+CFLAGS = -std=c++17 -O3 -Wall -shared -fPIC -m64
 PYFLAGS = `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 MODULE_NAME = `python3-config --extension-suffix`
 NUMPY_INC = $(shell python3 -c "import numpy; print(numpy.get_include())")
