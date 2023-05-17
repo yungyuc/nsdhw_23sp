@@ -27,10 +27,8 @@ SO = _matrix$(MODULE_NAME)
 
 .PHONY: test clean
 
-all: $(SO)
-
-$(SO): ../mod.cpp
-	$(CLANG) -I. -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) -I$(NUMPY_INC) ${MKL_LIBS}
+all: ../mod.cpp
+	$(CLANG) -I. -o $(SO) $< $(CFLAGS) $(HEADERS) $(PYFLAGS) -I$(NUMPY_INC) ${MKL_LIBS}
 
 test: $(SO)
 	python3 -m pytest -v -s
