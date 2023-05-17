@@ -1,5 +1,6 @@
 CLANG = clang++
-CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC -m64 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC -m64
+PYFLAGS = `python3 -m pybind11 --includes` `python3-config --includes --ldflags` `python3 -c "import numpy"`
 HEADERS = -I/usr/include/mkl
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIB_SO=libmkl_def.so libmkl_avx2.so libmkl_core.so libmkl_intel_lp64.so libmkl_sequential.so
@@ -27,7 +28,7 @@ SO = _matrix.so
 all: $(SO)
 
 _matrix.so: ../mod.cpp
-	$(CLANG) -I . -o $@ $< $(CFLAGS) $(HEADERS) ${MKL_LIBS}
+	$(CLANG) -I . -o $@ $< $(CFLAGS) $(HEADERS) $(PYFLAGS) ${MKL_LIBS}
 
 test: $(SO)
 	python3 -m pytest -v -s
