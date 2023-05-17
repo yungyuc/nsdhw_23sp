@@ -68,26 +68,6 @@ private:
     double* m_data;
 };
 
-// void setZero(Matrix& M)
-// {
-//     for (size_t i = 0; i < M.nrow(); ++i) {
-//         for (size_t j = 0; j < M.ncol(); ++j) {
-//             M(i, j) = 0.0;
-//         }
-//     }
-// }
-
-// void generateValue(Matrix& A){
-//     size_t n = A.nrow();
-//     size_t m = A.ncol();
-//     for (size_t i = 0 ; i < n ; ++i){
-//         for (size_t j = 0 ; j < m ; ++j){
-//             double value = rand() % RANDMAX;
-//             A(i, j) = value;
-//         }
-//     }
-// }
-
 Matrix multiply_naive(Matrix const & A, Matrix const & B)
 {
     assert(A.ncol() == B.nrow());
@@ -159,36 +139,4 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     return E;
 }
 
-
-// PYBIND11_MODULE(_matrix, m)
-// {
-//     py::class_<Matrix>(m, "Matrix")
-//         .def(py::init<size_t, size_t>())
-//         .def(py::init<const Matrix &>())
-//         // .def("nrow", &Matrix::nrow)
-//         // .def("ncol", &Matrix::ncol)
-//         .def("assign", &Matrix::operator=)
-//         // .def_property_readonly("nrow", &Matrix::nrow)
-//         // .def_property_readonly("ncol", &Matrix::ncol)
-//         .def_property_readonly("nrow", [](const Matrix &mat){ return mat.nrow(); })
-//         .def_property_readonly("ncol", [](const Matrix &mat){ return mat.ncol(); })
-//         .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
-//         .def("__getitem__",
-//              [](const Matrix &m, std::pair<size_t, size_t> idx) {
-//                  return m(idx.first, idx.second);
-//              })
-//         .def("__setitem__",
-//              [](Matrix &m, std::pair<size_t, size_t> idx, double value) {
-//                  m(idx.first, idx.second) = value;
-//              });
-//     m.def("multiply_naive", &multiply_naive);
-//     m.def("multiply_tile", &multiply_tile);
-//     m.def("multiply_mkl", &multiply_mkl);
-//     // m.def("matrices_equal", &matrices_equal);
-//     // m.def("setZero", &setZero);
-//     m.def("generateValue", &generateValue);
-
-    
-  
-// }
 
