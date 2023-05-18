@@ -1,6 +1,6 @@
 CXX = clang++
 CXXFLAGS = -std=c++17 -O3 -shared -m64
-HEADERS = -I/usr/include/mkl -I. -I$(shell python3 -c "import numpy"; print(numpy.get_include())) #-I/DATA/lllll/.local/lib/python3.6/site-packages/pybind11/include
+HEADERS = -I/usr/include/mkl -I. -I$(shell python3 -c "import numpy; print(numpy.get_include())") #-I/DATA/lllll/.local/lib/python3.6/site-packages/pybind11/include
 PIBINDFLAG = -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 PY_OBJ = _matrix$(shell python3-config --extension-suffix)
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
