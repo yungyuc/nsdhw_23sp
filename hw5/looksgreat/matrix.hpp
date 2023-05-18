@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include <mkl.h>
 #include "pybind11/pybind11.h"
 #include "pybind11/stl.h"
 #include "pybind11/operators.h"
@@ -99,7 +100,6 @@ Matrix multiply_tile(Matrix const &m1, Matrix const &m2, int const tile_size){
 }
 
 Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
-    mkl_set_num_threads(1);
     Matrix ret(m1.nrow(), m2.ncol());
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m1.nrow(),  m2.ncol(), m1.ncol(), 1.0 , m1.data(),
      m1.ncol(), m2.data(), m2.ncol(), 0.0, ret.data(), ret.ncol());
