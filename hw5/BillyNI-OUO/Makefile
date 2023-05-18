@@ -1,5 +1,6 @@
 CXXPROC = clang++
-CPPFLAGS = -std=c++17 -O3 -Wall -shared -fPIC -m64 -lblas `python3 -m pybind11 --includes` `python3-config --includes --ldflags`# for debug
+CPPFLAGS = -std=c++17 -O3 -Wall -shared -fPIC -m64 
+PYFLAGS  = `python3 -m pybind11 --includes` `python3-config --includes --ldflags`# for debug
 PROG_TARGET = matrix_test.py
 LIB_TARGET = _matrix
 MKLROOT=/usr/lib/x86_64-linux-gnu
@@ -14,8 +15,9 @@ LDFLAGS=${MKLROOT}/libmkl_def.so \
 NUMPY_INC = $(shell python3 -c "import numpy;")
 MODULE_NAME = `python3-config --extension-suffix`
 SO = _matrix$(MODULE_NAME)
+
 all: ../mod.cpp
-	$(CXXPROC) -I. -o $(SO) $< $(CPPFLAGS) -I/usr/include/mkl -I$(NUMPY_INC) ${LDFLAGS} 
+	$(CXXPROC) -I. -o $(SO) $< $(CPPFLAGS) -I/usr/include/mkl $(PYFLAGS) -I$(NUMPY_INC) ${LDFLAGS} 
 
 .PHONY: test
 test: _matrix.so
