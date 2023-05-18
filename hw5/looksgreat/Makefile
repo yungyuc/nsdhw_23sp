@@ -2,7 +2,7 @@ CXX = clang++
 CXXFLAGS = -std=c++17 -O3 -shared -m64
 HEADERS = -I/usr/include/mkl -I. #-I/DATA/lllll/.local/lib/python3.6/site-packages/pybind11/include
 PIBINDFLAG = -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
-PY_OBJ = _matrix.so
+PY_OBJ = _matrix$(shell python3-config --extension-suffix)
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIB_SO=libmkl_def.so libmkl_avx2.so libmkl_core.so libmkl_intel_lp64.so libmkl_sequential.so
 MKL_LIBS=$(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
@@ -10,7 +10,7 @@ MKL_LIBS=$(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
 
 all: $(PY_OBJ)
 
-$(PY_OBJ): ../mod.cpp
+$(PY_OBJ): ../mod.cpp matrix.hpp
 	$(CXX) $< -o $@ $(CXXFLAGS) $(HEADERS) $(PIBINDFLAG) ${MKL_LIBS} 
 
 test: $(PY_OBJ)
