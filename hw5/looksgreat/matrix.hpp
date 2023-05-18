@@ -1,10 +1,6 @@
 #include<bits/stdc++.h>
 #include <mkl.h>
-#include "pybind11/pybind11.h"
-#include "pybind11/stl.h"
-#include "pybind11/operators.h"
 using namespace std;
-namespace py=pybind11;
 class Matrix {
 
 
