@@ -61,7 +61,7 @@ class Matrix {
         //declare and initialize the argement. 
         size_t m_nrow = 0;
         size_t m_ncol = 0;
-        std::vector<double, CustomAllocator<double>> m_buffer ;
+        double * m_buffer = nullptr;
 };
 
 Matrix multiply_naive(const Matrix &mat1, const Matrix &mat2) {
