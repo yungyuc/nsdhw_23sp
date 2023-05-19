@@ -6,28 +6,9 @@
 #include <vector>
 #include <sstream>
 #include <mkl.h>
-// #include <mkl_lapack.h>
-// #include <mkl_lapacke.h>
 
-// #define BLK_NUM 32
+
 static size_t BLK_NUM = 32;
-
-// namespace py=pybind11;
-// extern "C" {
-// extern void dgemm_(const char* transa,
-//                    const char* transb,
-//                    const int* m,
-//                    const int* n,
-//                    const int* k,
-//                    const double* alpha,
-//                    const double* a,
-//                    const int* lda,
-//                    const double* b,
-//                    const int* ldb,
-//                    const double* beta,
-//                    double* c,
-//                    const int* ldc);
-// }
 
 
 class Matrix {
@@ -230,40 +211,4 @@ Matrix multiply_mkl(Matrix &A, Matrix &B) {
     return ret;
 }
 
-// PYBIND11_MODULE(_matrix, m) {
-//     py::class_<Matrix>(m, "Matrix")
-//         .def(py::init<size_t, size_t>())
-//         .def("__getitem__", [](const Matrix &self, const size_t elem) {
-//             return self[elem];
-//         })
-//         .def("__getitem__", [](const Matrix &self, const std::pair<size_t, size_t> p) {
-//             return self(p.first, p.second);
-//         })
-//         .def("__setitem__", [](Matrix &self, const size_t elem, double val) {
-//             self[elem] = val;
-//         })
-//         .def("__setitem__", [](Matrix &self, const std::pair<size_t, size_t> p, double val) {
-//             self(p.first, p.second) = val;
-//         })
-//         .def("__repr__", [](const Matrix &self) {
-//             size_t ncol = self.ncol;
-//             size_t _nrow = self._nrow;
-//             std::stringstream ss;
-//             for(size_t i = 0; i < _nrow; i ++) {
-//                 for(size_t j = 0; j < ncol; j ++) {
-//                     ss << self(i, j) << ' ';
-//                 }
-//                 if(i < _nrow - 1)
-//                     ss << '\n';
-//             }
-//             return ss.str();
-//         })
-//         .def(py::self == py::self)
-//         .def_readonly("_nrow", &Matrix::_nrow)
-//         .def_readonly("ncol", &Matrix::ncol);
-
-//     m.def("multiply_naive", &multiply_naive);
-//     m.def("multiply_tile", &multiply_tile);
-//     m.def("multiply_mkl", &multiply_mkl);
-// }
 #endif
