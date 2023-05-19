@@ -1,23 +1,28 @@
-CXXFLAGS=-O3 -Wall -m64 -shared -std=c++17 -fPIC
-MKL_PATH=-I /usr/include/mkl
-pybind_include=`python3 -m pybind11 --includes`
-python_config=`python3-config --extension-suffix`
-src=_matrix
+# Variables
+BUILD_DIR = build
+SO = _matrix.so
+CPP = ../mod.cpp
+PYBIND_INCLUDES := $(shell python3 -m pybind11 --includes)
+PYTHON_INCLUDES := $(shell python3-config --includes --ldflags)
+CXXFLAGS := -O3 -Wall -shared -std=c++17 -fPIC $(PYBIND_INCLUDES) $(PYTHON_INCLUDES) -I/usr/include/mkl -I.
+LDFLAGS := -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
 
-.PHONY: all test clean
+# Default target
+.PHONY: all
+all: $(SO)
 
-MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
-MKL_LIBS=${MKL_LIB_DIR}/libmkl_def.so \
-		${MKL_LIB_DIR}/libmkl_avx2.so \
-		${MKL_LIB_DIR}/libmkl_core.so \
-		${MKL_LIB_DIR}/libmkl_intel_lp64.so \
-		${MKL_LIB_DIR}/libmkl_sequential.so
+# Build shared object file
+$(SO): $(CPP)
+	@[ -d $(BUILD_DIR) ] || mkdir $(BUILD_DIR)
+	g++ $(CXXFLAGS) $< $(LDFLAGS) -o $@
 
-all:
-	clang++ $(CXXFLAGS) -I ./ $(MKL_PATH) $(pybind_include) ../mod.cpp -o $(src)$(python_config) -I/usr/include/python3.8 ${MKL_LIBS} 
-
-test: all
+# Test target
+.PHONY: test
+test: $(SO)
 	python3 -m pytest -v
 
+# Clean target
+.PHONY: clean
 clean:
-	rm -rf *.so __pycache__ .pytest_cache 
+	rm -f *.so
+	rm -rf $(BUILD_DIR)
