@@ -1,4 +1,4 @@
-CXXFLAGS=-O3 -Wall -m64 -shared -std=c++11 -fPIC
+CXXFLAGS=-O3 -Wall -m64 -shared -std=c++17 -fPIC
 MKL_INCLUDE=-I /usr/include/mkl
 PYTHON_VERSION=$(shell python3 -c "import sys; print('{}.{}'.format(sys.version_info.major, sys.version_info.minor))")
 PYTHON_CONFIG=`python3-config --extension-suffix`
