@@ -167,21 +167,21 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
             for (size_t tj = 0; tj < ncol1; tj += tsize)
             {
                 size_t jmax = std::min(tj + tsize, ncol1);
-                for (size_t j = tj; j < jmax; ++j)
+                for (size_t k = tk*ncol2; k < kmax; k+=ncol2)
                 {
-                    for (size_t i = ti; i < imax; ++i)
+                    for (size_t j = tj; j < jmax; ++j)
                     {
-                        for (size_t k = tk*ncol2; k < kmax; k+=ncol2)
+                        for (size_t i = ti; i < imax; ++i)
                         {
                             ret.buffer(0)[i+k] += mat1.buffer(0)[i+j*ncol1] * mat2.buffer(0)[j+k];
                         }
                     }
                 }
-            }   
+            }
         }
     }
 
-    return ret;    
+    return ret;
 }
 
 /*
