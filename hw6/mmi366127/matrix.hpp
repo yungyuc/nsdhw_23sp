@@ -1,7 +1,6 @@
-#ifndef _MATRIX_INCLUDED_
-#define _MATRIX_INCLUDED_
-#include "pybind11/pybind11.h"
-#include "pybind11/stl.h"
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
+#include <pybind11/stl.h>
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
@@ -90,6 +89,13 @@ struct Matrix {
     }
     size_t nrow() const { return _nrow; }
     size_t ncol() const { return _ncol; }
+    pybind11::array_t<double> ndarray() {
+        return pybind11::array_t<double>(
+            { nrow(), ncol() },
+            { sizeof(double) * ncol(), sizeof(double) },
+              data,
+              pybind11::cast(this));
+    }
 };
 
 
@@ -144,5 +150,3 @@ Matrix multiply_mkl(const Matrix &A, const Matrix &B) {
     myDgemm(A.data, B.data, C.data, A.nrow(), A.ncol(), B.ncol());
     return C;
 }
-
-#endif

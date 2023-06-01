@@ -210,7 +210,7 @@ WrapMatrix
     {
 
         namespace py = pybind11;
-
+   
         (*this)
             // The Python constructor will be counted!
             .def_tagged(py::init<size_t, size_t>())
@@ -228,6 +228,11 @@ WrapMatrix
                 "__setitem__"
               , [](Matrix & self, std::tuple<size_t, size_t> idx, double value)
                 { return self(std::get<0>(idx), std::get<1>(idx)) = value; }
+            )
+            .def_property_readonly
+            (
+                "array",
+                &Matrix::ndarray
             )
         ;
 
