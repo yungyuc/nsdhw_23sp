@@ -34,7 +34,4 @@ PYBIND11_MODULE(_matrix, m)
         .def_property("array", &Matrix::array, nullptr)
         .def("__setitem__", [](Matrix &m, std::pair<size_t, size_t> idx, double val)
              { m(idx.first, idx.second) = val; });
-    m.def("bytes", &CustomAllocator<double>::bytes);
-    m.def("allocated", &CustomAllocator<double>::allocated);
-    m.def("deallocated", &CustomAllocator<double>::deallocated);
 }

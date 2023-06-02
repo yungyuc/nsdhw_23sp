@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <cstddef>
-#include "CustomAllocator.h"
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
@@ -32,7 +31,7 @@ public:
     Matrix &operator=(const Matrix &rhs);
 
     size_t m_col, m_row;
-    std::vector<double, CustomAllocator<double>> m_buffer;
+    std::vector<double> m_buffer;
 
     py::array_t<double> array();
 };
