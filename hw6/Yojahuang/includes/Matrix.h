@@ -4,6 +4,11 @@
 #include <vector>
 #include <cstddef>
 #include "CustomAllocator.h"
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/numpy.h>
+
+namespace py = pybind11;
 
 class Matrix
 {
@@ -28,6 +33,8 @@ public:
 
     size_t m_col, m_row;
     std::vector<double, CustomAllocator<double>> m_buffer;
+
+    py::array_t<double> array();
 };
 
 #endif

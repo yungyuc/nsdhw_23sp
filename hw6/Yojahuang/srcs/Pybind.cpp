@@ -23,14 +23,15 @@ PYBIND11_MODULE(_matrix, m)
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
         .def_property_readonly("nrow", [](Matrix &m)
-                               { return m.n_row(); })
+                               { return m.nrow(); })
         .def_property_readonly("ncol", [](Matrix &m)
-                               { return m.n_col(); })
+                               { return m.ncol(); })
         .def(py::self == py::self) // eq
         .def("__getitem__", [](Matrix &m, std::pair<size_t, size_t> idx)
              { return m(idx.first, idx.second); })
         .def("__setitem__", [](Matrix &m, const size_t elem, double val)
              { m(elem) = val; })
+        .def_property("array", &Matrix::array, nullptr)
         .def("__setitem__", [](Matrix &m, std::pair<size_t, size_t> idx, double val)
              { m(idx.first, idx.second) = val; });
     m.def("bytes", &CustomAllocator<double>::bytes);

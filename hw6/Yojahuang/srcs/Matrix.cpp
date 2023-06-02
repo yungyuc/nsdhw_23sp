@@ -1,6 +1,18 @@
 #include "Matrix.h"
 #include <vector>
 #include <stdexcept>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <pybind11/numpy.h>
+
+namespace py = pybind11;
+
+py::array_t<double> Matrix::array()
+{
+    return py::array_t<double>({nrow(), ncol()},
+        {sizeof(double) * ncol(), sizeof(double)},
+        m_buffer.data(), py::cast(this));
+}
 
 Matrix::Matrix() {
 

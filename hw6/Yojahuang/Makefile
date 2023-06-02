@@ -5,7 +5,7 @@ CIMPORTPATH = "includes"
 
 all: _matrix.so
 
-_matrix.so: srcs/Matrix.cpp srcs/Matrix_Mul.cpp srcs/Pybind.cpp includes/Matrix.h includes/Matrix_Mul.h includes/CustomAllocator.h
+_matrix.so: srcs/Matrix.cpp srcs/Matrix_Mul.cpp srcs/Pybind.cpp includes/Matrix.h includes/Matrix_Mul.h
 	$(CXX) $^ $(CFLAGS) -I/usr/include/mk -I${CIMPORTPATH} -o $@ ${LDFLAGS}
 
 clean:
