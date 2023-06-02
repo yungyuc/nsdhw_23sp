@@ -12,6 +12,8 @@
 #include <pybind11/operators.h>
 #include <pybind11/stl.h>
 
+namespace py = pybind11;
+
 PYBIND11_MODULE(_matrix, m)
 {
     m.doc() = "Matrix multiplication function implementation"; // module doc string
