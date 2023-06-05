@@ -2,6 +2,7 @@
 #include "pybind11/pybind11.h"
 #include "pybind11/stl.h"
 #include "pybind11/operators.h"
+#include "pybind11/numpy.h"
 #include <mkl/mkl.h>
 #include <mkl/mkl_cblas.h>
 #include <mkl/mkl_lapack.h>
@@ -157,9 +158,7 @@ PYBIND11_MODULE(_matrix, m){
         .def("data", pybind11::overload_cast<>(&Matrix::data, pybind11::const_))
         .def_property_readonly("array", [](Matrix const &mat){
             return py::array_t<double>({mat.nrow(), mat.ncol()}, {mat.ncol() * sizeof(double), sizeof(double)}, mat.data(), py::cast(mat));
-        })
-
-        
+        })        
         .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })
         .def_property_readonly("ncol", [](const Matrix &mat) { return mat.ncol(); })
         .def("__eq__", [](const Matrix &a, const Matrix &b) { 
