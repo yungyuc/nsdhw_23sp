@@ -62,13 +62,12 @@ public:
     size_t ncol() const { return m_ncol; }
 
     py::array_t<double> getArray() const{
-        size_t _size  8;
+        size_t _size = 8;
         return py::array_t<double>(
             {m_nrow, m_ncol}, 
             {_size* m_ncol, _size}, 
             m_data,
-            py::cast(*this)
-        );
+            py::cast(*this));
     }
 
 private:
