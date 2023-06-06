@@ -187,7 +187,9 @@ PYBIND11_MODULE(_matrix, m)
         .def("__setitem__",
              [](Matrix &m, std::pair<size_t, size_t> idx, double value) {
                  m(idx.first, idx.second) = value;
-             });
+             })
+        .def_property_readonly("array", &Matrix::get_nparray, py::return_value_policy::reference);  
+
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
