@@ -107,7 +107,7 @@ PYBIND11_MODULE(_matrix, m) {
         .def("__ne__", &Matrix::operator!=)
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol);
-        .def_property_readonly("array", [](const Matrix& mat){ return py::array_t<double>({mat.nrow(), mat.ncol()}, {sizeof(double)*mat.ncol(), sizeof(double)}, mat.data(), py::cast(mat)); })
+        .def_property_readonly("array", [](const Matrix& mat){ return py::array_t<double>({mat.nrow(), mat.ncol()}, {sizeof(double)*mat.ncol(), sizeof(double)}, mat.data(), py::cast(&mat)); })
 
     m.def("multiply_naive", &multiply_naive, "naive matrix-matrix multiplication");
     m.def("multiply_tile", &multiply_tile, "matrix-matrix multiplication with tiling");
