@@ -21,14 +21,23 @@ public:
 
     ~Matrix()
     {
-        delete[] m_data;
+        if (!numpy_owns_data)
+            delete[] m_data;
     }
     
-    Matrix(const Matrix &matrix){
-            m_nrow = matrix.m_nrow;
-            m_ncol = matrix.m_ncol;
-            m_data = new double[m_nrow * m_ncol](); 
-            memcpy(m_data, matrix.m_data, m_nrow * m_ncol*sizeof(double));
+    // Matrix(const Matrix &matrix){
+    //         m_nrow = matrix.m_nrow;
+    //         m_ncol = matrix.m_ncol;
+    //         m_data = new double[m_nrow * m_ncol](); 
+    //         memcpy(m_data, matrix.m_data, m_nrow * m_ncol*sizeof(double));
+    // }
+    Matrix(const Matrix &matrix)
+        : m_nrow(matrix.m_nrow), m_ncol(matrix.m_ncol)
+    {
+        size_t nelement = m_nrow * m_ncol;
+        m_data = new double[nelement];
+        std::copy(matrix.m_data, matrix.m_data + nelement, m_data);
+        numpy_owns_data = false;
     }
 
     bool operator == (Matrix const &matrix) const {
@@ -39,8 +48,26 @@ public:
             return true;
         }
 
-    Matrix& operator= (const Matrix& matrix) {
-        m_data = matrix.m_data;
+    // Matrix& operator= (const Matrix& matrix) {
+    //     m_data = matrix.m_data;
+    //     return *this;
+    // }
+    Matrix& operator=(const Matrix& matrix) {
+        if (&matrix == this) {
+            return *this;
+        }
+        
+        if (!numpy_owns_data) {
+            delete[] m_data;
+        }
+
+        m_nrow = matrix.m_nrow;
+        m_ncol = matrix.m_ncol;
+        size_t nelement = m_nrow * m_ncol;
+        m_data = new double[nelement];
+        std::copy(matrix.m_data, matrix.m_data + nelement, m_data);
+        numpy_owns_data = false;
+
         return *this;
     }
 
@@ -70,12 +97,26 @@ public:
     //         py::cast(*this));
     // }
     py::array_t<double> get_nparray() {
-        return py::array_t<double>({m_nrow, m_ncol}, m_data);
+        py::capsule free_when_done(m_data, [](void *f) {
+            // This function is called when the numpy array is deleted.
+            // It should not delete the data if it is still used by the Matrix object.
+            delete[] reinterpret_cast<double *>(f);
+        });
+
+        numpy_owns_data = true;
+
+        return py::array_t<double>(
+            {m_nrow, m_ncol},  // shape
+            {sizeof(double) * m_ncol, sizeof(double)},  // strides
+            m_data,  // data pointer
+            free_when_done  // the capsule
+        );
     }
 private:
     size_t m_nrow;
     size_t m_ncol;
     double* m_data;
+    bool numpy_owns_data = false; 
 };
 
 void setZero(Matrix& M)
