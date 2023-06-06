@@ -124,8 +124,8 @@ Spatial Search
    `AQuaDRR <darrenleeleelee1/README.rst>`__:
    https://github.com/darrenleeleelee1/AQuaDRR
 3. `mmi3661227 <https://github.com/mmi3661227>`__ for
-   `Geometric-Search-Engine <mmi3661227/README.md>`__:
-   https://github.com/mmi3661227/Geometric-Search-Engine
+   `Geometric-Search-Engine <mmi366127/README.md>`__:
+   https://github.com/mmi366127/Geometric-Search-Engine
 
 Polygon Boolean
 ---------------
