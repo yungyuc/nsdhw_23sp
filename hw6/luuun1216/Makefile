@@ -14,7 +14,7 @@ MKL_LIBS=${MKL_LIB_DIR}/libmkl_def.so \
 		${MKL_LIB_DIR}/libmkl_sequential.so
 
 all:
-	clang++ $(CXXFLAGS) ${MKL_LIBS} ${MKL_PATH} $(pybind_include) _matrix.cpp -o $(src)$(python_config) -I/usr/include/python3.8 
+	clang++ $(CXXFLAGS) ${MKL_LIBS} ${MKL_PATH} $(pybind_include) _matrix.cpp -o $(src)$(python_config) -I/usr/include/python3.10 
 
 test: all
 	python3 -m pytest -v
