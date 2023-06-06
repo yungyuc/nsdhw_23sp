@@ -21,23 +21,14 @@ public:
 
     ~Matrix()
     {
-        if (!numpy_owns_data)
-            delete[] m_data;
+        delete[] m_data;
     }
     
-    // Matrix(const Matrix &matrix){
-    //         m_nrow = matrix.m_nrow;
-    //         m_ncol = matrix.m_ncol;
-    //         m_data = new double[m_nrow * m_ncol](); 
-    //         memcpy(m_data, matrix.m_data, m_nrow * m_ncol*sizeof(double));
-    // }
-    Matrix(const Matrix &matrix)
-        : m_nrow(matrix.m_nrow), m_ncol(matrix.m_ncol)
-    {
-        size_t nelement = m_nrow * m_ncol;
-        m_data = new double[nelement];
-        std::copy(matrix.m_data, matrix.m_data + nelement, m_data);
-        numpy_owns_data = false;
+    Matrix(const Matrix &matrix){
+            m_nrow = matrix.m_nrow;
+            m_ncol = matrix.m_ncol;
+            m_data = new double[m_nrow * m_ncol](); 
+            memcpy(m_data, matrix.m_data, m_nrow * m_ncol*sizeof(double));
     }
 
     bool operator == (Matrix const &matrix) const {
@@ -48,26 +39,8 @@ public:
             return true;
         }
 
-    // Matrix& operator= (const Matrix& matrix) {
-    //     m_data = matrix.m_data;
-    //     return *this;
-    // }
-    Matrix& operator=(const Matrix& matrix) {
-        if (&matrix == this) {
-            return *this;
-        }
-        
-        if (!numpy_owns_data) {
-            delete[] m_data;
-        }
-
-        m_nrow = matrix.m_nrow;
-        m_ncol = matrix.m_ncol;
-        size_t nelement = m_nrow * m_ncol;
-        m_data = new double[nelement];
-        std::copy(matrix.m_data, matrix.m_data + nelement, m_data);
-        numpy_owns_data = false;
-
+    Matrix& operator= (const Matrix& matrix) {
+        m_data = matrix.m_data;
         return *this;
     }
 
@@ -87,36 +60,21 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-    
-    // py::array_t <double> getArray() const{
-    //     size_t _size  8;
-    //     return py::array_t<double>(
-    //         {m_nrow, m_ncol}, 
-    //         {_size * m_ncol, size},
-    //         m_buffer, 
-    //         py::cast(*this));
-    // }
-    py::array_t<double> get_nparray() {
-        py::capsule free_when_done(m_data, [](void *f) {
-            // This function is called when the numpy array is deleted.
-            // It should not delete the data if it is still used by the Matrix object.
-            delete[] reinterpret_cast<double *>(f);
-        });
 
-        numpy_owns_data = true;
-
+    py::array_t<double> getArray() const{
+        size_t _size  8;
         return py::array_t<double>(
-            {m_nrow, m_ncol},  // shape
-            {sizeof(double) * m_ncol, sizeof(double)},  // strides
-            m_data,  // data pointer
-            free_when_done  // the capsule
+            {m_nrow, m_ncol}, 
+            {_size* m_ncol, _size}, 
+            m_data,
+            py::cast(*this)
         );
     }
+
 private:
     size_t m_nrow;
     size_t m_ncol;
     double* m_data;
-    bool numpy_owns_data = false; 
 };
 
 void setZero(Matrix& M)
@@ -219,7 +177,6 @@ PYBIND11_MODULE(_matrix, m)
         .def("assign", &Matrix::operator=)
         .def_property_readonly("nrow", [](const Matrix &mat){ return mat.nrow(); })
         .def_property_readonly("ncol", [](const Matrix &mat){ return mat.ncol(); })
-        .def("get_nparray", &Matrix::get_nparray)  // Here is our new method
         .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
         .def("__getitem__",
              [](const Matrix &m, std::pair<size_t, size_t> idx) {
@@ -229,8 +186,7 @@ PYBIND11_MODULE(_matrix, m)
              [](Matrix &m, std::pair<size_t, size_t> idx, double value) {
                  m(idx.first, idx.second) = value;
              })
-        .def_property_readonly("array", &Matrix::get_nparray, py::return_value_policy::reference);  
-
+        .def_property_readonly("array", [](const Matrix &mat){   return mat.getArray();  });
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
