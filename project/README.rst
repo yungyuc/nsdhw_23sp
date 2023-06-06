@@ -29,11 +29,11 @@ entry too.  You can request my review in the PR.
 Presentation
 ============
 
-.. The presentation schedule is set.  If you want to change the time, ask for the
-.. owner of the other time slot and file a PR tagging him or her and the
-.. instructor (@yungyuc) against the branch `master`.  Everyone involved needs to
-.. respond to agree the exchange in the PR.  The PR subject line should start with
-.. ``[presentation]``.
+The presentation schedule is set.  If you want to change the time, ask for the
+owner of the other time slot and file a PR tagging him or her and the
+instructor (@yungyuc) against the branch `master`.  Everyone involved needs to
+respond to agree the exchange in the PR.  The PR subject line should start with
+``[presentation]``.
 
 Each presentation can use at most 15 minutes.  Presenters may decide how to use
 their time.  A possible arrangement is to use 13 minutes in the presentation
