@@ -167,7 +167,6 @@ Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
     return E;
 }
 
-
 PYBIND11_MODULE(_matrix, m)
 {
     py::class_<Matrix>(m, "Matrix")
